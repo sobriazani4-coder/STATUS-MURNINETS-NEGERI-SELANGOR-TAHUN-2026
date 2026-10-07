@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#061f33" />
+  <title>Status Kemampanan Bandar (MURNInets) Negeri Selangor 2026</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <div class="brand-mark">SELANGOR</div>
+        <div>
+          <div class="eyebrow">Dashboard MURNInets 2.0 • Verifikasi Data 2026</div>
+          <h1>STATUS KEMAMPANAN BANDAR <span>(MURNInets)</span><br>NEGERI SELANGOR 2026</h1>
+          <p>Gambaran interaktif berdasarkan 48 indikator dalam 6 dimensi bagi 12 Pihak Berkuasa Tempatan Negeri Selangor.</p>
+        </div>
+        <div class="hero-badges">
+          <span>Bandar Mampan</span><span>Rakyat Sejahtera</span><span>Selangor Maju</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="dashboard-grid">
+      <section class="panel summary-panel">
+        <div class="panel-title"><span class="icon">▥</span> Ringkasan Dashboard</div>
+        <div class="kpi-grid">
+          <div class="kpi"><small>PBT Dinilai</small><strong>12</strong><em>seluruh Negeri Selangor</em></div>
+          <div class="kpi"><small>Dimensi</small><strong>6</strong><em>teras kemampanan</em></div>
+          <div class="kpi"><small>Indikator</small><strong>48</strong><em>daripada halaman 2–49</em></div>
+          <div class="kpi"><small>Tahun Kajian</small><strong>2026</strong><em>perbandingan utama 2025</em></div>
+        </div>
+        <div class="notice">
+          <b>Nota penting:</b> PDF sumber mengandungi data indikator dan piawaian, tetapi tidak menyediakan satu skor komposit akhir “Mampan / Sederhana Mampan / Kurang Mampan” untuk setiap PBT. Dashboard ini tidak mereka-reka skor keseluruhan; status warna hanya digunakan pada indikator yang mempunyai ambang jelas dalam sumber.
+        </div>
+      </section>
+
+      <section class="panel distribution-panel">
+        <div class="panel-title"><span class="icon">◉</span> Taburan 48 Indikator Mengikut Dimensi</div>
+        <div class="chart-wrap"><canvas id="dimensionChart"></canvas></div>
+        <div class="legend-note">Ekonomi 2 • Persekitaran 7 • Komuniti 20 • Guna Tanah 6 • Infrastruktur 7 • Urus Tadbir 6</div>
+      </section>
+
+      <section class="panel highlights-panel">
+        <div class="panel-title"><span class="icon">✦</span> Sorotan Data Negeri 2026</div>
+        <div class="highlight-grid">
+          <div class="highlight"><span>Tenaga Buruh</span><strong>+1.12%</strong><small>pertumbuhan penduduk bekerja 15–64</small></div>
+          <div class="highlight"><span>Air Domestik</span><strong>240.05</strong><small>hasil indikator penggunaan harian per kapita</small></div>
+          <div class="highlight"><span>Elektrik</span><strong>4.95</strong><small>hasil penggunaan harian elektrik per kapita</small></div>
+          <div class="highlight"><span>NRW</span><strong>28.76%</strong><small>kadar kehilangan air tidak terhasil</small></div>
+        </div>
+      </section>
+
+      <section class="panel performance-panel wide">
+        <div class="panel-head-row">
+          <div class="panel-title"><span class="icon">↗</span> Prestasi PBT — Indikator Terpilih</div>
+          <div class="selector-group">
+            <label for="metricSelect">Paparan:</label>
+            <select id="metricSelect">
+              <option value="happiness">Indeks Kebahagiaan 2026 (%)</option>
+              <option value="urbanisation">Kadar Perbandaran 2026 (%)</option>
+              <option value="broadband">Liputan Jalur Lebar 2026 (%)</option>
+              <option value="revenue">Pencapaian Kutipan Hasil PBT 2026 (%)</option>
+              <option value="community">Peningkatan Penglibatan Komuniti 2026 (%)</option>
+            </select>
+          </div>
+        </div>
+        <div class="performance-layout">
+          <div class="chart-area"><canvas id="pbtChart"></canvas></div>
+          <div class="ranking-table-wrap">
+            <table id="rankingTable">
+              <thead><tr><th>#</th><th>PBT</th><th>Nilai</th><th>Status</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel dimension-panel wide">
+        <div class="panel-title"><span class="icon">⌘</span> 6 Dimensi MURNInets 2.0</div>
+        <div class="dimension-cards" id="dimensionCards"></div>
+      </section>
+
+      <section class="panel explorer-panel wide">
+        <div class="panel-head-row wrap">
+          <div>
+            <div class="panel-title"><span class="icon">☷</span> Penjelajah 48 Indikator</div>
+            <p class="muted">Cari indikator, tapis mengikut dimensi, dan buka halaman sumber PDF.</p>
+          </div>
+          <div class="explorer-controls">
+            <input id="searchInput" type="search" placeholder="Cari kod atau nama indikator…" />
+            <select id="dimensionFilter"><option value="all">Semua dimensi</option></select>
+          </div>
+        </div>
+        <div class="indicator-list" id="indicatorList"></div>
+      </section>
+
+      <section class="panel source-panel wide">
+        <div class="panel-head-row wrap">
+          <div>
+            <div class="panel-title"><span class="icon">▣</span> Sumber & Kaedah Paparan</div>
+            <p class="muted">Data dipetik terus daripada slaid verifikasi MURNInets 2.0 Negeri Selangor 2026. Klik mana-mana indikator untuk membuka halaman berkaitan.</p>
+          </div>
+          <a class="pdf-btn" href="source/slides_murninets_dashboard_SUO.pdf" target="_blank" rel="noopener">Buka PDF Penuh</a>
+        </div>
+        <div class="source-meta">
+          <div><b>12 PBT:</b> MB Shah Alam, MB Petaling Jaya, MB Subang Jaya, MBD Klang, MP Ampang Jaya, MP Kajang, MP Selayang, MP Sepang, MP Kuala Langat, MP Kuala Selangor, MP Hulu Selangor dan MD Sabak Bernam.</div>
+          <div><b>Reka bentuk:</b> tema smart-city / urban sustainability, responsif untuk desktop dan tablet, sesuai diterbitkan melalui GitHub Pages.</div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>STATUS KEMAMPANAN BANDAR (MURNInets) NEGERI SELANGOR 2026</span>
+      <span>Sumber: Mesyuarat Verifikasi Data MURNInets 2.0 Tahun 2026</span>
+    </footer>
+  </div>
+
+  <div class="modal" id="pdfModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-top">
+        <div><b id="modalTitle">Sumber PDF</b><small id="modalSubtitle"></small></div>
+        <button id="closeModal" aria-label="Tutup">×</button>
+      </div>
+      <iframe id="pdfFrame" title="Paparan PDF"></iframe>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
