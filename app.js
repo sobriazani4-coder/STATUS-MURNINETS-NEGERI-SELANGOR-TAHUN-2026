@@ -24,11 +24,11 @@ function formatNumber(value, digits = 2){
 }
 
 function getStatus(metric, value){
-  if(metric === 'happiness') return value >= 80 ? {label:'Tinggi', key:'good'} : value >= 50 ? {label:'Sederhana', key:'mid'} : {label:'Perlu perhatian', key:'low'};
-  if(metric === 'urbanisation') return value >= 90 ? {label:'Tinggi', key:'good'} : value >= 75 ? {label:'Sederhana', key:'mid'} : {label:'Perlu perhatian', key:'low'};
-  if(metric === 'broadband') return value >= 99.95 ? {label:'Tinggi', key:'good'} : value >= 99.5 ? {label:'Sederhana', key:'mid'} : {label:'Perlu perhatian', key:'low'};
-  if(metric === 'revenue') return value >= 100 ? {label:'Tinggi', key:'good'} : value >= 90 ? {label:'Sederhana', key:'mid'} : {label:'Perlu perhatian', key:'low'};
-  if(metric === 'community') return value >= 20 ? {label:'Tinggi', key:'good'} : value >= 5 ? {label:'Sederhana', key:'mid'} : {label:'Perlu perhatian', key:'low'};
+  if(metric === 'happiness') return value >= 80 ? {label:'Mampan', key:'good'} : value >= 50 ? {label:'Sederhana Mampan', key:'mid'} : {label:'Kurang Mampan', key:'low'};
+  if(metric === 'urbanisation') return value >= 90 ? {label:'Mampan', key:'good'} : value >= 75 ? {label:'Sederhana Mampan', key:'mid'} : {label:'Kurang Mampan', key:'low'};
+  if(metric === 'broadband') return value >= 99.95 ? {label:'Mampan', key:'good'} : value >= 99.5 ? {label:'Sederhana Mampan', key:'mid'} : {label:'Kurang Mampan', key:'low'};
+  if(metric === 'revenue') return value >= 100 ? {label:'Mampan', key:'good'} : value >= 90 ? {label:'Sederhana Mampan', key:'mid'} : {label:'Kurang Mampan', key:'low'};
+  if(metric === 'community') return value >= 20 ? {label:'Mampan', key:'good'} : value >= 5 ? {label:'Sederhana Mampan', key:'mid'} : {label:'Kurang Mampan', key:'low'};
   return {label:'Data', key:'mid'};
 }
 
@@ -289,7 +289,7 @@ function renderStatus(){
   if(state.statusChart) state.statusChart.destroy();
   state.statusChart=new Chart($('#statusChart'),{
     type:'doughnut',
-    data:{labels:['Tinggi','Sederhana','Perlu perhatian'],datasets:[{data:[counts.good,counts.mid,counts.low],backgroundColor:[STATUS_COLORS.good,STATUS_COLORS.mid,STATUS_COLORS.low],borderWidth:4,borderColor:'#fff'}]},
+    data:{labels:['Mampan','Sederhana Mampan','Kurang Mampan'],datasets:[{data:[counts.good,counts.mid,counts.low],backgroundColor:[STATUS_COLORS.good,STATUS_COLORS.mid,STATUS_COLORS.low],borderWidth:4,borderColor:'#fff'}]},
     options:{responsive:true,maintainAspectRatio:false,cutout:'64%',plugins:{legend:{position:'bottom',labels:{boxWidth:12,color:'#45546f'}},tooltip:{callbacks:{label:(ctx)=>ctx.label+': '+ctx.raw+' PBT'}}}}
   });
 }
