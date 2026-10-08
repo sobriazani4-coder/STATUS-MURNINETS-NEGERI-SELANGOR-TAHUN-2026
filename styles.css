@@ -1218,3 +1218,25 @@ body{
     text-align:center!important;
   }
 }
+
+
+/* ===== SUO LOGO CENTERED BETWEEN LEFT EDGE AND MAIN TITLE ===== */
+@media(min-width:901px){
+  .top-header .logo-group{
+    position:relative!important;
+    width:100%!important;
+    min-height:136px!important;
+  }
+  .top-header .suo-logo-wrap{
+    position:absolute!important;
+    left:25%!important;
+    top:50%!important;
+    transform:translate(-50%,-50%)!important;
+    margin-left:0!important;
+  }
+  .top-header .title-block{
+    left:50%!important;
+    top:50%!important;
+    transform:translate(-50%,-50%)!important;
+  }
+}
