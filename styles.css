@@ -1007,3 +1007,29 @@ body{
   letter-spacing:-.04em!important;
   margin:0!important;
 }
+
+
+/* ===== SUO LOGO SIZE + POSITION REFINEMENT ===== */
+.top-header .suo-logo-wrap{
+  width:113px!important;
+  height:113px!important;
+  padding:5px!important;
+  margin-left:24px!important;
+  flex:0 0 113px!important;
+}
+.top-header .suo-official{
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+}
+.top-header .logo-group{
+  column-gap:90px!important;
+}
+@media(max-width:900px){
+  .top-header .suo-logo-wrap{
+    width:94px!important;
+    height:94px!important;
+    flex-basis:94px!important;
+    margin-left:12px!important;
+  }
+}
