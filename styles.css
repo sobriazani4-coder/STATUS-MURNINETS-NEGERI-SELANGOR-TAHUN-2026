@@ -710,3 +710,12 @@ body{
   text-transform:uppercase;
   letter-spacing:-0.035em;
 }
+
+
+/* ===== DASHBOARD TITLE MONTSERRAT BLACK ===== */
+.title-block h1{
+  font-family:'Montserrat',sans-serif!important;
+  font-weight:900!important;
+  text-transform:uppercase;
+  letter-spacing:-0.04em;
+}
