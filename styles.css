@@ -1114,3 +1114,42 @@ body{
     text-align:center!important;
   }
 }
+
+
+/* ===== RESTORE ORIGINAL HEADER ALIGNMENT + CENTER TITLE TEXT ONLY ===== */
+@media(min-width:901px){
+  .top-header{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:space-between!important;
+  }
+  .top-header .logo-group{
+    width:auto!important;
+    display:flex!important;
+    position:static!important;
+    min-height:0!important;
+    align-items:center!important;
+    column-gap:96px!important;
+  }
+  .top-header .suo-logo-wrap{
+    position:static!important;
+    left:auto!important;
+    top:auto!important;
+    transform:none!important;
+    margin-left:64px!important;
+  }
+  .top-header .title-block{
+    position:static!important;
+    left:auto!important;
+    top:auto!important;
+    transform:none!important;
+    width:auto!important;
+    margin-left:0!important;
+    text-align:center!important;
+  }
+  .top-header .title-block .eyebrow,
+  .top-header .title-block h1,
+  .top-header .title-block p{
+    text-align:center!important;
+  }
+}
