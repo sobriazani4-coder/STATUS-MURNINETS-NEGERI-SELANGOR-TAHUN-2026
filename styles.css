@@ -1033,3 +1033,30 @@ body{
     margin-left:12px!important;
   }
 }
+
+
+/* ===== SUO LOGO SIZE + TRUE VISUAL CENTERING V2 ===== */
+.top-header .suo-logo-wrap{
+  width:136px!important;
+  height:136px!important;
+  flex:0 0 136px!important;
+  padding:6px!important;
+  margin-left:44px!important;
+}
+.top-header .logo-group{
+  column-gap:78px!important;
+}
+.top-header .title-block{
+  margin-left:0!important;
+}
+@media(max-width:900px){
+  .top-header .suo-logo-wrap{
+    width:110px!important;
+    height:110px!important;
+    flex-basis:110px!important;
+    margin-left:22px!important;
+  }
+  .top-header .logo-group{
+    column-gap:52px!important;
+  }
+}
