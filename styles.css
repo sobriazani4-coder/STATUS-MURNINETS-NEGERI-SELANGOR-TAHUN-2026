@@ -1153,3 +1153,31 @@ body{
     text-align:center!important;
   }
 }
+
+
+/* ===== CENTER TITLE BLOCK WITHIN HEADER, KEEP ORIGINAL GROUP FLOW ===== */
+@media(min-width:901px){
+  .top-header .logo-group{
+    width:100%!important;
+    display:grid!important;
+    grid-template-columns:220px 1fr 220px!important;
+    align-items:center!important;
+    column-gap:24px!important;
+  }
+  .top-header .suo-logo-wrap{
+    justify-self:center!important;
+    margin-left:0!important;
+  }
+  .top-header .title-block{
+    grid-column:2!important;
+    justify-self:stretch!important;
+    width:100%!important;
+    margin-left:0!important;
+    text-align:center!important;
+  }
+  .top-header .title-block .eyebrow,
+  .top-header .title-block h1,
+  .top-header .title-block p{
+    text-align:center!important;
+  }
+}
