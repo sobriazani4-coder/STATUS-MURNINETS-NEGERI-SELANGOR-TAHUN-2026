@@ -1249,3 +1249,12 @@ body{
     transform:translate(-50%,-50%)!important;
   }
 }
+
+
+/* ===== SUO LOGO SAFE LEFT POSITION V6 ===== */
+@media(min-width:901px){
+  .top-header .suo-logo-wrap{
+    left:11.5%!important;
+    transform:translate(-50%,-50%)!important;
+  }
+}
