@@ -157,18 +157,18 @@ async function loadPbtGeoJSON(){
 }
 
 const PBT_LABEL_CONFIG = {
-  'MD Sabak Bernam':   {offset:[0,-2],  cls:'label-rural'},
-  'MP Kuala Selangor': {offset:[-8,-6], cls:'label-rural'},
-  'MP Hulu Selangor':  {offset:[18,-8], cls:'label-rural'},
-  'MBD Klang':         {offset:[-42,18],cls:'label-urban label-left'},
-  'MB Shah Alam':      {offset:[-34,-16],cls:'label-urban label-left'},
-  'MB Petaling Jaya':  {offset:[34,-26],cls:'label-urban label-right'},
-  'MB Subang Jaya':    {offset:[24,24], cls:'label-urban label-right'},
-  'MP Selayang':       {offset:[18,-28],cls:'label-urban label-right'},
-  'MP Ampang Jaya':    {offset:[48,-8], cls:'label-urban label-right'},
-  'MP Kajang':         {offset:[34,26], cls:'label-urban label-right'},
-  'MP Kuala Langat':   {offset:[-14,18],cls:'label-rural'},
-  'MP Sepang':         {offset:[14,14], cls:'label-rural'}
+  'MD Sabak Bernam':   {offset:[0,-6],   cls:'label-rural label-north'},
+  'MP Kuala Selangor': {offset:[-18,-10],cls:'label-rural label-west'},
+  'MP Hulu Selangor':  {offset:[30,-14], cls:'label-rural label-east'},
+  'MBD Klang':         {offset:[-64,28], cls:'label-urban label-left label-priority'},
+  'MB Shah Alam':      {offset:[-48,-28],cls:'label-urban label-left label-priority'},
+  'MB Petaling Jaya':  {offset:[58,-40], cls:'label-urban label-right label-priority'},
+  'MB Subang Jaya':    {offset:[48,38],  cls:'label-urban label-right label-priority'},
+  'MP Selayang':       {offset:[26,-48], cls:'label-urban label-right'},
+  'MP Ampang Jaya':    {offset:[72,-10], cls:'label-urban label-right'},
+  'MP Kajang':         {offset:[56,38],  cls:'label-urban label-right'},
+  'MP Kuala Langat':   {offset:[-22,28], cls:'label-rural label-west'},
+  'MP Sepang':         {offset:[28,26],  cls:'label-rural label-east'}
 };
 
 function pbtLabelConfig(pbt){
@@ -241,8 +241,14 @@ async function initMap(){
         mouseover:(e)=>{
           e.target.setStyle({weight:4.5,color:'#172b51',fillOpacity:.84});
           if(!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) e.target.bringToFront();
+          const el=layer.getTooltip()?.getElement();
+          if(el) el.classList.add('is-active');
         },
-        mouseout:(e)=>e.target.setStyle(mapStyle(feature)),
+        mouseout:(e)=>{
+          e.target.setStyle(mapStyle(feature));
+          const el=layer.getTooltip()?.getElement();
+          if(el) el.classList.remove('is-active');
+        },
         click:()=>{
           state.pbt=pbt;
           $('#pbtSelect').value=pbt;
@@ -257,6 +263,16 @@ async function initMap(){
 
   state.map.fitBounds(state.pbtLayer.getBounds(),{padding:[20,20]});
 
+  const refreshLabelDensity=()=>{
+    const z=state.map.getZoom();
+    const mapEl=document.getElementById('selangorMap');
+    if(!mapEl) return;
+    mapEl.classList.toggle('map-labels-compact', z<=9);
+    mapEl.classList.toggle('map-labels-expanded', z>=10);
+  };
+  state.map.on('zoomend',refreshLabelDensity);
+  refreshLabelDensity();
+
   const note=document.createElement('div');
   note.className='map-source-note';
   note.innerHTML='<b>Sempadan PBT:</b> fail GeoJSON yang anda lampirkan • 12 PBT';
@@ -270,6 +286,8 @@ function updateMapStyles(){
     const pbt=normalizePbtName(featureRawName(layer.feature));
     layer.setTooltipContent(pbtLabelHtml(pbt));
     layer.setPopupContent(pbtPopupHtml(pbt));
+    const el=layer.getTooltip()?.getElement();
+    if(el) el.classList.toggle('is-selected', state.pbt===pbt);
   });
   if(state.pbt!=='all'){
     const layer=state.pbtLayerByName.get(state.pbt);
