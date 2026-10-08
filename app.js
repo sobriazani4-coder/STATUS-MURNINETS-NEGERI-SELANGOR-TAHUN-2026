@@ -478,26 +478,7 @@ function renderStatus(){
     id:'premiumStatusRing',
 
     beforeDatasetsDraw(chart){
-      const meta=chart.getDatasetMeta(0);
-      if(!meta?.data?.length) return;
-      const {ctx}=chart;
-
-      // controlled depth layer: premium, not exaggerated
-      for(let d=10;d>=3;d-=2){
-        meta.data.forEach((arc,index)=>{
-          if(!values[index]) return;
-          const p=arc.getProps(['x','y','startAngle','endAngle','innerRadius','outerRadius'],true);
-          ctx.save();
-          ctx.beginPath();
-          ctx.arc(p.x,p.y+d,p.outerRadius,p.startAngle,p.endAngle);
-          ctx.arc(p.x,p.y+d,p.innerRadius,p.endAngle,p.startAngle,true);
-          ctx.closePath();
-          ctx.fillStyle=depthColors[index];
-          ctx.globalAlpha=.78;
-          ctx.fill();
-          ctx.restore();
-        });
-      }
+      // 3D depth layer removed for a cleaner status badge.
     },
 
     afterDatasetsDraw(chart){
@@ -511,9 +492,9 @@ function renderStatus(){
 
       // centre premium badge
       const rg=ctx.createRadialGradient(cx-14,cy-18,5,cx,cy,72);
-      rg.addColorStop(0,'#ffffff');
-      rg.addColorStop(.72,'#fffaf5');
-      rg.addColorStop(1,'#f3e5d7');
+      rg.addColorStop(0,'#9fda88');
+      rg.addColorStop(.72,'#78bb65');
+      rg.addColorStop(1,'#5fa34e');
 
       ctx.beginPath();
       ctx.arc(cx,cy,66,0,Math.PI*2);
@@ -525,7 +506,7 @@ function renderStatus(){
 
       ctx.shadowColor='transparent';
       ctx.lineWidth=1.5;
-      ctx.strokeStyle='#ead5c0';
+      ctx.strokeStyle='rgba(255,255,255,.72)';
       ctx.stroke();
 
       const dominant=Math.max(...values);
@@ -533,11 +514,11 @@ function renderStatus(){
 
       ctx.textAlign='center';
       ctx.textBaseline='middle';
-      ctx.fillStyle='#142b58';
+      ctx.fillStyle='#ffffff';
       ctx.font='900 32px Montserrat,Arial,sans-serif';
       ctx.fillText(pct+'%',cx,cy-9);
 
-      ctx.fillStyle='#6f7b91';
+      ctx.fillStyle='rgba(255,255,255,.92)';
       ctx.font='800 10px Montserrat,Arial,sans-serif';
       ctx.fillText(total+' PBT DINILAI',cx,cy+20);
 
