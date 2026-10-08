@@ -62,6 +62,56 @@ function populateFilters(){
   $('#indicatorDimensionFilter').innerHTML = '<option value="all">Semua Dimensi</option>' + DIMENSIONS.map(d=>'<option value="'+d.id+'">Dimensi '+d.id+' — '+d.name+'</option>').join('');
 }
 
+
+const PBT_SHORT_LABELS = {
+  'MB Shah Alam':'MBSA',
+  'MB Petaling Jaya':'MBPJ',
+  'MB Subang Jaya':'MBSJ',
+  'MBD Klang':'MBDK',
+  'MP Ampang Jaya':'MPAJ',
+  'MP Kajang':'MPKj',
+  'MP Selayang':'MPS',
+  'MP Sepang':'MPSepang',
+  'MP Kuala Langat':'MPKL',
+  'MP Kuala Selangor':'MPKS',
+  'MP Hulu Selangor':'MPHS',
+  'MD Sabak Bernam':'MDSB'
+};
+
+function renderPbtLogoSelector(){
+  const holder=$('#pbtLogoStrip');
+  if(!holder) return;
+
+  const allCard = '<button class="pbt-logo-card '+(state.pbt==='all'?'active':'')+'" data-pbt="all" type="button" aria-label="Semua PBT">'+
+    '<span class="pbt-logo-frame all-pbt-icon">◎</span>'+
+    '<strong>SEMUA</strong>'+
+  '</button>';
+
+  const cards = PBT.map(name=>{
+    const logo = logoForPbt(name);
+    const short = PBT_SHORT_LABELS[name] || shortPbt(name);
+    return '<button class="pbt-logo-card '+(state.pbt===name?'active':'')+'" data-pbt="'+name+'" type="button" aria-label="'+name+'">'+
+      '<span class="pbt-logo-frame">'+(logo?'<img src="'+logo+'" alt="'+name+'">':'<span class="pbt-fallback">'+short.slice(0,2)+'</span>')+'</span>'+
+      '<strong>'+short+'</strong>'+
+    '</button>';
+  }).join('');
+
+  holder.innerHTML = allCard + cards;
+
+  holder.querySelectorAll('.pbt-logo-card').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const selected=btn.dataset.pbt;
+      state.pbt=selected;
+      $('#pbtSelect').value=selected;
+      renderAll();
+      if(selected==='all' && state.map && state.pbtLayer){
+        state.map.closePopup();
+        state.map.fitBounds(state.pbtLayer.getBounds(),{padding:[20,20]});
+      }
+    });
+  });
+}
+
 function bindEvents(){
   $('#applyBtn').addEventListener('click', applyFilters);
   $('#resetBtn').addEventListener('click', resetAll);
@@ -384,6 +434,7 @@ function renderIndicators(){
 }
 
 function renderAll(){
+  renderPbtLogoSelector();
   renderRanking();
   renderStatus();
   renderDimensions();
