@@ -453,35 +453,47 @@ function renderStatus(){
 
   if(state.statusChart) state.statusChart.destroy();
 
-  const values=[counts.good,counts.mid,counts.low];
   const labels=['Mampan','Sederhana Mampan','Kurang Mampan'];
-  const topColors=['#79bf62','#f2ad36','#df4960'];
-  const depthColors=['#559740','#c98219','#ad2940'];
+  const values=[counts.good,counts.mid,counts.low];
 
-  const pie3DPlugin={
-    id:'premiumExplodedPie3D',
+  const canvas=$('#statusChart');
+  const ctx=canvas.getContext('2d');
+
+  const makeGradient=(top,bottom)=>{
+    const g=ctx.createLinearGradient(0,0,0,360);
+    g.addColorStop(0,top);
+    g.addColorStop(1,bottom);
+    return g;
+  };
+
+  const colors=[
+    makeGradient('#9edb86','#68ac55'),
+    makeGradient('#ffd06b','#e69b2c'),
+    makeGradient('#f27480','#cf3a51')
+  ];
+
+  const depthColors=['#548d43','#bb791b','#a72b3d'];
+
+  const premiumStatusPlugin={
+    id:'premiumStatusRing',
 
     beforeDatasetsDraw(chart){
       const meta=chart.getDatasetMeta(0);
-      if(!meta || !meta.data) return;
+      if(!meta?.data?.length) return;
       const {ctx}=chart;
 
-      // Draw several darker layers behind the live pie to simulate thickness.
-      for(let depth=14;depth>=3;depth-=2){
+      // controlled depth layer: premium, not exaggerated
+      for(let d=10;d>=3;d-=2){
         meta.data.forEach((arc,index)=>{
           if(!values[index]) return;
-          const props=arc.getProps(['x','y','startAngle','endAngle','innerRadius','outerRadius'],true);
+          const p=arc.getProps(['x','y','startAngle','endAngle','innerRadius','outerRadius'],true);
           ctx.save();
           ctx.beginPath();
-          ctx.arc(props.x,props.y+depth,props.outerRadius,props.startAngle,props.endAngle);
-          if(props.innerRadius>0){
-            ctx.arc(props.x,props.y+depth,props.innerRadius,props.endAngle,props.startAngle,true);
-          }else{
-            ctx.lineTo(props.x,props.y+depth);
-          }
+          ctx.arc(p.x,p.y+d,p.outerRadius,p.startAngle,p.endAngle);
+          ctx.arc(p.x,p.y+d,p.innerRadius,p.endAngle,p.startAngle,true);
           ctx.closePath();
           ctx.fillStyle=depthColors[index];
-          ctx.globalAlpha=.92;
+          ctx.globalAlpha=.78;
           ctx.fill();
           ctx.restore();
         });
@@ -489,118 +501,72 @@ function renderStatus(){
     },
 
     afterDatasetsDraw(chart){
-      const meta=chart.getDatasetMeta(0);
-      if(!meta || !meta.data || !total) return;
-      const {ctx}=chart;
+      const {ctx,chartArea}=chart;
+      if(!chartArea) return;
 
-      // Percentage badges on every visible slice.
-      meta.data.forEach((arc,index)=>{
-        const value=values[index];
-        if(!value) return;
+      const cx=(chartArea.left+chartArea.right)/2;
+      const cy=(chartArea.top+chartArea.bottom)/2-5;
 
-        const pct=Math.round((value/total)*100);
-        const props=arc.getProps(['x','y','startAngle','endAngle','innerRadius','outerRadius'],true);
-        const angle=(props.startAngle+props.endAngle)/2;
-        const radius=props.outerRadius*.58;
-        const x=props.x+Math.cos(angle)*radius;
-        const y=props.y+Math.sin(angle)*radius;
-
-        ctx.save();
-        ctx.textAlign='center';
-        ctx.textBaseline='middle';
-        ctx.shadowColor='rgba(15,35,70,.22)';
-        ctx.shadowBlur=8;
-        ctx.shadowOffsetY=3;
-
-        const badgeText=pct+'%';
-        ctx.font='900 17px Montserrat,Arial,sans-serif';
-        const w=Math.max(54,ctx.measureText(badgeText).width+22);
-
-        const r=14;
-        const h=34;
-        const bx=x-w/2;
-        const by=y-h/2;
-        ctx.beginPath();
-        ctx.moveTo(bx+r,by);
-        ctx.arcTo(bx+w,by,bx+w,by+h,r);
-        ctx.arcTo(bx+w,by+h,bx,by+h,r);
-        ctx.arcTo(bx,by+h,bx,by,r);
-        ctx.arcTo(bx,by,bx+w,by,r);
-        ctx.closePath();
-        ctx.fillStyle='rgba(255,255,255,.94)';
-        ctx.fill();
-
-        ctx.shadowColor='transparent';
-        ctx.lineWidth=1;
-        ctx.strokeStyle='rgba(20,36,67,.10)';
-        ctx.stroke();
-
-        ctx.fillStyle='#132b58';
-        ctx.fillText(badgeText,x,y-1);
-
-        ctx.restore();
-      });
-
-      // Soft floor shadow to make the chart sit naturally in the card.
-      const area=chart.chartArea;
-      const cx=(area.left+area.right)/2;
-      const cy=area.bottom-10;
       ctx.save();
+
+      // centre premium badge
+      const rg=ctx.createRadialGradient(cx-14,cy-18,5,cx,cy,72);
+      rg.addColorStop(0,'#ffffff');
+      rg.addColorStop(.72,'#fffaf5');
+      rg.addColorStop(1,'#f3e5d7');
+
       ctx.beginPath();
-      ctx.ellipse(cx,cy,118,15,0,0,Math.PI*2);
-      ctx.fillStyle='rgba(20,36,67,.08)';
-      ctx.filter='blur(10px)';
+      ctx.arc(cx,cy,66,0,Math.PI*2);
+      ctx.fillStyle=rg;
+      ctx.shadowColor='rgba(20,36,67,.14)';
+      ctx.shadowBlur=20;
+      ctx.shadowOffsetY=6;
       ctx.fill();
+
+      ctx.shadowColor='transparent';
+      ctx.lineWidth=1.5;
+      ctx.strokeStyle='#ead5c0';
+      ctx.stroke();
+
+      const dominant=Math.max(...values);
+      const pct=total ? Math.round((dominant/total)*100) : 0;
+
+      ctx.textAlign='center';
+      ctx.textBaseline='middle';
+      ctx.fillStyle='#142b58';
+      ctx.font='900 32px Montserrat,Arial,sans-serif';
+      ctx.fillText(pct+'%',cx,cy-9);
+
+      ctx.fillStyle='#6f7b91';
+      ctx.font='800 10px Montserrat,Arial,sans-serif';
+      ctx.fillText(total+' PBT DINILAI',cx,cy+20);
+
       ctx.restore();
     }
   };
 
-  const canvas=$('#statusChart');
-  const c=canvas.getContext('2d');
-  const gradients=topColors.map((color,index)=>{
-    const grad=c.createLinearGradient(0,15,0,330);
-    if(index===0){
-      grad.addColorStop(0,'#9bdd83');
-      grad.addColorStop(.45,'#7bc366');
-      grad.addColorStop(1,'#62a94f');
-    }else if(index===1){
-      grad.addColorStop(0,'#ffd270');
-      grad.addColorStop(.48,'#f4b33f');
-      grad.addColorStop(1,'#dc8c22');
-    }else{
-      grad.addColorStop(0,'#f57a86');
-      grad.addColorStop(.48,'#e95669');
-      grad.addColorStop(1,'#c8324a');
-    }
-    return grad;
-  });
-
   state.statusChart=new Chart(canvas,{
-    type:'pie',
+    type:'doughnut',
     data:{
       labels,
       datasets:[{
         data:values,
-        backgroundColor:gradients,
+        backgroundColor:colors,
         borderColor:'#ffffff',
-        borderWidth:4,
-        hoverBorderWidth:4,
-        hoverOffset:18,
-        offset:(ctx)=>{
-          if(!ctx.raw) return 0;
-          if(ctx.dataIndex===0) return 5;
-          if(ctx.dataIndex===1) return 11;
-          return 14;
-        }
+        borderWidth:5,
+        borderRadius:5,
+        spacing:3,
+        hoverOffset:8
       }]
     },
     options:{
       responsive:true,
       maintainAspectRatio:false,
-      animation:{duration:850,easing:'easeOutQuart'},
-      rotation:-78,
-      radius:'84%',
-      layout:{padding:{top:18,right:20,bottom:26,left:20}},
+      cutout:'58%',
+      radius:'90%',
+      rotation:-90,
+      animation:{duration:700,easing:'easeOutQuart'},
+      layout:{padding:{top:10,right:10,bottom:8,left:10}},
       plugins:{
         legend:{
           position:'bottom',
@@ -615,13 +581,11 @@ function renderStatus(){
           }
         },
         tooltip:{
-          backgroundColor:'#122849',
-          titleColor:'#fff',
-          bodyColor:'#fff',
-          borderColor:'rgba(255,255,255,.16)',
-          borderWidth:1,
-          padding:12,
-          cornerRadius:12,
+          backgroundColor:'#14284f',
+          titleColor:'#ffffff',
+          bodyColor:'#ffffff',
+          padding:11,
+          cornerRadius:10,
           displayColors:true,
           callbacks:{
             label:(ctx)=>{
@@ -632,7 +596,7 @@ function renderStatus(){
         }
       }
     },
-    plugins:[pie3DPlugin]
+    plugins:[premiumStatusPlugin]
   });
 }
 
