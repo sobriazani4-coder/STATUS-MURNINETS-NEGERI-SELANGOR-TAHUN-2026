@@ -966,3 +966,29 @@ body{
 .status-counters .counter.low{
   background:linear-gradient(180deg,#ef6b78 0%,#d33c52 100%)!important;
 }
+
+
+/* ===== STATUS PRESTASI CLEAN PREMIUM RING ===== */
+#statusChart{
+  filter:drop-shadow(0 14px 22px rgba(20,36,67,.11))!important;
+}
+.chart-medium{
+  height:330px!important;
+}
+.status-counters{
+  gap:10px!important;
+  padding:0 14px 14px!important;
+}
+.status-counters .counter{
+  min-height:78px!important;
+  border-radius:15px!important;
+  box-shadow:
+    0 9px 18px rgba(20,36,67,.08),
+    inset 0 1px 0 rgba(255,255,255,.28)!important;
+}
+.status-counters .counter:before{
+  display:none!important;
+}
+.status-counters .counter span{
+  font-size:30px!important;
+}
