@@ -585,17 +585,48 @@ function renderDimensionsChart(){
   if(state.dimensionChart) return;
   state.dimensionChart=new Chart($('#dimensionChart'),{
     type:'doughnut',
-    data:{labels:DIMENSIONS.map(d=>d.name),datasets:[{data:DIMENSIONS.map(d=>d.count),backgroundColor:DIMENSIONS.map(d=>d.color),borderColor:'#fff',borderWidth:4}]},
-    options:{responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{position:'bottom',labels:{boxWidth:12,color:'#43516d'}},tooltip:{callbacks:{label:(ctx)=>ctx.label+': '+ctx.raw+' indikator'}}}}
+    data:{
+      labels:DIMENSIONS.map(d=>d.name),
+      datasets:[{
+        data:DIMENSIONS.map(d=>d.count),
+        backgroundColor:DIMENSIONS.map(d=>d.color),
+        borderColor:'#fff',
+        borderWidth:4,
+        hoverOffset:7
+      }]
+    },
+    options:{
+      responsive:true,
+      maintainAspectRatio:false,
+      cutout:'58%',
+      radius:'92%',
+      plugins:{
+        legend:{display:false},
+        tooltip:{callbacks:{label:(ctx)=>ctx.label+': '+ctx.raw+' indikator'}}
+      }
+    }
   });
 }
 
 function renderDimensions(){
-  $('#dimensionList').innerHTML=DIMENSIONS.map(d=>{
+  const cards=DIMENSIONS.map(d=>{
     const page=DIMENSION_START_PAGES[d.id];
     return '<a class="dimension-card '+(state.dimension!=='all' && String(d.id)===state.dimension?'active':'')+'" href="'+PDF_PATH+'#page='+page+'" target="_blank" rel="noopener" style="--accent:'+d.color+'">'+
       '<small>DIMENSI '+d.id+'</small><h3>'+d.name+'</h3><span>'+d.count+' indikator</span><span class="pdf-jump">Buka PDF • Hal. '+page+'</span></a>';
   }).join('');
+  $('#dimensionList').innerHTML=cards;
+
+  const breakdown=$('#dimensionBreakdown');
+  if(breakdown){
+    breakdown.innerHTML=DIMENSIONS.map(d=>{
+      const pct=Math.round((d.count/48)*100);
+      return '<div class="breakdown-item">'+
+        '<span class="breakdown-swatch" style="background:'+d.color+'"></span>'+
+        '<div class="breakdown-copy"><strong>'+d.name+'</strong><span>'+d.count+' indikator • '+pct+'%</span></div>'+
+        '<div class="breakdown-count">'+d.count+'</div>'+
+      '</div>';
+    }).join('');
+  }
 }
 
 function renderProfile(){
@@ -607,14 +638,23 @@ function renderProfile(){
     : 'PBT ini sedang dipilih pada peta dan carta. Nilai dipaparkan berdasarkan indikator '+METRICS[state.metric].short.toLowerCase()+'.';
   const stat=current.status;
   const logo=logoForPbt(current.name);
+  const metric=METRICS[state.metric];
+
   $('#profileBox').innerHTML=
-    '<div class="profile-hero profile-with-logo">'+
-      (logo?'<div class="profile-logo-box"><img src="'+logo+'" alt="Logo '+current.name+'"></div>':'')+
+    '<div class="profile-hero profile-with-logo profile-hero-premium">'+
+      (logo?'<div class="profile-logo-box profile-logo-box-premium"><img src="'+logo+'" alt="Logo '+current.name+'"></div>':'')+
       '<div><h3>'+title+'</h3><p>'+desc+'</p></div>'+
     '</div>'+
-    '<div class="profile-metric">'+
-      '<div class="metric-card"><small>'+METRICS[state.metric].label+'</small><strong>'+formatNumber(current.value)+METRICS[state.metric].unit+'</strong><span>Rujukan halaman '+METRICS[state.metric].page+'</span></div>'+
-      '<div class="metric-card"><small>Status Prestasi</small><strong style="color:'+STATUS_COLORS[stat.key]+'">'+stat.label+'</strong><span>Klasifikasi paparan dashboard</span></div>'+
+    '<div class="profile-metric profile-metric-premium">'+
+      '<div class="metric-card metric-card-premium"><small>'+metric.label+'</small><strong>'+formatNumber(current.value)+metric.unit+'</strong><span>Rujukan halaman '+metric.page+'</span></div>'+
+      '<div class="metric-card metric-card-premium"><small>Status Prestasi</small><strong style="color:'+STATUS_COLORS[stat.key]+'">'+stat.label+'</strong><span>Klasifikasi paparan dashboard</span></div>'+
+    '</div>'+
+    '<div class="profile-summary-card">'+
+      '<div class="profile-summary-title">Ringkasan Paparan Semasa</div>'+
+      '<div class="profile-summary-row"><span>PBT dirujuk</span><strong>'+current.name+'</strong></div>'+
+      '<div class="profile-summary-row"><span>Indikator aktif</span><strong>'+metric.short+'</strong></div>'+
+      '<div class="profile-summary-row"><span>Halaman rujukan</span><strong>'+metric.page+'</strong></div>'+
+      '<div class="profile-summary-row"><span>Status semasa</span><strong style="color:'+STATUS_COLORS[stat.key]+'">'+stat.label+'</strong></div>'+
     '</div>';
 }
 
