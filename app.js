@@ -156,11 +156,31 @@ async function loadPbtGeoJSON(){
   return data;
 }
 
+const PBT_LABEL_CONFIG = {
+  'MD Sabak Bernam':   {offset:[0,-2],  cls:'label-rural'},
+  'MP Kuala Selangor': {offset:[-8,-6], cls:'label-rural'},
+  'MP Hulu Selangor':  {offset:[18,-8], cls:'label-rural'},
+  'MBD Klang':         {offset:[-42,18],cls:'label-urban label-left'},
+  'MB Shah Alam':      {offset:[-34,-16],cls:'label-urban label-left'},
+  'MB Petaling Jaya':  {offset:[34,-26],cls:'label-urban label-right'},
+  'MB Subang Jaya':    {offset:[24,24], cls:'label-urban label-right'},
+  'MP Selayang':       {offset:[18,-28],cls:'label-urban label-right'},
+  'MP Ampang Jaya':    {offset:[48,-8], cls:'label-urban label-right'},
+  'MP Kajang':         {offset:[34,26], cls:'label-urban label-right'},
+  'MP Kuala Langat':   {offset:[-14,18],cls:'label-rural'},
+  'MP Sepang':         {offset:[14,14], cls:'label-rural'}
+};
+
+function pbtLabelConfig(pbt){
+  return PBT_LABEL_CONFIG[pbt] || {offset:[0,0],cls:''};
+}
+
 function pbtLabelHtml(pbt){
   const logo=logoForPbt(pbt);
-  return '<div class="pbt-label-inner">'+
-    (logo ? '<img src="'+logo+'" alt="">' : '')+
-    '<span>'+shortPbt(pbt)+'</span>'+
+  const cfg=pbtLabelConfig(pbt);
+  return '<div class="pbt-label-inner '+cfg.cls+'">'+
+    (logo ? '<span class="pbt-label-logo"><img src="'+logo+'" alt=""></span>' : '')+
+    '<span class="pbt-label-copy"><b>'+shortPbt(pbt)+'</b><small>PBT</small></span>'+
   '</div>';
 }
 
@@ -202,12 +222,14 @@ async function initMap(){
       const pbt=normalizePbtName(featureRawName(feature));
       state.pbtLayerByName.set(pbt,layer);
 
+      const labelCfg=pbtLabelConfig(pbt);
       layer.bindTooltip(pbtLabelHtml(pbt),{
         permanent:true,
         direction:'center',
-        className:'pbt-label',
+        className:'pbt-label '+labelCfg.cls,
         opacity:1,
-        interactive:true
+        interactive:true,
+        offset:L.point(labelCfg.offset[0],labelCfg.offset[1])
       });
 
       layer.bindPopup(()=>pbtPopupHtml(pbt),{
