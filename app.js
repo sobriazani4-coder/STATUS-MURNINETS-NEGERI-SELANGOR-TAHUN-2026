@@ -453,129 +453,178 @@ function renderStatus(){
 
   if(state.statusChart) state.statusChart.destroy();
 
-  const status3DPlugin={
-    id:'status3DPlugin',
-    afterDraw(chart){
-      const {ctx,chartArea}=chart;
-      if(!chartArea) return;
-      const cx=(chartArea.left+chartArea.right)/2;
-      const cy=(chartArea.top+chartArea.bottom)/2-10;
+  const values=[counts.good,counts.mid,counts.low];
+  const labels=['Mampan','Sederhana Mampan','Kurang Mampan'];
+  const topColors=['#79bf62','#f2ad36','#df4960'];
+  const depthColors=['#559740','#c98219','#ad2940'];
 
+  const pie3DPlugin={
+    id:'premiumExplodedPie3D',
+
+    beforeDatasetsDraw(chart){
+      const meta=chart.getDatasetMeta(0);
+      if(!meta || !meta.data) return;
+      const {ctx}=chart;
+
+      // Draw several darker layers behind the live pie to simulate thickness.
+      for(let depth=14;depth>=3;depth-=2){
+        meta.data.forEach((arc,index)=>{
+          if(!values[index]) return;
+          const props=arc.getProps(['x','y','startAngle','endAngle','innerRadius','outerRadius'],true);
+          ctx.save();
+          ctx.beginPath();
+          ctx.arc(props.x,props.y+depth,props.outerRadius,props.startAngle,props.endAngle);
+          if(props.innerRadius>0){
+            ctx.arc(props.x,props.y+depth,props.innerRadius,props.endAngle,props.startAngle,true);
+          }else{
+            ctx.lineTo(props.x,props.y+depth);
+          }
+          ctx.closePath();
+          ctx.fillStyle=depthColors[index];
+          ctx.globalAlpha=.92;
+          ctx.fill();
+          ctx.restore();
+        });
+      }
+    },
+
+    afterDatasetsDraw(chart){
+      const meta=chart.getDatasetMeta(0);
+      if(!meta || !meta.data || !total) return;
+      const {ctx}=chart;
+
+      // Percentage badges on every visible slice.
+      meta.data.forEach((arc,index)=>{
+        const value=values[index];
+        if(!value) return;
+
+        const pct=Math.round((value/total)*100);
+        const props=arc.getProps(['x','y','startAngle','endAngle','innerRadius','outerRadius'],true);
+        const angle=(props.startAngle+props.endAngle)/2;
+        const radius=props.outerRadius*.58;
+        const x=props.x+Math.cos(angle)*radius;
+        const y=props.y+Math.sin(angle)*radius;
+
+        ctx.save();
+        ctx.textAlign='center';
+        ctx.textBaseline='middle';
+        ctx.shadowColor='rgba(15,35,70,.22)';
+        ctx.shadowBlur=8;
+        ctx.shadowOffsetY=3;
+
+        const badgeText=pct+'%';
+        ctx.font='900 17px Montserrat,Arial,sans-serif';
+        const w=Math.max(54,ctx.measureText(badgeText).width+22);
+
+        const r=14;
+        const h=34;
+        const bx=x-w/2;
+        const by=y-h/2;
+        ctx.beginPath();
+        ctx.moveTo(bx+r,by);
+        ctx.arcTo(bx+w,by,bx+w,by+h,r);
+        ctx.arcTo(bx+w,by+h,bx,by+h,r);
+        ctx.arcTo(bx,by+h,bx,by,r);
+        ctx.arcTo(bx,by,bx+w,by,r);
+        ctx.closePath();
+        ctx.fillStyle='rgba(255,255,255,.94)';
+        ctx.fill();
+
+        ctx.shadowColor='transparent';
+        ctx.lineWidth=1;
+        ctx.strokeStyle='rgba(20,36,67,.10)';
+        ctx.stroke();
+
+        ctx.fillStyle='#132b58';
+        ctx.fillText(badgeText,x,y-1);
+
+        ctx.restore();
+      });
+
+      // Soft floor shadow to make the chart sit naturally in the card.
+      const area=chart.chartArea;
+      const cx=(area.left+area.right)/2;
+      const cy=area.bottom-10;
       ctx.save();
-
-      // Premium soft shadow underneath the doughnut.
       ctx.beginPath();
-      ctx.ellipse(cx,cy+96,100,16,0,0,Math.PI*2);
-      ctx.fillStyle='rgba(20,36,67,.13)';
-      ctx.filter='blur(12px)';
+      ctx.ellipse(cx,cy,118,15,0,0,Math.PI*2);
+      ctx.fillStyle='rgba(20,36,67,.08)';
+      ctx.filter='blur(10px)';
       ctx.fill();
-      ctx.filter='none';
-
-      // Premium center badge.
-      const g=ctx.createRadialGradient(cx-16,cy-20,8,cx,cy,68);
-      g.addColorStop(0,'#ffffff');
-      g.addColorStop(.70,'#fffaf5');
-      g.addColorStop(1,'#f7e9db');
-
-      ctx.beginPath();
-      ctx.arc(cx,cy,62,0,Math.PI*2);
-      ctx.fillStyle=g;
-      ctx.shadowColor='rgba(20,36,67,.12)';
-      ctx.shadowBlur=18;
-      ctx.shadowOffsetY=5;
-      ctx.fill();
-
-      ctx.shadowColor='transparent';
-      ctx.lineWidth=1.5;
-      ctx.strokeStyle='rgba(229,205,181,.95)';
-      ctx.stroke();
-
-      ctx.textAlign='center';
-      ctx.textBaseline='middle';
-
-      ctx.fillStyle='#132b58';
-      ctx.font='900 32px Montserrat,Arial,sans-serif';
-      ctx.fillText('100%',cx,cy-8);
-
-      ctx.fillStyle='#6f7b91';
-      ctx.font='800 10px Montserrat,Arial,sans-serif';
-      ctx.fillText((total||0)+' PBT DINILAI',cx,cy+20);
-
       ctx.restore();
     }
   };
 
-  state.statusChart=new Chart($('#statusChart'),{
-    type:'doughnut',
+  const canvas=$('#statusChart');
+  const c=canvas.getContext('2d');
+  const gradients=topColors.map((color,index)=>{
+    const grad=c.createLinearGradient(0,15,0,330);
+    if(index===0){
+      grad.addColorStop(0,'#9bdd83');
+      grad.addColorStop(.45,'#7bc366');
+      grad.addColorStop(1,'#62a94f');
+    }else if(index===1){
+      grad.addColorStop(0,'#ffd270');
+      grad.addColorStop(.48,'#f4b33f');
+      grad.addColorStop(1,'#dc8c22');
+    }else{
+      grad.addColorStop(0,'#f57a86');
+      grad.addColorStop(.48,'#e95669');
+      grad.addColorStop(1,'#c8324a');
+    }
+    return grad;
+  });
+
+  state.statusChart=new Chart(canvas,{
+    type:'pie',
     data:{
-      labels:['Mampan','Sederhana Mampan','Kurang Mampan'],
-      datasets:[
-        {
-          // Lower ring gives pseudo-3D thickness/depth.
-          data:[counts.good,counts.mid,counts.low],
-          backgroundColor:['rgba(92,154,73,.50)','rgba(216,137,28,.50)','rgba(183,39,59,.50)'],
-          borderWidth:0,
-          radius:'96%',
-          cutout:'57%',
-          spacing:2,
-          circumference:360,
-          rotation:-90
-        },
-        {
-          data:[counts.good,counts.mid,counts.low],
-          backgroundColor:[
-            ['#99cf84','#63a953'],
-            ['#ffc665','#e99d29'],
-            ['#ef6a75','#cf3851']
-          ].map(pair=>{
-            const canvas=$('#statusChart');
-            const c=canvas.getContext('2d');
-            const grad=c.createLinearGradient(0,0,0,330);
-            grad.addColorStop(0,pair[0]);
-            grad.addColorStop(1,pair[1]);
-            return grad;
-          }),
-          borderColor:'#ffffff',
-          borderWidth:4,
-          radius:'88%',
-          cutout:'55%',
-          spacing:4,
-          hoverOffset:10,
-          circumference:360,
-          rotation:-90
+      labels,
+      datasets:[{
+        data:values,
+        backgroundColor:gradients,
+        borderColor:'#ffffff',
+        borderWidth:4,
+        hoverBorderWidth:4,
+        hoverOffset:18,
+        offset:(ctx)=>{
+          if(!ctx.raw) return 0;
+          if(ctx.dataIndex===0) return 5;
+          if(ctx.dataIndex===1) return 11;
+          return 14;
         }
-      ]
+      }]
     },
     options:{
       responsive:true,
       maintainAspectRatio:false,
-      animation:{duration:750,easing:'easeOutQuart'},
-      layout:{padding:{top:10,right:12,bottom:4,left:12}},
+      animation:{duration:850,easing:'easeOutQuart'},
+      rotation:-78,
+      radius:'84%',
+      layout:{padding:{top:18,right:20,bottom:26,left:20}},
       plugins:{
         legend:{
           position:'bottom',
           labels:{
             usePointStyle:true,
             pointStyle:'rectRounded',
-            boxWidth:11,
-            boxHeight:11,
+            boxWidth:12,
+            boxHeight:12,
             padding:18,
-            color:'#45546f',
+            color:'#40506d',
             font:{size:11,weight:'700'}
           }
         },
         tooltip:{
-          backgroundColor:'#14284f',
+          backgroundColor:'#122849',
           titleColor:'#fff',
           bodyColor:'#fff',
-          borderColor:'rgba(255,255,255,.15)',
+          borderColor:'rgba(255,255,255,.16)',
           borderWidth:1,
-          padding:11,
-          cornerRadius:11,
+          padding:12,
+          cornerRadius:12,
           displayColors:true,
           callbacks:{
             label:(ctx)=>{
-              if(ctx.datasetIndex!==1) return '';
               const pct=total ? Math.round((ctx.raw/total)*100) : 0;
               return ctx.label+': '+ctx.raw+' PBT ('+pct+'%)';
             }
@@ -583,7 +632,7 @@ function renderStatus(){
         }
       }
     },
-    plugins:[status3DPlugin]
+    plugins:[pie3DPlugin]
   });
 }
 
