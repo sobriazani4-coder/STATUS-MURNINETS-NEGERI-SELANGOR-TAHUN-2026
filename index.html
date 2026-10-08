@@ -10,12 +10,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="styles.css?v=20261008-0701 />
+  <link rel="stylesheet" href="styles.css?v=20261008-0645" />
   <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
   <script defer src="data.js?v=20261008-0542"></script>
   <script defer src="pbt-logos.js?v=20261008-0542"></script>
-  <script defer src="app.js?v=20261008-0701></script>
+  <script defer src="app.js?v=20261008-0654"></script>
 </head>
 <body>
   <header class="top-header">
@@ -159,40 +159,33 @@
         </div>
       </section>
 
-      <section class="secondary-grid secondary-grid-premium" id="dimensionsBoard">
-        <article class="panel secondary-panel profile-panel-premium">
+      <section class="secondary-grid" id="dimensionsBoard">
+        <article class="panel">
           <div class="panel-head">
             <div>
               <h2>Profil PBT Dipilih</h2>
               <p>Ringkasan pantas PBT yang aktif pada dashboard.</p>
             </div>
           </div>
-          <div class="profile-box profile-box-premium" id="profileBox"></div>
+          <div class="profile-box" id="profileBox"></div>
         </article>
-
-        <article class="panel secondary-panel indicator-distribution-panel">
+        <article class="panel">
           <div class="panel-head">
             <div>
               <h2>Taburan 48 Indikator</h2>
               <p>Pecahan indikator mengikut dimensi MURNInets 2.0.</p>
             </div>
           </div>
-          <div class="distribution-body">
-            <div class="distribution-chart-card">
-              <div class="chart-box chart-medium distribution-chart-box"><canvas id="dimensionChart"></canvas></div>
-            </div>
-            <div class="distribution-breakdown" id="dimensionBreakdown"></div>
-          </div>
+          <div class="chart-box chart-medium"><canvas id="dimensionChart"></canvas></div>
         </article>
-
-        <article class="panel secondary-panel dimensions-panel-premium">
+        <article class="panel">
           <div class="panel-head">
             <div>
               <h2>6 Dimensi MURNInets</h2>
               <p>Klik kad dimensi untuk tapis senarai indikator.</p>
             </div>
           </div>
-          <div class="dimension-list dimension-list-premium" id="dimensionList"></div>
+          <div class="dimension-list" id="dimensionList"></div>
         </article>
       </section>
 
