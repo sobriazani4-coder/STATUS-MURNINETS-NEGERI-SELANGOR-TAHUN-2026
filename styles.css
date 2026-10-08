@@ -1060,3 +1060,20 @@ body{
     column-gap:52px!important;
   }
 }
+
+
+/* ===== SUO LOGO SPACING V3 ===== */
+.top-header .suo-logo-wrap{
+  margin-left:64px!important;
+}
+.top-header .logo-group{
+  column-gap:96px!important;
+}
+@media(max-width:900px){
+  .top-header .suo-logo-wrap{
+    margin-left:30px!important;
+  }
+  .top-header .logo-group{
+    column-gap:62px!important;
+  }
+}
