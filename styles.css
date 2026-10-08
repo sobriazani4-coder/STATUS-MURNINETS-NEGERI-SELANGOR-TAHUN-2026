@@ -728,3 +728,12 @@ body{
 .top-header .title-block{
   margin-left:10px!important;
 }
+
+
+/* ===== EXTRA SUO / TITLE SPACING ===== */
+.top-header .logo-group{
+  column-gap:64px!important;
+}
+.top-header .title-block{
+  margin-left:18px!important;
+}
