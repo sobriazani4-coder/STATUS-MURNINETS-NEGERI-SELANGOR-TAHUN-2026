@@ -746,3 +746,131 @@ body{
 .top-header .title-block{
   margin-left:24px!important;
 }
+
+
+/* ===== PBT LOGO QUICK SELECTOR ===== */
+.pbt-logo-selector{
+  background:linear-gradient(180deg,rgba(255,255,255,.99),rgba(255,250,245,.98));
+  border:1px solid #ead8c7;
+  border-radius:18px;
+  box-shadow:0 9px 24px rgba(20,36,67,.07);
+  padding:12px 12px 11px;
+  overflow:hidden;
+}
+.pbt-selector-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:0 2px 10px;
+}
+.pbt-selector-head h2{
+  margin:0;
+  color:#172b51;
+  font-size:14px;
+  font-weight:900;
+  letter-spacing:-.01em;
+}
+.pbt-selector-head span{
+  font-size:11px;
+  color:#7c879a;
+}
+.pbt-logo-strip{
+  display:grid;
+  grid-template-columns:repeat(13,minmax(78px,1fr));
+  gap:8px;
+  align-items:stretch;
+}
+.pbt-logo-card{
+  appearance:none;
+  border:1px solid #ead8c7;
+  background:linear-gradient(180deg,#fff,#fffaf5);
+  border-radius:14px;
+  min-height:88px;
+  padding:7px 5px 8px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  cursor:pointer;
+  color:#18305e;
+  transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease,background .18s ease;
+  box-shadow:0 4px 11px rgba(20,36,67,.035);
+}
+.pbt-logo-card:hover{
+  transform:translateY(-2px);
+  border-color:#efa26b;
+  box-shadow:0 9px 19px rgba(20,36,67,.09);
+  background:#fff;
+}
+.pbt-logo-card.active{
+  border:2px solid #ef742b;
+  background:linear-gradient(180deg,#fff8f1,#fff3e7);
+  box-shadow:0 9px 20px rgba(239,116,43,.16),inset 0 0 0 1px rgba(255,255,255,.7);
+}
+.pbt-logo-frame{
+  width:46px;
+  height:46px;
+  display:grid;
+  place-items:center;
+  border-radius:11px;
+  background:#fff;
+  overflow:hidden;
+}
+.pbt-logo-frame img{
+  width:41px;
+  height:41px;
+  object-fit:contain;
+  display:block;
+}
+.pbt-logo-card strong{
+  max-width:100%;
+  font-size:10px;
+  line-height:1.05;
+  font-weight:900;
+  color:#0f2855;
+  white-space:nowrap;
+}
+.all-pbt-icon{
+  font-size:22px;
+  font-weight:900;
+  color:#ef612c;
+  background:linear-gradient(180deg,#fff8ef,#fff1e3);
+}
+.pbt-fallback{
+  font-size:12px;
+  font-weight:900;
+  color:#df5b30;
+}
+@media(max-width:1450px){
+  .pbt-logo-strip{
+    display:flex;
+    overflow-x:auto;
+    gap:8px;
+    padding-bottom:4px;
+    scrollbar-width:thin;
+  }
+  .pbt-logo-card{
+    flex:0 0 92px;
+  }
+}
+@media(max-width:700px){
+  .pbt-selector-head{
+    align-items:flex-start;
+    flex-direction:column;
+    gap:4px;
+  }
+  .pbt-logo-card{
+    flex-basis:82px;
+    min-height:80px;
+  }
+  .pbt-logo-frame{
+    width:40px;
+    height:40px;
+  }
+  .pbt-logo-frame img{
+    width:36px;
+    height:36px;
+  }
+}
