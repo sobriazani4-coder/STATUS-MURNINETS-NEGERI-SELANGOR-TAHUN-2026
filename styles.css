@@ -701,3 +701,12 @@ body{
 .pbt-label.label-rural .pbt-label-copy b{
   max-width:96px;
 }
+
+
+/* ===== DASHBOARD TITLE TYPOGRAPHY ===== */
+.title-block h1{
+  font-family:'Montserrat',sans-serif!important;
+  font-weight:700!important;
+  text-transform:uppercase;
+  letter-spacing:-0.035em;
+}
