@@ -349,24 +349,96 @@ function updateMapStyles(){
 }
 
 function renderRanking(){
-  const allRows=metricRows();
-  const rows=state.pbt==='all' ? allRows : allRows.filter(r=>r.name===state.pbt);
-  const clipped=rows.map(r=>state.metric==='revenue' ? Math.min(r.value,160) : r.value);
+  const allRows = metricRows();
+  const rows = state.pbt === 'all' ? allRows : allRows.filter(r=>r.name===state.pbt);
+  const clipped = rows.map(r=> state.metric==='revenue' ? Math.min(r.value, 160) : r.value);
+
+  const palette = [
+    '#ef4444','#f97316','#f59e0b','#eab308',
+    '#84cc16','#22c55e','#14b8a6','#06b6d4',
+    '#3b82f6','#6366f1','#8b5cf6','#ec4899'
+  ];
+
+  const shadowPlugin = {
+    id:'barShadow',
+    beforeDatasetDraw(chart){
+      const {ctx}=chart;
+      ctx.save();
+      ctx.shadowColor='rgba(15,23,42,.14)';
+      ctx.shadowBlur=10;
+      ctx.shadowOffsetY=4;
+    },
+    afterDatasetDraw(chart){ chart.ctx.restore(); }
+  };
+
+  const valueLabelPlugin = {
+    id:'rankingValueLabels',
+    afterDatasetsDraw(chart){
+      const {ctx}=chart;
+      ctx.save();
+      ctx.font='800 11px Montserrat, Arial, sans-serif';
+      ctx.fillStyle='#173163';
+      ctx.textAlign='left';
+      ctx.textBaseline='middle';
+      const meta=chart.getDatasetMeta(0);
+      meta.data.forEach((bar,index)=>{
+        const label=formatNumber(rows[index].value)+METRICS[state.metric].unit;
+        ctx.fillText(label,Math.min(bar.x+8,chart.chartArea.right+8),bar.y);
+      });
+      ctx.restore();
+    }
+  };
+
   if(state.rankingChart) state.rankingChart.destroy();
-  state.rankingChart=new Chart($('#rankingChart'),{
+
+  state.rankingChart = new Chart($('#rankingChart'), {
     type:'bar',
-    data:{labels:rows.map(r=>r.short),datasets:[{data:clipped,borderRadius:8,backgroundColor:rows.map(r=>STATUS_COLORS[r.status.key])}]},
+    data:{
+      labels:rows.map(r=>r.short),
+      datasets:[{
+        data:clipped,
+        borderRadius:999,
+        borderSkipped:false,
+        borderColor:'#ffffff',
+        borderWidth:2,
+        backgroundColor:rows.map((_,i)=>palette[i%palette.length]),
+        hoverBackgroundColor:rows.map((_,i)=>palette[i%palette.length]),
+        barPercentage:.78,
+        categoryPercentage:.88
+      }]
+    },
     options:{
-      responsive:true,maintainAspectRatio:false,indexAxis:'y',
+      responsive:true,
+      maintainAspectRatio:false,
+      indexAxis:'y',
+      layout:{padding:{right:64}},
       scales:{
-        x:{beginAtZero:true,grid:{color:'rgba(31,47,88,.08)'},ticks:{color:'#66738b'}},
-        y:{grid:{display:false},ticks:{color:'#1f2f58',font:{size:11}}}
+        x:{
+          beginAtZero:true,
+          grid:{color:'rgba(31,47,88,.07)'},
+          ticks:{color:'#66738b'}
+        },
+        y:{
+          grid:{display:false},
+          ticks:{color:'#1f2f58',font:{size:11,weight:'700'}}
+        }
       },
       plugins:{
         legend:{display:false},
-        tooltip:{callbacks:{label:(ctx)=>METRICS[state.metric].label+': '+formatNumber(rows[ctx.dataIndex].value)+METRICS[state.metric].unit}}
+        tooltip:{
+          backgroundColor:'#14284f',
+          titleColor:'#fff',
+          bodyColor:'#fff',
+          padding:10,
+          cornerRadius:10,
+          displayColors:false,
+          callbacks:{
+            label:(ctx)=>METRICS[state.metric].label+': '+formatNumber(rows[ctx.dataIndex].value)+METRICS[state.metric].unit
+          }
+        }
       }
-    }
+    },
+    plugins:[shadowPlugin,valueLabelPlugin]
   });
 }
 
