@@ -1077,3 +1077,40 @@ body{
     column-gap:62px!important;
   }
 }
+
+
+/* ===== CENTER MAIN DASHBOARD TITLE ===== */
+@media(min-width:901px){
+  .top-header{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:flex-start!important;
+  }
+  .top-header .logo-group{
+    width:100%!important;
+    display:block!important;
+    position:relative!important;
+    min-height:136px!important;
+  }
+  .top-header .suo-logo-wrap{
+    position:absolute!important;
+    left:64px!important;
+    top:50%!important;
+    transform:translateY(-50%)!important;
+    margin-left:0!important;
+  }
+  .top-header .title-block{
+    position:absolute!important;
+    left:50%!important;
+    top:50%!important;
+    transform:translate(-50%,-50%)!important;
+    width:min(1080px,calc(100% - 420px))!important;
+    margin-left:0!important;
+    text-align:center!important;
+  }
+  .top-header .title-block .eyebrow,
+  .top-header .title-block h1,
+  .top-header .title-block p{
+    text-align:center!important;
+  }
+}
