@@ -1258,3 +1258,19 @@ body{
     transform:translate(-50%,-50%)!important;
   }
 }
+
+
+/* ===== KPI CARDS · SOFT SELANGOR FLAG COLORS ===== */
+/* Kotak 1 & 3: family merah lembut */
+.kpi-grid .kpi-card:nth-child(1),
+.kpi-grid .kpi-card:nth-child(3){
+  background:linear-gradient(135deg,#fffafa 0%,#fff2f0 58%,#ffe7e3 100%)!important;
+  border-color:#efcbc5!important;
+}
+
+/* Kotak 2 & 4: family kuning lembut */
+.kpi-grid .kpi-card:nth-child(2),
+.kpi-grid .kpi-card:nth-child(4){
+  background:linear-gradient(135deg,#fffef9 0%,#fff8e2 58%,#ffefc4 100%)!important;
+  border-color:#eadca9!important;
+}
