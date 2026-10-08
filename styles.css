@@ -1240,3 +1240,12 @@ body{
     transform:translate(-50%,-50%)!important;
   }
 }
+
+
+/* ===== SUO LOGO SAFE LEFT POSITION V5 ===== */
+@media(min-width:901px){
+  .top-header .suo-logo-wrap{
+    left:18%!important;
+    transform:translate(-50%,-50%)!important;
+  }
+}
