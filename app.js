@@ -445,14 +445,145 @@ function renderRanking(){
 function renderStatus(){
   const rows=state.pbt==='all' ? metricRows() : metricRows().filter(r=>r.name===state.pbt);
   const counts=rows.reduce((acc,row)=>{acc[row.status.key]+=1;return acc;},{good:0,mid:0,low:0});
+  const total=counts.good+counts.mid+counts.low;
+
   $('#countGood').textContent=counts.good;
   $('#countMid').textContent=counts.mid;
   $('#countLow').textContent=counts.low;
+
   if(state.statusChart) state.statusChart.destroy();
+
+  const status3DPlugin={
+    id:'status3DPlugin',
+    afterDraw(chart){
+      const {ctx,chartArea}=chart;
+      if(!chartArea) return;
+      const cx=(chartArea.left+chartArea.right)/2;
+      const cy=(chartArea.top+chartArea.bottom)/2-10;
+
+      ctx.save();
+
+      // Premium soft shadow underneath the doughnut.
+      ctx.beginPath();
+      ctx.ellipse(cx,cy+96,100,16,0,0,Math.PI*2);
+      ctx.fillStyle='rgba(20,36,67,.13)';
+      ctx.filter='blur(12px)';
+      ctx.fill();
+      ctx.filter='none';
+
+      // Premium center badge.
+      const g=ctx.createRadialGradient(cx-16,cy-20,8,cx,cy,68);
+      g.addColorStop(0,'#ffffff');
+      g.addColorStop(.70,'#fffaf5');
+      g.addColorStop(1,'#f7e9db');
+
+      ctx.beginPath();
+      ctx.arc(cx,cy,62,0,Math.PI*2);
+      ctx.fillStyle=g;
+      ctx.shadowColor='rgba(20,36,67,.12)';
+      ctx.shadowBlur=18;
+      ctx.shadowOffsetY=5;
+      ctx.fill();
+
+      ctx.shadowColor='transparent';
+      ctx.lineWidth=1.5;
+      ctx.strokeStyle='rgba(229,205,181,.95)';
+      ctx.stroke();
+
+      ctx.textAlign='center';
+      ctx.textBaseline='middle';
+
+      ctx.fillStyle='#132b58';
+      ctx.font='900 32px Montserrat,Arial,sans-serif';
+      ctx.fillText('100%',cx,cy-8);
+
+      ctx.fillStyle='#6f7b91';
+      ctx.font='800 10px Montserrat,Arial,sans-serif';
+      ctx.fillText((total||0)+' PBT DINILAI',cx,cy+20);
+
+      ctx.restore();
+    }
+  };
+
   state.statusChart=new Chart($('#statusChart'),{
     type:'doughnut',
-    data:{labels:['Mampan','Sederhana Mampan','Kurang Mampan'],datasets:[{data:[counts.good,counts.mid,counts.low],backgroundColor:[STATUS_COLORS.good,STATUS_COLORS.mid,STATUS_COLORS.low],borderWidth:4,borderColor:'#fff'}]},
-    options:{responsive:true,maintainAspectRatio:false,cutout:'64%',plugins:{legend:{position:'bottom',labels:{boxWidth:12,color:'#45546f'}},tooltip:{callbacks:{label:(ctx)=>ctx.label+': '+ctx.raw+' PBT'}}}}
+    data:{
+      labels:['Mampan','Sederhana Mampan','Kurang Mampan'],
+      datasets:[
+        {
+          // Lower ring gives pseudo-3D thickness/depth.
+          data:[counts.good,counts.mid,counts.low],
+          backgroundColor:['rgba(92,154,73,.50)','rgba(216,137,28,.50)','rgba(183,39,59,.50)'],
+          borderWidth:0,
+          radius:'96%',
+          cutout:'57%',
+          spacing:2,
+          circumference:360,
+          rotation:-90
+        },
+        {
+          data:[counts.good,counts.mid,counts.low],
+          backgroundColor:[
+            ['#99cf84','#63a953'],
+            ['#ffc665','#e99d29'],
+            ['#ef6a75','#cf3851']
+          ].map(pair=>{
+            const canvas=$('#statusChart');
+            const c=canvas.getContext('2d');
+            const grad=c.createLinearGradient(0,0,0,330);
+            grad.addColorStop(0,pair[0]);
+            grad.addColorStop(1,pair[1]);
+            return grad;
+          }),
+          borderColor:'#ffffff',
+          borderWidth:4,
+          radius:'88%',
+          cutout:'55%',
+          spacing:4,
+          hoverOffset:10,
+          circumference:360,
+          rotation:-90
+        }
+      ]
+    },
+    options:{
+      responsive:true,
+      maintainAspectRatio:false,
+      animation:{duration:750,easing:'easeOutQuart'},
+      layout:{padding:{top:10,right:12,bottom:4,left:12}},
+      plugins:{
+        legend:{
+          position:'bottom',
+          labels:{
+            usePointStyle:true,
+            pointStyle:'rectRounded',
+            boxWidth:11,
+            boxHeight:11,
+            padding:18,
+            color:'#45546f',
+            font:{size:11,weight:'700'}
+          }
+        },
+        tooltip:{
+          backgroundColor:'#14284f',
+          titleColor:'#fff',
+          bodyColor:'#fff',
+          borderColor:'rgba(255,255,255,.15)',
+          borderWidth:1,
+          padding:11,
+          cornerRadius:11,
+          displayColors:true,
+          callbacks:{
+            label:(ctx)=>{
+              if(ctx.datasetIndex!==1) return '';
+              const pct=total ? Math.round((ctx.raw/total)*100) : 0;
+              return ctx.label+': '+ctx.raw+' PBT ('+pct+'%)';
+            }
+          }
+        }
+      }
+    },
+    plugins:[status3DPlugin]
   });
 }
 
