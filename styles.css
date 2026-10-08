@@ -619,3 +619,85 @@ body{
   .pbt-label-logo img{width:16px;height:16px}
   .pbt-label-inner{min-height:25px;padding:3px 5px}
 }
+
+
+/* ===== FINAL MAP LABEL COLLISION / PREMIUM PASS ===== */
+.pbt-label-inner{
+  min-height:28px;
+  padding:4px 8px 4px 5px;
+}
+.pbt-label.label-urban .pbt-label-inner{
+  min-height:27px;
+  padding:3px 7px 3px 4px;
+  border-radius:10px;
+}
+.pbt-label.label-urban .pbt-label-logo{
+  width:23px;height:23px;flex-basis:23px;border-radius:7px;
+}
+.pbt-label.label-urban .pbt-label-logo img{
+  width:18px;height:18px;
+}
+.pbt-label.label-urban .pbt-label-copy b{
+  max-width:82px;
+  font-size:9.5px;
+}
+.pbt-label.label-urban .pbt-label-copy small{
+  font-size:6.5px;
+}
+.pbt-label.label-priority .pbt-label-inner{
+  border-color:#e9c5a8;
+  box-shadow:0 9px 22px rgba(20,36,67,.18),0 1px 2px rgba(20,36,67,.06);
+}
+.pbt-label.is-active .pbt-label-inner,
+.pbt-label.is-selected .pbt-label-inner{
+  transform:translateY(-2px) scale(1.06);
+  background:#fff;
+  border-color:#ef8f4a;
+  box-shadow:0 14px 28px rgba(20,36,67,.24),0 0 0 2px rgba(244,139,31,.12);
+}
+.pbt-label.is-selected .pbt-label-copy small{
+  color:#d64a2e;
+}
+#selangorMap.map-labels-compact .pbt-label-copy small{
+  display:none;
+}
+#selangorMap.map-labels-compact .pbt-label-inner{
+  gap:4px;
+  padding:3px 6px 3px 4px;
+}
+#selangorMap.map-labels-compact .pbt-label-logo{
+  width:22px;height:22px;flex-basis:22px;
+}
+#selangorMap.map-labels-compact .pbt-label-logo img{
+  width:17px;height:17px;
+}
+#selangorMap.map-labels-compact .pbt-label-copy b{
+  max-width:72px;
+  font-size:9px;
+}
+#selangorMap.map-labels-expanded .pbt-label-copy b{
+  max-width:108px;
+}
+.pbt-label.label-left .pbt-label-inner:before,
+.pbt-label.label-right .pbt-label-inner:before{
+  width:18px;
+  opacity:.85;
+}
+.pbt-label.label-left .pbt-label-inner:before{right:-18px}
+.pbt-label.label-right .pbt-label-inner:before{left:-18px}
+.pbt-label.label-north .pbt-label-inner:before{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-10px;
+  width:1px;
+  height:10px;
+  background:linear-gradient(rgba(238,112,54,.55),rgba(238,112,54,.10));
+}
+.pbt-label.label-west .pbt-label-inner,
+.pbt-label.label-east .pbt-label-inner{
+  background:rgba(255,255,255,.94);
+}
+.pbt-label.label-rural .pbt-label-copy b{
+  max-width:96px;
+}
