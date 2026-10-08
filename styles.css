@@ -719,36 +719,3 @@ body{
   text-transform:uppercase;
   letter-spacing:-0.04em;
 }
-
-
-/* ===== PREMIUM ILLUSTRATED HEADER BANNER ===== */
-.top-header.premium-banner-header{
-  display:block!important;
-  position:relative;
-  width:100%;
-  min-height:0!important;
-  height:auto!important;
-  padding:0!important;
-  margin:0!important;
-  overflow:hidden;
-  background:#fff8ef!important;
-  border-bottom:1px solid #efd9c4!important;
-  box-shadow:0 8px 24px rgba(20,36,67,.06);
-}
-.premium-header-image{
-  display:block;
-  width:100%;
-  height:clamp(190px,18vw,300px);
-  object-fit:fill;
-  object-position:center;
-}
-@media(max-width:900px){
-  .premium-header-image{
-    height:170px;
-  }
-}
-@media(max-width:620px){
-  .premium-header-image{
-    height:135px;
-  }
-}
