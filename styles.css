@@ -737,3 +737,12 @@ body{
 .top-header .title-block{
   margin-left:18px!important;
 }
+
+
+/* ===== EXTRA SUO / TITLE SPACING V2 ===== */
+.top-header .logo-group{
+  column-gap:90px!important;
+}
+.top-header .title-block{
+  margin-left:24px!important;
+}
