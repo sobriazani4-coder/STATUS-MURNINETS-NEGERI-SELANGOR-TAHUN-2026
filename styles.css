@@ -1181,3 +1181,40 @@ body{
     text-align:center!important;
   }
 }
+
+
+/* ===== TRUE HEADER-CENTERED TITLE V4 ===== */
+@media(min-width:901px){
+  .top-header{
+    position:relative!important;
+  }
+  .top-header .logo-group{
+    width:100%!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:flex-start!important;
+    column-gap:0!important;
+    position:relative!important;
+  }
+  .top-header .suo-logo-wrap{
+    position:relative!important;
+    z-index:2!important;
+    margin-left:64px!important;
+    flex:0 0 136px!important;
+  }
+  .top-header .title-block{
+    position:absolute!important;
+    left:50%!important;
+    top:50%!important;
+    transform:translate(-50%,-50%)!important;
+    width:min(1120px,calc(100% - 520px))!important;
+    margin:0!important;
+    text-align:center!important;
+    z-index:1!important;
+  }
+  .top-header .title-block .eyebrow,
+  .top-header .title-block h1,
+  .top-header .title-block p{
+    text-align:center!important;
+  }
+}
