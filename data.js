@@ -20,7 +20,7 @@ const PBT = ['MB Shah Alam','MB Petaling Jaya','MB Subang Jaya','MBD Klang','MP 
 
 const METRICS = {
   happiness:{label:'Indeks Kebahagiaan 2026',short:'Indeks Kebahagiaan',unit:'%',page:22,values:[92.293,100,94.98,96.691,99.167,95.66,99.98,90.884,100,87.773,98.76,96.606]},
-  riverWater:{label:'Status Kualiti Air Sungai 2026',short:'Status Kualiti Air Sungai',unit:'%',page:4,values:[12.50,20,25,0,0,0,0,0,0,7.69,0,0]},
+  riverWater:{label:'Status Kualiti Air Sungai 2026',short:'Status Kualiti Air Sungai',unit:'%',page:4,values:[12.50,20,25,0,0,0,0,0,0,7.69,0,0],stationTotal:[8,5,4,3,3,18,13,10,3,13,17,3],stationPolluted:[1,1,1,0,0,0,0,0,0,1,0,0]},
   hospitalBeds:{label:'Nisbah Bilangan Katil Hospital 2026',short:'Nisbah Katil Hospital',unit:' katil/1,000 penduduk',page:12,values:[1.96,1.96,1.96,1.96,1.96,1.96,1.96,1.96,1.96,1.96,1.96,1.96]},
   primarySchoolRatio:{label:'Nisbah Sekolah Rendah Kepada Penduduk 2026',short:'Nisbah Sekolah Rendah',unit:' penduduk/sekolah',page:14,values:[6809,11853,7902,7126,16182,5803,12669,3100,5393,3633,3558,2166],schoolLabel:'Bil. Sekolah Rendah',schoolCounts:[94,68,117,166,35,196,63,113,61,83,73,51]},
   secondarySchoolRatio:{label:'Nisbah Sekolah Menengah Kepada Penduduk 2026',short:'Nisbah Sekolah Menengah',unit:' penduduk/sekolah',page:15,values:[12801,19190,13021,9696,23599,12363,21572,5840,14304,11600,6836,6138],schoolLabel:'Bil. Sekolah Menengah',schoolCounts:[50,42,71,122,24,92,37,60,23,26,38,18]},
