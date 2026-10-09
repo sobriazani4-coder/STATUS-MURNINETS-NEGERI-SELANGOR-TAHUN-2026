@@ -1430,3 +1430,19 @@ body{
     margin-top:18px!important;
   }
 }
+
+
+/* ===== SCHOOL COUNT NUMBER EMPHASIS IN MAP POPUP ===== */
+.pbt-popup .school-count-popup{
+  line-height:1.45!important;
+}
+.pbt-popup .school-count-number{
+  display:inline-block;
+  margin-left:4px;
+  font-family:'Montserrat',Arial,sans-serif!important;
+  font-size:20px!important;
+  line-height:1!important;
+  font-weight:900!important;
+  color:#173163!important;
+  letter-spacing:-.02em;
+}
