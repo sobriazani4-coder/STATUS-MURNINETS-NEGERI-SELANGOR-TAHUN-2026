@@ -312,7 +312,7 @@ function pbtPopupHtml(pbt){
       (logo ? '<img class="pbt-popup-logo" src="'+logo+'" alt="Logo '+pbt+'">' : '')+
       '<div><strong>'+pbt+'</strong><small>Negeri Selangor</small></div>'+
     '</div>'+
-    (schoolCount!=null ? '<div class="pbt-popup-metric"><b>'+METRICS[state.metric].schoolLabel+':</b> '+formatNumber(schoolCount,0)+'</div>' : '')+
+    (schoolCount!=null ? '<div class="pbt-popup-metric school-count-popup"><b>'+METRICS[state.metric].schoolLabel+':</b> <span class="school-count-number">'+formatNumber(schoolCount,0)+'</span></div>' : '')+
     (station ? '<div class="pbt-popup-metric"><b>Stesen tercemar:</b> '+station.polluted+' &nbsp;•&nbsp; <b>Jumlah stesen:</b> '+station.total+'</div>' : '')+
     (hospitalBedCount!=null ? '<div class="pbt-popup-metric hospital-bed-popup"><b>Bil. Katil Hospital (Kerajaan &amp; Swasta):</b> '+formatNumber(hospitalBedCount,0)+'</div>' : '')+
     '<span class="value">'+(value==null ? 'Tiada data' : formatNumber(value)+METRICS[state.metric].unit)+'</span>'+
