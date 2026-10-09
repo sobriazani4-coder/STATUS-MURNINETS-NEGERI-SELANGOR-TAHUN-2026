@@ -702,11 +702,31 @@ function renderProfile(){
   const stat=current.status;
   const logo=logoForPbt(current.name);
   const schoolCount=schoolCountForPbt(current.name);
+
+  let extraPbtCards='';
+  if(state.pbt==='all' && state.metric==='happiness'){
+    const extras=[
+      {name:'MP Kuala Langat',display:'Majlis Perbandaran Kuala Langat'},
+      {name:'MP Selayang',display:'Majlis Perbandaran Selayang'}
+    ];
+    extraPbtCards=extras.map(item=>{
+      const row=rows.find(r=>r.name===item.name);
+      const extraLogo=logoForPbt(item.name);
+      if(!row) return '';
+      return '<div class="profile-hero profile-with-logo">'+
+        (extraLogo?'<div class="profile-logo-box"><img src="'+extraLogo+'" alt="Logo '+item.display+'"></div>':'')+
+        '<div><h3>'+item.display+'</h3>'+
+        '<p>Indeks Kebahagiaan 2026: <b>'+formatNumber(row.value)+METRICS[state.metric].unit+'</b> &nbsp;•&nbsp; Status: <b style="color:'+STATUS_COLORS[row.status.key]+'">'+row.status.label+'</b></p></div>'+
+      '</div>';
+    }).join('');
+  }
+
   $('#profileBox').innerHTML=
     '<div class="profile-hero profile-with-logo">'+
       (logo?'<div class="profile-logo-box"><img src="'+logo+'" alt="Logo '+current.name+'"></div>':'')+
       '<div><h3>'+title+'</h3><p>'+desc+'</p></div>'+
     '</div>'+
+    extraPbtCards+
     '<div class="profile-metric">'+
       '<div class="metric-card"><small>'+METRICS[state.metric].label+'</small>'+
         (schoolCount!=null ? '<span><b>'+METRICS[state.metric].schoolLabel+':</b> '+formatNumber(schoolCount,0)+'</span>' : '')+
