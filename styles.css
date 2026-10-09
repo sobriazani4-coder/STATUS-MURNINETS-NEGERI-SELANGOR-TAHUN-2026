@@ -1518,3 +1518,28 @@ body{
     left:18%!important;
   }
 }
+
+
+/* ===== MURNInets LOGO AT RIGHT OF MAIN TITLE; TITLE POSITION UNCHANGED ===== */
+@media(min-width:901px){
+  .top-header .murninets-header-logo{
+    position:absolute!important;
+    left:84.5%!important;
+    top:50%!important;
+    transform:translate(-50%,-50%)!important;
+    width:300px!important;
+    z-index:2!important;
+    pointer-events:none!important;
+  }
+  .top-header .murninets-header-logo img{
+    display:block!important;
+    width:100%!important;
+    height:auto!important;
+    object-fit:contain!important;
+  }
+}
+@media(max-width:900px){
+  .top-header .murninets-header-logo{
+    display:none!important;
+  }
+}
