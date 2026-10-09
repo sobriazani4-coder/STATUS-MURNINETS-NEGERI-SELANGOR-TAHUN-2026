@@ -1645,3 +1645,16 @@ body{
   max-width:100%!important;
   height:auto!important;
 }
+
+/* SDG logo render fix */
+.sidebar .sidebar-sdg-logo{
+  margin-top:auto!important;
+  padding:16px 8px 12px!important;
+}
+.sidebar .sidebar-sdg-logo img{
+  display:block!important;
+  width:150px!important;
+  max-width:100%!important;
+  height:auto!important;
+  object-fit:contain!important;
+}
