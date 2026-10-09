@@ -695,16 +695,24 @@ function renderDimensions(){
 function renderProfile(){
   const rows=metricRows();
   const current=state.pbt==='all' ? rows[0] : rows.find(r=>r.name===state.pbt);
-  const title=state.pbt==='all' ? 'Sorotan PBT Tertinggi Semasa' : current.name;
-  const desc=state.pbt==='all'
-    ? 'Paparan keseluruhan sedang aktif. PBT teratas bagi indikator '+METRICS[state.metric].short.toLowerCase()+' ialah '+current.name+'.'
-    : 'PBT ini sedang dipilih pada peta dan carta. Nilai dipaparkan berdasarkan indikator '+METRICS[state.metric].short.toLowerCase()+'.';
+
+  const isOverallHappiness=state.pbt==='all' && state.metric==='happiness';
+  const title=isOverallHappiness
+    ? 'Majlis Bandaraya Petaling Jaya'
+    : (state.pbt==='all' ? 'Sorotan PBT Tertinggi Semasa' : current.name);
+
+  const desc=isOverallHappiness
+    ? 'Indeks Kebahagiaan 2026 : '+formatNumber(current.value)+METRICS[state.metric].unit
+    : (state.pbt==='all'
+      ? 'Paparan keseluruhan sedang aktif. PBT teratas bagi indikator '+METRICS[state.metric].short.toLowerCase()+' ialah '+current.name+'.'
+      : 'PBT ini sedang dipilih pada peta dan carta. Nilai dipaparkan berdasarkan indikator '+METRICS[state.metric].short.toLowerCase()+'.');
+
   const stat=current.status;
   const logo=logoForPbt(current.name);
   const schoolCount=schoolCountForPbt(current.name);
 
   let extraPbtCards='';
-  if(state.pbt==='all' && state.metric==='happiness'){
+  if(isOverallHappiness){
     const extras=[
       {name:'MP Kuala Langat',display:'Majlis Perbandaran Kuala Langat'},
       {name:'MP Selayang',display:'Majlis Perbandaran Selayang'}
@@ -716,7 +724,7 @@ function renderProfile(){
       return '<div class="profile-hero profile-with-logo">'+
         (extraLogo?'<div class="profile-logo-box"><img src="'+extraLogo+'" alt="Logo '+item.display+'"></div>':'')+
         '<div><h3>'+item.display+'</h3>'+
-        '<p>Indeks Kebahagiaan 2026: <b>'+formatNumber(row.value)+METRICS[state.metric].unit+'</b></p></div>'+
+        '<p>Indeks Kebahagiaan 2026 : <b>'+formatNumber(row.value)+METRICS[state.metric].unit+'</b></p></div>'+
       '</div>'+
       '<div class="profile-metric">'+
         '<div class="metric-card"><small>Indeks Kebahagiaan 2026</small><strong>'+formatNumber(row.value)+METRICS[state.metric].unit+'</strong><span>Rujukan halaman '+METRICS[state.metric].page+'</span></div>'+
