@@ -1685,3 +1685,24 @@ body > *{
     left:87.5%!important;
   }
 }
+
+
+/* ===== PDF BUTTON FOR EACH INDICATOR CARD ===== */
+.indicator-card .indicator-pdf-btn{
+  display:inline-flex!important;
+  align-items:center!important;
+  margin-top:10px!important;
+  padding:6px 10px!important;
+  border-radius:999px!important;
+  border:1px solid #f2c9a9!important;
+  background:linear-gradient(90deg,#fff0e5,#fff6ed)!important;
+  color:#d3542e!important;
+  font-size:12px!important;
+  line-height:1!important;
+  font-weight:900!important;
+  white-space:nowrap!important;
+}
+.indicator-card:hover .indicator-pdf-btn{
+  background:linear-gradient(90deg,#ffe3ce,#fff0e2)!important;
+  border-color:#efb98f!important;
+}
