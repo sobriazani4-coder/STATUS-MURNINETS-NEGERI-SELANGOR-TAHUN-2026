@@ -22,8 +22,8 @@ const METRICS = {
   happiness:{label:'Indeks Kebahagiaan 2026',short:'Indeks Kebahagiaan',unit:'%',page:22,values:[92.293,100,94.98,96.691,99.167,95.66,99.98,90.884,100,87.773,98.76,96.606]},
   urbanisation:{label:'Kadar Perbandaran 2026',short:'Kadar Perbandaran',unit:'%',page:31,values:[99.50,100,99.10,87.51,100,96.23,88.80,93.00,87.90,85.53,72.62,72.45]},
   broadband:{label:'Kadar Liputan Jalur Lebar 2026',short:'Liputan Jalur Lebar',unit:'%',page:40,values:[100,100,100,100,100,100,100,99.99,99.98,100,99.94,99.99]},
-  revenue:{label:'Pencapaian Kutipan Hasil PBT 2026',short:'Kutipan Hasil PBT',unit:'%',page:45,values:[99.30,105.86,104.89,110.46,108.07,113.59,128.74,116.01,115.65,94.82,988.12,101.78]},
-  community:{label:'Peningkatan Penglibatan Komuniti 2026',short:'Penglibatan Komuniti',unit:'%',page:25,values:[10.80,36.87,12.63,33.18,7.86,21.99,61.86,6.95,6.48,217.06,40.40,297.73]}
+  revenue:{label:'Peratusan Pencapaian Kutipan Hasil PBT 2026',short:'Pencapaian Kutipan Hasil PBT',unit:'%',page:45,values:[99.30,105.86,104.89,110.46,108.07,113.59,128.74,116.01,115.65,94.82,988.12,101.78]},
+  community:{label:'Peratus Peningkatan Penglibatan Komuniti Dalam Program Bersama PBT 2026',short:'Peningkatan Penglibatan Komuniti',unit:'%',page:25,values:[10.80,36.87,12.63,33.18,7.86,21.99,61.86,6.95,6.48,217.06,40.40,297.73]}
 };
 
 const MAP_REGIONS = [
