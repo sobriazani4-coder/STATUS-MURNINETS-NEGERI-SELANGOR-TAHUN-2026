@@ -1510,3 +1510,11 @@ body{
     left:14.5%!important;
   }
 }
+
+
+/* ===== MOVE SUO LOGO EVEN CLOSER TO MAIN TITLE; TITLE POSITION UNCHANGED ===== */
+@media(min-width:901px){
+  .top-header .suo-logo-wrap{
+    left:18%!important;
+  }
+}
