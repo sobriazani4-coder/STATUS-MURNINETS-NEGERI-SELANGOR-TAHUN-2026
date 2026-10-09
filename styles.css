@@ -1502,3 +1502,11 @@ body{
   font-size:11.4px!important;
   max-width:100px!important;
 }
+
+
+/* ===== MOVE SUO LOGO CLOSER TO MAIN TITLE ONLY ===== */
+@media(min-width:901px){
+  .top-header .suo-logo-wrap{
+    left:14.5%!important;
+  }
+}
