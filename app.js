@@ -28,40 +28,26 @@ function getStatus(metric, value, pbtName=''){
   const mid={label:'Sederhana Mampan',key:'mid'};
   const low={label:'Kurang Mampan',key:'low'};
 
-  // KT3-P5: >=80% / 50-79% / <50%
-  if(metric==='happiness'){
-    return value>=80 ? good : value>=50 ? mid : low;
-  }
+  // KT3-P5 — Indeks Kebahagiaan
+  if(metric==='happiness') return value>=80 ? good : value>=50 ? mid : low;
 
-  // GT2-P1: piawaian berbeza mengikut kategori PBT.
-  if(metric==='urbanisation'){
-    const isBandaraya=pbtName.startsWith('MB ') || pbtName.startsWith('MBD ');
-    const isDaerah=pbtName.startsWith('MD ');
+  // ST1-P1 — Status Kualiti Air Sungai
+  if(metric==='riverWater') return value<=10 ? good : value<=49 ? mid : low;
 
-    if(isBandaraya) return value>=80 ? good : value>=60 ? mid : low;
-    if(isDaerah) return value>=60 ? good : value>=40 ? mid : low;
-    return value>=70 ? good : value>=50 ? mid : low; // Majlis Perbandaran
-  }
+  // KT2-P2 — Nisbah Bilangan Katil Hospital (data satu Negeri Selangor)
+  if(metric==='hospitalBeds') return value>=2.06 ? good : value>=1.04 ? mid : low;
 
-  // IT1-P6: piawaian berbeza mengikut kategori PBT.
-  if(metric==='broadband'){
-    const isBandaraya=pbtName.startsWith('MB ') || pbtName.startsWith('MBD ');
-    const isDaerah=pbtName.startsWith('MD ');
+  // KT2-P4 — Nisbah Sekolah Rendah kepada Penduduk
+  if(metric==='primarySchoolRatio') return value<=1250 ? good : value<=7499 ? mid : low;
 
-    if(isBandaraya) return value>=100 ? good : value>=70 ? mid : low;
-    if(isDaerah) return value>=70 ? good : value>=50 ? mid : low;
-    return value>=80 ? good : value>=60 ? mid : low; // Majlis Perbandaran
-  }
+  // KT2-P5 — Nisbah Sekolah Menengah kepada Penduduk
+  if(metric==='secondarySchoolRatio') return value<=2500 ? good : value<=8749 ? mid : low;
 
-  // UT2-P1: >=90% / 70-89% / <70%
-  if(metric==='revenue'){
-    return value>=90 ? good : value>=70 ? mid : low;
-  }
+  // KT2-P6 — Unit rumah bagi setiap Pra Sekolah / Tadika / Tabika
+  if(metric==='preschoolRatio') return value<=200 ? good : value<=499 ? mid : low;
 
-  // KT3-P8: >=5% / 3-4% / <3%
-  if(metric==='community'){
-    return value>=5 ? good : value>=3 ? mid : low;
-  }
+  // IT1-P1 — Isipadu Penggunaan Air Domestik Harian Per Kapita (data satu Negeri Selangor)
+  if(metric==='domesticWater') return value<=180 ? good : value<=200 ? mid : low;
 
   return {label:'Data',key:'mid'};
 }
@@ -271,7 +257,7 @@ function pbtLabelHtml(pbt){
 function pbtPopupHtml(pbt){
   const logo=logoForPbt(pbt);
   const value=valueForPbt(pbt);
-  const status=value==null ? null : getStatus(state.metric,value);
+  const status=value==null ? null : getStatus(state.metric,value,pbt);
   return '<div class="pbt-popup">'+
     '<div class="pbt-popup-head">'+
       (logo ? '<img class="pbt-popup-logo" src="'+logo+'" alt="Logo '+pbt+'">' : '')+
