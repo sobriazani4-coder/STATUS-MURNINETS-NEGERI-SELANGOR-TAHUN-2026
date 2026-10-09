@@ -284,7 +284,7 @@ const PBT_LABEL_CONFIG = {
   'MB Subang Jaya':    {offset:[18,42],  cls:'label-urban label-right label-priority'},
   'MP Selayang':       {offset:[26,-48], cls:'label-urban label-right'},
   'MP Ampang Jaya':    {offset:[88,4], cls:'label-urban label-right'},
-  'MP Kajang':         {offset:[78,58],  cls:'label-urban label-right'},
+  'MP Kajang':         {offset:[48,48],  cls:'label-urban label-right'},
   'MP Kuala Langat':   {offset:[-22,28], cls:'label-rural label-west'},
   'MP Sepang':         {offset:[28,26],  cls:'label-rural label-east'}
 };
