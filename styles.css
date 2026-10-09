@@ -1419,3 +1419,14 @@ body{
     margin-top:8px!important;
   }
 }
+
+
+/* ===== EXTRA GAP BEFORE TABURAN 48 INDIKATOR ===== */
+.population-title-line + h2{
+  margin-top:24px!important;
+}
+@media(max-width:700px){
+  .population-title-line + h2{
+    margin-top:18px!important;
+  }
+}
