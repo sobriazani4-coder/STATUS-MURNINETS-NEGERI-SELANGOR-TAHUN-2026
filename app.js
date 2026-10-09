@@ -106,6 +106,13 @@ function riverStationForPbt(name, metricKey = state.metric){
   return {total:metric.stationTotal[idx], polluted:metric.stationPolluted[idx]};
 }
 
+function hospitalBedCountForPbt(name, metricKey = state.metric){
+  const metric=METRICS[metricKey];
+  if(!metric || !metric.hospitalBedCount) return null;
+  const idx=PBT.indexOf(name);
+  return idx>=0 ? metric.hospitalBedCount[idx] : null;
+}
+
 function shortPbt(name){
   return name.replace('MBD ','').replace('MB ','').replace('MP ','').replace('MD ','');
 }
@@ -299,6 +306,7 @@ function pbtPopupHtml(pbt){
   const status=value==null ? null : getStatus(state.metric,value,pbt);
   const schoolCount=schoolCountForPbt(pbt);
   const station=riverStationForPbt(pbt);
+  const hospitalBedCount=hospitalBedCountForPbt(pbt);
   return '<div class="pbt-popup">'+
     '<div class="pbt-popup-head">'+
       (logo ? '<img class="pbt-popup-logo" src="'+logo+'" alt="Logo '+pbt+'">' : '')+
@@ -306,6 +314,7 @@ function pbtPopupHtml(pbt){
     '</div>'+
     (schoolCount!=null ? '<div class="pbt-popup-metric"><b>'+METRICS[state.metric].schoolLabel+':</b> '+formatNumber(schoolCount,0)+'</div>' : '')+
     (station ? '<div class="pbt-popup-metric"><b>Stesen tercemar:</b> '+station.polluted+' &nbsp;•&nbsp; <b>Jumlah stesen:</b> '+station.total+'</div>' : '')+
+    (hospitalBedCount!=null ? '<div class="pbt-popup-metric"><b>Bil. Katil Hospital (Kerajaan &amp; Swasta):</b> '+formatNumber(hospitalBedCount,0)+'</div>' : '')+
     '<span class="value">'+(value==null ? 'Tiada data' : formatNumber(value)+METRICS[state.metric].unit)+'</span>'+
     '<div class="pbt-popup-metric">'+(schoolCount!=null ? 'Hasil Nisbah' : METRICS[state.metric].label)+'</div>'+
     (status ? '<div>Status: <b>'+status.label+'</b></div>' : '')+
