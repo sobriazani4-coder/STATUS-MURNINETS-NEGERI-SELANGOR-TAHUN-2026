@@ -278,7 +278,7 @@ const PBT_LABEL_CONFIG = {
   'MD Sabak Bernam':   {offset:[0,-6],   cls:'label-rural label-north'},
   'MP Kuala Selangor': {offset:[-18,-10],cls:'label-rural label-west'},
   'MP Hulu Selangor':  {offset:[30,-14], cls:'label-rural label-east'},
-  'MBD Klang':         {offset:[-64,28], cls:'label-urban label-left label-priority'},
+  'MBD Klang':         {offset:[-34,18], cls:'label-urban label-left label-priority'},
   'MB Shah Alam':      {offset:[-48,-28],cls:'label-urban label-left label-priority'},
   'MB Petaling Jaya':  {offset:[58,-40], cls:'label-urban label-right label-priority'},
   'MB Subang Jaya':    {offset:[48,38],  cls:'label-urban label-right label-priority'},
