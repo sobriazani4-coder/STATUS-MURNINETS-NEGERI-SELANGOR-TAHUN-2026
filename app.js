@@ -280,11 +280,11 @@ const PBT_LABEL_CONFIG = {
   'MP Hulu Selangor':  {offset:[30,-14], cls:'label-rural label-east'},
   'MBD Klang':         {offset:[-34,18], cls:'label-urban label-left label-priority'},
   'MB Shah Alam':      {offset:[-48,-28],cls:'label-urban label-left label-priority'},
-  'MB Petaling Jaya':  {offset:[58,-40], cls:'label-urban label-right label-priority'},
-  'MB Subang Jaya':    {offset:[48,38],  cls:'label-urban label-right label-priority'},
+  'MB Petaling Jaya':  {offset:[28,-52], cls:'label-urban label-right label-priority'},
+  'MB Subang Jaya':    {offset:[18,42],  cls:'label-urban label-right label-priority'},
   'MP Selayang':       {offset:[26,-48], cls:'label-urban label-right'},
-  'MP Ampang Jaya':    {offset:[72,-10], cls:'label-urban label-right'},
-  'MP Kajang':         {offset:[56,38],  cls:'label-urban label-right'},
+  'MP Ampang Jaya':    {offset:[88,4], cls:'label-urban label-right'},
+  'MP Kajang':         {offset:[78,58],  cls:'label-urban label-right'},
   'MP Kuala Langat':   {offset:[-22,28], cls:'label-rural label-west'},
   'MP Sepang':         {offset:[28,26],  cls:'label-rural label-east'}
 };
