@@ -716,7 +716,11 @@ function renderProfile(){
       return '<div class="profile-hero profile-with-logo">'+
         (extraLogo?'<div class="profile-logo-box"><img src="'+extraLogo+'" alt="Logo '+item.display+'"></div>':'')+
         '<div><h3>'+item.display+'</h3>'+
-        '<p>Indeks Kebahagiaan 2026: <b>'+formatNumber(row.value)+METRICS[state.metric].unit+'</b> &nbsp;•&nbsp; Status: <b style="color:'+STATUS_COLORS[row.status.key]+'">'+row.status.label+'</b></p></div>'+
+        '<p>Indeks Kebahagiaan 2026: <b>'+formatNumber(row.value)+METRICS[state.metric].unit+'</b></p></div>'+
+      '</div>'+
+      '<div class="profile-metric">'+
+        '<div class="metric-card"><small>Indeks Kebahagiaan 2026</small><strong>'+formatNumber(row.value)+METRICS[state.metric].unit+'</strong><span>Rujukan halaman '+METRICS[state.metric].page+'</span></div>'+
+        '<div class="metric-card"><small>Status Prestasi</small><strong style="color:'+STATUS_COLORS[row.status.key]+'">'+row.status.label+'</strong><span>Klasifikasi paparan dashboard</span></div>'+
       '</div>';
     }).join('');
   }
