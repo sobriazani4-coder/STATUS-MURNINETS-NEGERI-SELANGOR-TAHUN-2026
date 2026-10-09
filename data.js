@@ -20,10 +20,12 @@ const PBT = ['MB Shah Alam','MB Petaling Jaya','MB Subang Jaya','MBD Klang','MP 
 
 const METRICS = {
   happiness:{label:'Indeks Kebahagiaan 2026',short:'Indeks Kebahagiaan',unit:'%',page:22,values:[92.293,100,94.98,96.691,99.167,95.66,99.98,90.884,100,87.773,98.76,96.606]},
-  urbanisation:{label:'Kadar Perbandaran 2026',short:'Kadar Perbandaran',unit:'%',page:31,values:[99.50,100,99.10,87.51,100,96.23,88.80,93.00,87.90,85.53,72.62,72.45]},
-  broadband:{label:'Kadar Liputan Jalur Lebar 2026',short:'Liputan Jalur Lebar',unit:'%',page:40,values:[100,100,100,100,100,100,100,99.99,99.98,100,99.94,99.99]},
-  revenue:{label:'Peratusan Pencapaian Kutipan Hasil PBT 2026',short:'Pencapaian Kutipan Hasil PBT',unit:'%',page:45,values:[99.30,105.86,104.89,110.46,108.07,113.59,128.74,116.01,115.65,94.82,988.12,101.78]},
-  community:{label:'Peratus Peningkatan Penglibatan Komuniti Dalam Program Bersama PBT 2026',short:'Peningkatan Penglibatan Komuniti',unit:'%',page:25,values:[10.80,36.87,12.63,33.18,7.86,21.99,61.86,6.95,6.48,217.06,40.40,297.73]}
+  riverWater:{label:'Status Kualiti Air Sungai 2026',short:'Status Kualiti Air Sungai',unit:'%',page:4,values:[12.50,20,25,0,0,0,0,0,0,7.69,0,0]},
+  hospitalBeds:{label:'Nisbah Bilangan Katil Hospital 2026',short:'Nisbah Katil Hospital',unit:' katil/1,000 penduduk',page:12,values:[1.96,1.96,1.96,1.96,1.96,1.96,1.96,1.96,1.96,1.96,1.96,1.96]},
+  primarySchoolRatio:{label:'Nisbah Sekolah Rendah Kepada Penduduk 2026',short:'Nisbah Sekolah Rendah',unit:' penduduk/sekolah',page:14,values:[6809,11853,7902,7126,16182,5803,12669,3100,5393,3633,3558,2166]},
+  secondarySchoolRatio:{label:'Nisbah Sekolah Menengah Kepada Penduduk 2026',short:'Nisbah Sekolah Menengah',unit:' penduduk/sekolah',page:15,values:[12801,19190,13021,9696,23599,12363,21572,5840,14304,11600,6836,6138]},
+  preschoolRatio:{label:'Jumlah Pra Sekolah / Tadika / Tabika Bantuan Kerajaan dan Swasta 2026',short:'Pra Sekolah / Tadika / Tabika',unit:' unit rumah/pusat',page:16,values:[320.92,726.72,412.80,524.80,443.90,337.18,673.82,403.97,371.31,515.68,401.93,137.32]},
+  domesticWater:{label:'Isipadu Penggunaan Air Domestik Harian Per Kapita 2026',short:'Penggunaan Air Domestik',unit:' L/hari/orang',page:37,values:[240.05,240.05,240.05,240.05,240.05,240.05,240.05,240.05,240.05,240.05,240.05,240.05]}
 };
 
 const MAP_REGIONS = [
