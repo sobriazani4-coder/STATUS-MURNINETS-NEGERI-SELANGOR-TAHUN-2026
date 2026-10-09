@@ -1617,3 +1617,25 @@ body{
 .top-header::after{
   opacity:.58!important;
 }
+
+
+/* ===== SDG LOGO IN SIDEBAR LOWER AREA ONLY ===== */
+.sidebar .sidebar-sdg-logo{
+  margin-top:auto;
+  padding:18px 4px 10px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  width:100%;
+}
+.sidebar .sidebar-sdg-logo img{
+  display:block;
+  width:min(100%,150px);
+  height:auto;
+  object-fit:contain;
+}
+@media(max-width:1200px){
+  .sidebar .sidebar-sdg-logo{
+    display:none;
+  }
+}
