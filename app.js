@@ -23,13 +23,47 @@ function formatNumber(value, digits = 2){
   return num.toLocaleString('ms-MY', {maximumFractionDigits: digits, minimumFractionDigits: 0});
 }
 
-function getStatus(metric, value){
-  if(metric === 'happiness') return value >= 80 ? {label:'Mampan', key:'good'} : value >= 50 ? {label:'Sederhana Mampan', key:'mid'} : {label:'Kurang Mampan', key:'low'};
-  if(metric === 'urbanisation') return value >= 90 ? {label:'Mampan', key:'good'} : value >= 75 ? {label:'Sederhana Mampan', key:'mid'} : {label:'Kurang Mampan', key:'low'};
-  if(metric === 'broadband') return value >= 99.95 ? {label:'Mampan', key:'good'} : value >= 99.5 ? {label:'Sederhana Mampan', key:'mid'} : {label:'Kurang Mampan', key:'low'};
-  if(metric === 'revenue') return value >= 100 ? {label:'Mampan', key:'good'} : value >= 90 ? {label:'Sederhana Mampan', key:'mid'} : {label:'Kurang Mampan', key:'low'};
-  if(metric === 'community') return value >= 20 ? {label:'Mampan', key:'good'} : value >= 5 ? {label:'Sederhana Mampan', key:'mid'} : {label:'Kurang Mampan', key:'low'};
-  return {label:'Data', key:'mid'};
+function getStatus(metric, value, pbtName=''){
+  const good={label:'Mampan',key:'good'};
+  const mid={label:'Sederhana Mampan',key:'mid'};
+  const low={label:'Kurang Mampan',key:'low'};
+
+  // KT3-P5: >=80% / 50-79% / <50%
+  if(metric==='happiness'){
+    return value>=80 ? good : value>=50 ? mid : low;
+  }
+
+  // GT2-P1: piawaian berbeza mengikut kategori PBT.
+  if(metric==='urbanisation'){
+    const isBandaraya=pbtName.startsWith('MB ') || pbtName.startsWith('MBD ');
+    const isDaerah=pbtName.startsWith('MD ');
+
+    if(isBandaraya) return value>=80 ? good : value>=60 ? mid : low;
+    if(isDaerah) return value>=60 ? good : value>=40 ? mid : low;
+    return value>=70 ? good : value>=50 ? mid : low; // Majlis Perbandaran
+  }
+
+  // IT1-P6: piawaian berbeza mengikut kategori PBT.
+  if(metric==='broadband'){
+    const isBandaraya=pbtName.startsWith('MB ') || pbtName.startsWith('MBD ');
+    const isDaerah=pbtName.startsWith('MD ');
+
+    if(isBandaraya) return value>=100 ? good : value>=70 ? mid : low;
+    if(isDaerah) return value>=70 ? good : value>=50 ? mid : low;
+    return value>=80 ? good : value>=60 ? mid : low; // Majlis Perbandaran
+  }
+
+  // UT2-P1: >=90% / 70-89% / <70%
+  if(metric==='revenue'){
+    return value>=90 ? good : value>=70 ? mid : low;
+  }
+
+  // KT3-P8: >=5% / 3-4% / <3%
+  if(metric==='community'){
+    return value>=5 ? good : value>=3 ? mid : low;
+  }
+
+  return {label:'Data',key:'mid'};
 }
 
 function metricRows(metricKey = state.metric){
@@ -38,7 +72,7 @@ function metricRows(metricKey = state.metric){
     name,
     short: name.replace('MB ','').replace('MP ','').replace('MD ','').replace('MBD ',''),
     value: metric.values[i],
-    status: getStatus(metricKey, metric.values[i])
+    status: getStatus(metricKey, metric.values[i], name)
   })).sort((a,b)=>b.value-a.value);
 }
 
@@ -187,7 +221,7 @@ function featureRawName(feature){
 function mapStyle(feature){
   const pbt=normalizePbtName(featureRawName(feature));
   const value=valueForPbt(pbt);
-  const status=value==null ? {key:'mid'} : getStatus(state.metric,value);
+  const status=value==null ? {key:'mid'} : getStatus(state.metric,value,pbt);
   const selected=state.pbt!=='all' && state.pbt===pbt;
   return {
     color:selected ? '#172b51' : '#ffffff',
