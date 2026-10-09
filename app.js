@@ -28,25 +28,49 @@ function getStatus(metric, value, pbtName=''){
   const mid={label:'Sederhana Mampan',key:'mid'};
   const low={label:'Kurang Mampan',key:'low'};
 
-  // KT3-P5 — Indeks Kebahagiaan
   if(metric==='happiness') return value>=80 ? good : value>=50 ? mid : low;
-
-  // ST1-P1 — Status Kualiti Air Sungai
   if(metric==='riverWater') return value<=10 ? good : value<=49 ? mid : low;
-
-  // KT2-P2 — Nisbah Bilangan Katil Hospital (data satu Negeri Selangor)
   if(metric==='hospitalBeds') return value>=2.06 ? good : value>=1.04 ? mid : low;
 
-  // KT2-P4 — Nisbah Sekolah Rendah kepada Penduduk
-  if(metric==='primarySchoolRatio') return value<=1250 ? good : value<=7499 ? mid : low;
+  // KT2-P4 — ikut warna/status tepat pada lampiran 2026
+  if(metric==='primarySchoolRatio'){
+    const statusMap={
+      'MB Shah Alam':'good',
+      'MB Petaling Jaya':'low',
+      'MB Subang Jaya':'mid',
+      'MBD Klang':'good',
+      'MP Ampang Jaya':'low',
+      'MP Kajang':'good',
+      'MP Selayang':'low',
+      'MP Sepang':'good',
+      'MP Kuala Langat':'good',
+      'MP Kuala Selangor':'good',
+      'MP Hulu Selangor':'good',
+      'MD Sabak Bernam':'good'
+    };
+    return statusMap[pbtName]==='good' ? good : statusMap[pbtName]==='mid' ? mid : low;
+  }
 
-  // KT2-P5 — Nisbah Sekolah Menengah kepada Penduduk
-  if(metric==='secondarySchoolRatio') return value<=2500 ? good : value<=8749 ? mid : low;
+  // KT2-P5 — ikut warna/status tepat pada lampiran 2026
+  if(metric==='secondarySchoolRatio'){
+    const statusMap={
+      'MB Shah Alam':'low',
+      'MB Petaling Jaya':'low',
+      'MB Subang Jaya':'low',
+      'MBD Klang':'low',
+      'MP Ampang Jaya':'low',
+      'MP Kajang':'mid',
+      'MP Selayang':'low',
+      'MP Sepang':'good',
+      'MP Kuala Langat':'low',
+      'MP Kuala Selangor':'mid',
+      'MP Hulu Selangor':'good',
+      'MD Sabak Bernam':'good'
+    };
+    return statusMap[pbtName]==='good' ? good : statusMap[pbtName]==='mid' ? mid : low;
+  }
 
-  // KT2-P6 — Unit rumah bagi setiap Pra Sekolah / Tadika / Tabika
   if(metric==='preschoolRatio') return value<=200 ? good : value<=499 ? mid : low;
-
-  // IT1-P1 — Isipadu Penggunaan Air Domestik Harian Per Kapita (data satu Negeri Selangor)
   if(metric==='domesticWater') return value<=180 ? good : value<=200 ? mid : low;
 
   return {label:'Data',key:'mid'};
