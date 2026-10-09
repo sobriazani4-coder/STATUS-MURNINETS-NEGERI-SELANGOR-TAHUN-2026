@@ -1363,3 +1363,35 @@ body{
     font-size:26px!important;
   }
 }
+
+
+/* ===== POPULATION TITLE LINE V3: DIRECTLY ABOVE "TABURAN 48 INDIKATOR" ===== */
+.population-title-line{
+  display:flex!important;
+  align-items:baseline!important;
+  flex-wrap:wrap!important;
+  gap:4px!important;
+  margin:0 0 8px!important;
+  padding:0!important;
+  border:0!important;
+  background:none!important;
+  box-shadow:none!important;
+  line-height:1.12!important;
+}
+.population-title-line span{
+  font-family:'Montserrat',Arial,sans-serif!important;
+  font-size:18px!important;
+  font-weight:900!important;
+  color:#203762!important;
+}
+.population-title-line strong{
+  font-family:'Montserrat',Arial,sans-serif!important;
+  font-size:30px!important;
+  font-weight:900!important;
+  color:#d64b2a!important;
+  letter-spacing:-.02em!important;
+}
+@media(max-width:700px){
+  .population-title-line span{font-size:16px!important;}
+  .population-title-line strong{font-size:26px!important;}
+}
