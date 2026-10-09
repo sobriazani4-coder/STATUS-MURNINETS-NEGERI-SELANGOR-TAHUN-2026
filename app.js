@@ -314,7 +314,7 @@ function pbtPopupHtml(pbt){
     '</div>'+
     (schoolCount!=null ? '<div class="pbt-popup-metric"><b>'+METRICS[state.metric].schoolLabel+':</b> '+formatNumber(schoolCount,0)+'</div>' : '')+
     (station ? '<div class="pbt-popup-metric"><b>Stesen tercemar:</b> '+station.polluted+' &nbsp;•&nbsp; <b>Jumlah stesen:</b> '+station.total+'</div>' : '')+
-    (hospitalBedCount!=null ? '<div class="pbt-popup-metric"><b>Bil. Katil Hospital (Kerajaan &amp; Swasta):</b> '+formatNumber(hospitalBedCount,0)+'</div>' : '')+
+    (hospitalBedCount!=null ? '<div class="pbt-popup-metric hospital-bed-popup"><b>Bil. Katil Hospital (Kerajaan &amp; Swasta):</b> '+formatNumber(hospitalBedCount,0)+'</div>' : '')+
     '<span class="value">'+(value==null ? 'Tiada data' : formatNumber(value)+METRICS[state.metric].unit)+'</span>'+
     '<div class="pbt-popup-metric">'+(schoolCount!=null ? 'Hasil Nisbah' : METRICS[state.metric].label)+'</div>'+
     (status ? '<div>Status: <b>'+status.label+'</b></div>' : '')+
