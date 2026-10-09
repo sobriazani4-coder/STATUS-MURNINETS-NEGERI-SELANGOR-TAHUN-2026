@@ -1395,3 +1395,27 @@ body{
   .population-title-line span{font-size:16px!important;}
   .population-title-line strong{font-size:26px!important;}
 }
+
+
+/* ===== POPULATION HEADER EMPHASIS V4 ===== */
+.population-title-line{
+  margin-bottom:18px!important;
+}
+.population-title-line span{
+  font-size:27px!important; /* +50% from 18px */
+  line-height:1.05!important;
+}
+.population-title-line + h2{
+  margin-top:10px!important;
+}
+@media(max-width:700px){
+  .population-title-line span{
+    font-size:24px!important;
+  }
+  .population-title-line{
+    margin-bottom:14px!important;
+  }
+  .population-title-line + h2{
+    margin-top:8px!important;
+  }
+}
