@@ -1446,3 +1446,16 @@ body{
   color:#173163!important;
   letter-spacing:-.02em;
 }
+
+
+/* ===== TABURAN TITLE SAME SIZE AS POPULATION LABEL ===== */
+.population-title-line + h2{
+  font-size:27px!important;
+  line-height:1.05!important;
+  font-weight:900!important;
+}
+@media(max-width:700px){
+  .population-title-line + h2{
+    font-size:24px!important;
+  }
+}
