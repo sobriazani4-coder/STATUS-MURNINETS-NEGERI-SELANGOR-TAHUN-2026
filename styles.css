@@ -2002,3 +2002,19 @@ img,svg,canvas{max-width:100%}
   .kpi-grid{grid-template-columns:1fr 1fr!important;gap:6px!important}
   #selangorMap,.map-stage{height:350px!important;min-height:350px!important}
 }
+
+
+/* ===== ENLARGE PRESCHOOL / TADIKA / TABIKA COUNT IN MAP POPUP ===== */
+.pbt-popup .preschool-count-popup{
+  line-height:1.45!important;
+}
+.pbt-popup .preschool-count-number{
+  display:inline-block!important;
+  margin-left:4px!important;
+  font-family:'Montserrat',Arial,sans-serif!important;
+  font-size:20px!important;
+  line-height:1!important;
+  font-weight:900!important;
+  color:#173163!important;
+  letter-spacing:-.02em!important;
+}
