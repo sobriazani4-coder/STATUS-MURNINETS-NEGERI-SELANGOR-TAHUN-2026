@@ -1336,3 +1336,30 @@ body{
     font-size:18px;
   }
 }
+
+
+/* ===== POPULATION HIGHLIGHT V2: ABOVE PANEL TITLE + 50% LARGER ===== */
+.population-highlight-top{
+  margin:12px 14px 8px!important;
+  padding:16px 18px!important;
+  border-radius:15px!important;
+}
+.population-highlight-top span{
+  font-size:18px!important; /* ~50% larger than previous 12px */
+  font-weight:900!important;
+  color:#203762!important;
+}
+.population-highlight-top strong{
+  font-size:30px!important; /* ~50% larger than previous 20px */
+  font-weight:900!important;
+  color:#d64b2a!important;
+  line-height:1.05!important;
+}
+@media(max-width:700px){
+  .population-highlight-top span{
+    font-size:16px!important;
+  }
+  .population-highlight-top strong{
+    font-size:26px!important;
+  }
+}
