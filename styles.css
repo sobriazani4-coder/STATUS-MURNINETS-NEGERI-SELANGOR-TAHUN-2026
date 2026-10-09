@@ -1284,3 +1284,17 @@ body{
   color:#203762!important;
   letter-spacing:-.01em;
 }
+
+
+/* ===== HOSPITAL BED POPUP EMPHASIS ===== */
+.pbt-popup .hospital-bed-popup{
+  font-size:14.4px!important; /* ~20% larger than existing 12px */
+  line-height:1.45!important;
+  font-weight:800!important;
+  color:#203762!important;
+}
+.pbt-popup .hospital-bed-popup b{
+  font-size:14.4px!important;
+  font-weight:900!important;
+  color:#203762!important;
+}
