@@ -782,7 +782,7 @@ function renderIndicators(){
     const d=DIMENSIONS.find(x=>x.id===item.dimension);
     return '<a class="indicator-card" href="'+PDF_PATH+'#page='+item.page+'" target="_blank" rel="noopener">'+
       '<div class="top"><span class="indicator-code">'+item.code+'</span><span class="indicator-page">Hal. '+item.page+'</span></div>'+
-      '<h4>'+item.title+'</h4><p>Dimensi '+item.dimension+': '+d.name+'</p></a>';
+      '<h4>'+item.title+'</h4><p>Dimensi '+item.dimension+': '+d.name+'</p><span class="indicator-pdf-btn">Buka PDF · Hal. '+item.page+'</span></a>';
   }).join('') : '<div class="indicator-card"><h4>Tiada padanan indikator</h4><p>Sila ubah kata carian atau dimensi yang dipilih.</p></div>';
 }
 
