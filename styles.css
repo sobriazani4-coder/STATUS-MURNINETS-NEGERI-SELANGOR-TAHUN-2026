@@ -1706,3 +1706,31 @@ body > *{
   background:linear-gradient(90deg,#ffe3ce,#fff0e2)!important;
   border-color:#efb98f!important;
 }
+
+
+/* ===== LAPTOP HEADER RESPONSIVE FIX: PREVENT LOGO/TITLE OVERLAP ===== */
+/* Main title position remains unchanged. Only logo size/position adapts on laptop widths. */
+@media(min-width:901px) and (max-width:1450px){
+  .top-header .suo-logo-wrap{
+    left:9%!important;
+    width:112px!important;
+    height:112px!important;
+    flex-basis:112px!important;
+  }
+  .top-header .murninets-header-logo{
+    left:91%!important;
+    width:240px!important;
+  }
+}
+@media(min-width:901px) and (max-width:1150px){
+  .top-header .suo-logo-wrap{
+    left:8%!important;
+    width:96px!important;
+    height:96px!important;
+    flex-basis:96px!important;
+  }
+  .top-header .murninets-header-logo{
+    left:92%!important;
+    width:200px!important;
+  }
+}
