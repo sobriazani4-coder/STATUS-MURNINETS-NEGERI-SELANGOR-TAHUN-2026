@@ -24,7 +24,7 @@ const METRICS = {
   hospitalBeds:{label:'Nisbah Bilangan Katil Hospital 2026',short:'Nisbah Katil Hospital',unit:' katil/1,000 penduduk',page:12,values:[1.96,1.96,1.96,1.96,1.96,1.96,1.96,1.96,1.96,1.96,1.96,1.96],hospitalBedCount:[14526,14526,14526,14526,14526,14526,14526,14526,14526,14526,14526,14526]},
   primarySchoolRatio:{label:'Nisbah Sekolah Rendah Kepada Penduduk 2026',short:'Nisbah Sekolah Rendah',unit:' penduduk/sekolah',page:14,values:[6809,11853,7902,7126,16182,5803,12669,3100,5393,3633,3558,2166],schoolLabel:'Bil. Sekolah Rendah',schoolCounts:[94,68,117,166,35,196,63,113,61,83,73,51]},
   secondarySchoolRatio:{label:'Nisbah Sekolah Menengah Kepada Penduduk 2026',short:'Nisbah Sekolah Menengah',unit:' penduduk/sekolah',page:15,values:[12801,19190,13021,9696,23599,12363,21572,5840,14304,11600,6836,6138],schoolLabel:'Bil. Sekolah Menengah',schoolCounts:[50,42,71,122,24,92,37,60,23,26,38,18]},
-  preschoolRatio:{label:'Jumlah Pra Sekolah / Tadika / Tabika Bantuan Kerajaan dan Swasta 2026',short:'Pra Sekolah / Tadika / Tabika',unit:' unit rumah/pusat',page:16,values:[320.92,726.72,412.80,524.80,443.90,337.18,673.82,403.97,371.31,515.68,401.93,137.32]},
+  preschoolRatio:{label:'Jumlah Pra Sekolah / Tadika / Tabika Bantuan Kerajaan dan Swasta 2026',short:'Pra Sekolah / Tadika / Tabika',unit:' unit rumah/pusat',page:16,values:[320.92,726.72,412.80,524.80,443.90,337.18,673.82,403.97,371.31,515.68,401.93,137.32],preschoolCounts:[669,311,668,400,416,1002,298,365,232,134,194,131]},
   domesticWater:{label:'Isipadu Penggunaan Air Domestik Harian Per Kapita 2026',short:'Penggunaan Air Domestik',unit:' L/hari/orang',page:37,values:[240.05,240.05,240.05,240.05,240.05,240.05,240.05,240.05,240.05,240.05,240.05,240.05]}
 };
 
