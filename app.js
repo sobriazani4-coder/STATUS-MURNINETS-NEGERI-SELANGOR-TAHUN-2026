@@ -91,6 +91,13 @@ function valueForPbt(name, metricKey = state.metric){
   return idx >= 0 ? METRICS[metricKey].values[idx] : null;
 }
 
+function schoolCountForPbt(name, metricKey = state.metric){
+  const metric = METRICS[metricKey];
+  if(!metric || !metric.schoolCounts) return null;
+  const idx = PBT.indexOf(name);
+  return idx >= 0 ? metric.schoolCounts[idx] : null;
+}
+
 function shortPbt(name){
   return name.replace('MBD ','').replace('MB ','').replace('MP ','').replace('MD ','');
 }
@@ -282,13 +289,15 @@ function pbtPopupHtml(pbt){
   const logo=logoForPbt(pbt);
   const value=valueForPbt(pbt);
   const status=value==null ? null : getStatus(state.metric,value,pbt);
+  const schoolCount=schoolCountForPbt(pbt);
   return '<div class="pbt-popup">'+
     '<div class="pbt-popup-head">'+
       (logo ? '<img class="pbt-popup-logo" src="'+logo+'" alt="Logo '+pbt+'">' : '')+
       '<div><strong>'+pbt+'</strong><small>Negeri Selangor</small></div>'+
     '</div>'+
+    (schoolCount!=null ? '<div class="pbt-popup-metric"><b>'+METRICS[state.metric].schoolLabel+':</b> '+formatNumber(schoolCount,0)+'</div>' : '')+
     '<span class="value">'+(value==null ? 'Tiada data' : formatNumber(value)+METRICS[state.metric].unit)+'</span>'+
-    '<div class="pbt-popup-metric">'+METRICS[state.metric].label+'</div>'+
+    '<div class="pbt-popup-metric">'+(schoolCount!=null ? 'Hasil Nisbah' : METRICS[state.metric].label)+'</div>'+
     (status ? '<div>Status: <b>'+status.label+'</b></div>' : '')+
     '<small class="pbt-popup-source">Sempadan: fail GeoJSON yang dilampirkan</small>'+
   '</div>';
@@ -477,7 +486,17 @@ function renderRanking(){
           cornerRadius:10,
           displayColors:false,
           callbacks:{
-            label:(ctx)=>METRICS[state.metric].label+': '+formatNumber(rows[ctx.dataIndex].value)+METRICS[state.metric].unit
+            label:(ctx)=>{
+              const row=rows[ctx.dataIndex];
+              const schoolCount=schoolCountForPbt(row.name);
+              if(schoolCount!=null){
+                return [
+                  METRICS[state.metric].schoolLabel+': '+formatNumber(schoolCount,0),
+                  'Hasil: '+formatNumber(row.value)+METRICS[state.metric].unit
+                ];
+              }
+              return METRICS[state.metric].label+': '+formatNumber(row.value)+METRICS[state.metric].unit;
+            }
           }
         }
       }
@@ -651,13 +670,17 @@ function renderProfile(){
     : 'PBT ini sedang dipilih pada peta dan carta. Nilai dipaparkan berdasarkan indikator '+METRICS[state.metric].short.toLowerCase()+'.';
   const stat=current.status;
   const logo=logoForPbt(current.name);
+  const schoolCount=schoolCountForPbt(current.name);
   $('#profileBox').innerHTML=
     '<div class="profile-hero profile-with-logo">'+
       (logo?'<div class="profile-logo-box"><img src="'+logo+'" alt="Logo '+current.name+'"></div>':'')+
       '<div><h3>'+title+'</h3><p>'+desc+'</p></div>'+
     '</div>'+
     '<div class="profile-metric">'+
-      '<div class="metric-card"><small>'+METRICS[state.metric].label+'</small><strong>'+formatNumber(current.value)+METRICS[state.metric].unit+'</strong><span>Rujukan halaman '+METRICS[state.metric].page+'</span></div>'+
+      '<div class="metric-card"><small>'+METRICS[state.metric].label+'</small>'+
+        (schoolCount!=null ? '<span><b>'+METRICS[state.metric].schoolLabel+':</b> '+formatNumber(schoolCount,0)+'</span>' : '')+
+        '<strong>'+formatNumber(current.value)+METRICS[state.metric].unit+'</strong>'+
+        '<span>'+(schoolCount!=null ? 'Hasil nisbah • ' : '')+'Rujukan halaman '+METRICS[state.metric].page+'</span></div>'+
       '<div class="metric-card"><small>Status Prestasi</small><strong style="color:'+STATUS_COLORS[stat.key]+'">'+stat.label+'</strong><span>Klasifikasi paparan dashboard</span></div>'+
     '</div>';
 }
