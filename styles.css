@@ -1274,3 +1274,13 @@ body{
   background:linear-gradient(135deg,#fffef9 0%,#fff8e2 58%,#ffefc4 100%)!important;
   border-color:#eadca9!important;
 }
+
+
+/* ===== SCHOOL COUNT LABEL SIZE REFINEMENT ===== */
+.metric-card span b,
+.pbt-popup-metric b{
+  font-size:14px!important;
+  font-weight:900!important;
+  color:#203762!important;
+  letter-spacing:-.01em;
+}
