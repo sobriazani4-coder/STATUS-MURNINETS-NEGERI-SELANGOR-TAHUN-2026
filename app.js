@@ -98,6 +98,14 @@ function schoolCountForPbt(name, metricKey = state.metric){
   return idx >= 0 ? metric.schoolCounts[idx] : null;
 }
 
+function riverStationForPbt(name, metricKey = state.metric){
+  const metric=METRICS[metricKey];
+  if(!metric || !metric.stationTotal || !metric.stationPolluted) return null;
+  const idx=PBT.indexOf(name);
+  if(idx<0) return null;
+  return {total:metric.stationTotal[idx], polluted:metric.stationPolluted[idx]};
+}
+
 function shortPbt(name){
   return name.replace('MBD ','').replace('MB ','').replace('MP ','').replace('MD ','');
 }
@@ -290,12 +298,14 @@ function pbtPopupHtml(pbt){
   const value=valueForPbt(pbt);
   const status=value==null ? null : getStatus(state.metric,value,pbt);
   const schoolCount=schoolCountForPbt(pbt);
+  const station=riverStationForPbt(pbt);
   return '<div class="pbt-popup">'+
     '<div class="pbt-popup-head">'+
       (logo ? '<img class="pbt-popup-logo" src="'+logo+'" alt="Logo '+pbt+'">' : '')+
       '<div><strong>'+pbt+'</strong><small>Negeri Selangor</small></div>'+
     '</div>'+
     (schoolCount!=null ? '<div class="pbt-popup-metric"><b>'+METRICS[state.metric].schoolLabel+':</b> '+formatNumber(schoolCount,0)+'</div>' : '')+
+    (station ? '<div class="pbt-popup-metric"><b>Stesen tercemar:</b> '+station.polluted+' &nbsp;•&nbsp; <b>Jumlah stesen:</b> '+station.total+'</div>' : '')+
     '<span class="value">'+(value==null ? 'Tiada data' : formatNumber(value)+METRICS[state.metric].unit)+'</span>'+
     '<div class="pbt-popup-metric">'+(schoolCount!=null ? 'Hasil Nisbah' : METRICS[state.metric].label)+'</div>'+
     (status ? '<div>Status: <b>'+status.label+'</b></div>' : '')+
@@ -435,7 +445,11 @@ function renderRanking(){
       ctx.textBaseline='middle';
       const meta=chart.getDatasetMeta(0);
       meta.data.forEach((bar,index)=>{
-        const label=formatNumber(rows[index].value)+METRICS[state.metric].unit;
+        const row=rows[index];
+        const station=riverStationForPbt(row.name);
+        const label=station
+          ? station.polluted+'/'+station.total+' stesen • '+formatNumber(row.value)+METRICS[state.metric].unit
+          : formatNumber(row.value)+METRICS[state.metric].unit;
         ctx.fillText(label,Math.min(bar.x+8,chart.chartArea.right+8),bar.y);
       });
       ctx.restore();
@@ -489,6 +503,14 @@ function renderRanking(){
             label:(ctx)=>{
               const row=rows[ctx.dataIndex];
               const schoolCount=schoolCountForPbt(row.name);
+              const station=riverStationForPbt(row.name);
+              if(station){
+                return [
+                  'Bil. Stesen Pengawasan Kualiti Air Sungai Tercemar: '+station.polluted,
+                  'Bil. Stesen Pengawasan Kualiti Air Sungai: '+station.total,
+                  'Hasil: '+formatNumber(row.value)+METRICS[state.metric].unit
+                ];
+              }
               if(schoolCount!=null){
                 return [
                   METRICS[state.metric].schoolLabel+': '+formatNumber(schoolCount,0),
