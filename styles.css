@@ -1734,3 +1734,271 @@ body > *{
     width:200px!important;
   }
 }
+
+
+/* ===== UNIVERSAL RESPONSIVE LAYER · PC / LAPTOP / TABLET / MOBILE ===== */
+/* Desktop design remains unchanged. These rules only adapt spacing/sizing at smaller widths. */
+*,*::before,*::after{box-sizing:border-box}
+html,body{max-width:100%;overflow-x:hidden}
+img,svg,canvas{max-width:100%}
+.content,.panel,.hero-board,.two-column-section,.secondary-grid,.filters-panel,.kpi-grid{min-width:0}
+
+/* Large laptop / small desktop */
+@media (min-width:1201px) and (max-width:1450px){
+  .content{padding-left:12px!important;padding-right:12px!important}
+  .hero-board{grid-template-columns:minmax(0,1.28fr) minmax(330px,.72fr)!important}
+  .two-column-section{grid-template-columns:minmax(0,1.12fr) minmax(320px,.88fr)!important}
+  .panel-head{min-width:0}
+  .panel-head>div{min-width:0}
+  .panel-head h2,.panel-head p{overflow-wrap:anywhere}
+  .filters-panel{grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(180px,.8fr) auto!important}
+}
+
+/* Laptop / tablet landscape */
+@media (min-width:901px) and (max-width:1200px){
+  .dashboard-shell{
+    grid-template-columns:1fr!important;
+  }
+  .sidebar{
+    position:relative!important;
+    top:auto!important;
+    min-height:0!important;
+    width:100%!important;
+    display:flex!important;
+    flex-direction:row!important;
+    align-items:center!important;
+    gap:7px!important;
+    padding:8px 10px!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    white-space:nowrap!important;
+    border-right:0!important;
+    border-bottom:1px solid #eedbca!important;
+  }
+  .sidebar .menu-item{
+    flex:0 0 auto!important;
+    min-width:max-content!important;
+  }
+  .content{
+    width:100%!important;
+    max-width:100%!important;
+    padding:10px 12px 20px!important;
+  }
+  .hero-board,
+  .two-column-section,
+  .secondary-grid{
+    grid-template-columns:1fr!important;
+  }
+  .secondary-grid article:last-child{grid-column:auto!important}
+  .filters-panel{
+    grid-template-columns:1fr 1fr!important;
+  }
+  .kpi-grid{
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  }
+  .premium-map-wrap{padding:8px!important}
+  #selangorMap,.map-stage{min-height:520px!important;height:520px!important}
+}
+
+/* Mobile + tablet portrait: preserve same visual language, remove collisions */
+@media (max-width:900px){
+  .top-header{
+    padding:12px 10px 14px!important;
+    min-height:auto!important;
+    overflow:hidden!important;
+  }
+  .top-header .logo-group{
+    width:100%!important;
+    min-height:0!important;
+    display:grid!important;
+    grid-template-columns:88px minmax(0,1fr) 118px!important;
+    grid-template-rows:auto!important;
+    align-items:center!important;
+    gap:8px!important;
+    position:relative!important;
+  }
+  .top-header .suo-logo-wrap{
+    position:static!important;
+    transform:none!important;
+    margin:0!important;
+    justify-self:start!important;
+    width:82px!important;
+    height:82px!important;
+    flex-basis:auto!important;
+  }
+  .top-header .murninets-header-logo{
+    display:block!important;
+    position:static!important;
+    transform:none!important;
+    width:116px!important;
+    margin:0!important;
+    justify-self:end!important;
+    pointer-events:none!important;
+  }
+  .top-header .title-block{
+    position:static!important;
+    transform:none!important;
+    width:100%!important;
+    margin:0!important;
+    min-width:0!important;
+    text-align:center!important;
+  }
+  .top-header .title-block .eyebrow,
+  .top-header .title-block h1,
+  .top-header .title-block p{
+    text-align:center!important;
+  }
+  .top-header .title-block h1{
+    font-size:clamp(17px,3.2vw,25px)!important;
+    line-height:1.04!important;
+    letter-spacing:-.025em!important;
+    overflow-wrap:anywhere!important;
+  }
+  .top-header .title-block .eyebrow{
+    font-size:9px!important;
+    line-height:1.2!important;
+  }
+  .top-header .title-block p{
+    font-size:10px!important;
+    line-height:1.25!important;
+    margin-top:5px!important;
+  }
+
+  .dashboard-shell{grid-template-columns:1fr!important}
+  .sidebar{
+    position:relative!important;
+    min-height:0!important;
+    width:100%!important;
+    display:flex!important;
+    flex-direction:row!important;
+    align-items:center!important;
+    gap:6px!important;
+    padding:7px 8px!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    white-space:nowrap!important;
+    border-right:0!important;
+    border-bottom:1px solid #eedbca!important;
+    scrollbar-width:thin!important;
+  }
+  .sidebar .menu-item{
+    flex:0 0 auto!important;
+    min-width:max-content!important;
+    padding:9px 12px!important;
+  }
+
+  .content{
+    width:100%!important;
+    max-width:100%!important;
+    padding:8px!important;
+    gap:9px!important;
+  }
+  .kpi-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:8px!important;
+  }
+  .filters-panel,
+  .hero-board,
+  .two-column-section,
+  .secondary-grid,
+  .explorer-tools{
+    grid-template-columns:1fr!important;
+  }
+  .secondary-grid article:last-child{grid-column:auto!important}
+  .panel-head{
+    padding:10px 12px!important;
+    min-height:auto!important;
+    gap:8px!important;
+  }
+  .panel-head h2{font-size:16px!important}
+  .panel-head p{font-size:11px!important}
+  .panel-chip{
+    font-size:10px!important;
+    padding:6px 9px!important;
+    white-space:normal!important;
+    text-align:center!important;
+  }
+  .premium-map-wrap{padding:7px!important}
+  #selangorMap,.map-stage{
+    width:100%!important;
+    height:440px!important;
+    min-height:440px!important;
+  }
+  .indicator-grid{
+    grid-template-columns:1fr!important;
+    max-height:none!important;
+    overflow:visible!important;
+    padding:10px!important;
+  }
+  .indicator-card{padding:12px!important}
+  .chart-wrap,canvas{max-width:100%!important}
+  .pbt-logo-strip{max-width:100%!important}
+}
+
+/* Phones */
+@media (max-width:600px){
+  .top-header .logo-group{
+    grid-template-columns:64px minmax(0,1fr) 88px!important;
+    gap:5px!important;
+  }
+  .top-header .suo-logo-wrap{
+    width:60px!important;
+    height:60px!important;
+  }
+  .top-header .murninets-header-logo{
+    width:86px!important;
+  }
+  .top-header .title-block h1{
+    font-size:clamp(13px,4.2vw,18px)!important;
+    line-height:1.02!important;
+  }
+  .top-header .title-block .eyebrow{
+    font-size:7px!important;
+  }
+  .top-header .title-block p{
+    font-size:8px!important;
+  }
+
+  .kpi-grid{grid-template-columns:1fr 1fr!important}
+  .kpi-card{padding:10px!important}
+  .kpi-value{font-size:24px!important}
+  .kpi-label{font-size:10px!important}
+
+  .filters-panel{padding:8px!important}
+  .filters-panel select,
+  .filters-panel input,
+  .explorer-tools select,
+  .explorer-tools input{
+    width:100%!important;
+    min-width:0!important;
+    font-size:14px!important;
+  }
+
+  #selangorMap,.map-stage{
+    height:390px!important;
+    min-height:390px!important;
+  }
+  .population-title-line span{font-size:20px!important}
+  .population-title-line strong{font-size:24px!important}
+  .population-title-line + h2{font-size:20px!important}
+
+  .indicator-card h4{font-size:14px!important}
+  .indicator-card p{font-size:11px!important}
+  .indicator-code,.indicator-page,.indicator-card .indicator-pdf-btn{font-size:10px!important}
+}
+
+/* Very narrow phones */
+@media (max-width:420px){
+  .top-header .logo-group{
+    grid-template-columns:54px minmax(0,1fr) 72px!important;
+  }
+  .top-header .suo-logo-wrap{width:50px!important;height:50px!important}
+  .top-header .murninets-header-logo{width:70px!important}
+  .top-header .title-block h1{font-size:12px!important}
+  .top-header .title-block .eyebrow{font-size:6.5px!important}
+  .top-header .title-block p{display:none!important}
+
+  .content{padding:6px!important}
+  .kpi-grid{grid-template-columns:1fr 1fr!important;gap:6px!important}
+  #selangorMap,.map-stage{height:350px!important;min-height:350px!important}
+}
