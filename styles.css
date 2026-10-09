@@ -1674,3 +1674,14 @@ body > *{
   position:relative;
   z-index:1;
 }
+
+
+/* ===== SEPARATE HEADER LOGOS FROM MAIN TITLE; TITLE POSITION UNCHANGED ===== */
+@media(min-width:901px){
+  .top-header .suo-logo-wrap{
+    left:15.5%!important;
+  }
+  .top-header .murninets-header-logo{
+    left:87.5%!important;
+  }
+}
