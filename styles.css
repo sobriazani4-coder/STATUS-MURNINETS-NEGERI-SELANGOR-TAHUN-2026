@@ -1459,3 +1459,46 @@ body{
     font-size:24px!important;
   }
 }
+
+
+/* ===== MAP PBT LABELS +20% ===== */
+.pbt-label .pbt-label-inner{
+  gap:5px!important;
+  padding:4px 7px 4px 5px!important;
+  min-height:34px!important;
+}
+.pbt-label .pbt-label-logo{
+  width:26px!important;
+  height:26px!important;
+  flex-basis:26px!important;
+  border-radius:7px!important;
+}
+.pbt-label .pbt-label-logo img{
+  width:20px!important;
+  height:20px!important;
+}
+.pbt-label .pbt-label-copy b{
+  font-size:10.8px!important;
+  line-height:1.08!important;
+  max-width:116px!important;
+  font-weight:900!important;
+}
+
+/* Urban labels also enlarged proportionally */
+.pbt-label.label-urban .pbt-label-inner{
+  min-height:32px!important;
+  padding:4px 8px 4px 5px!important;
+}
+.pbt-label.label-urban .pbt-label-logo{
+  width:28px!important;
+  height:28px!important;
+  flex-basis:28px!important;
+}
+.pbt-label.label-urban .pbt-label-logo img{
+  width:22px!important;
+  height:22px!important;
+}
+.pbt-label.label-urban .pbt-label-copy b{
+  font-size:11.4px!important;
+  max-width:100px!important;
+}
