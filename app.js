@@ -726,14 +726,14 @@ function renderProfile(){
       (logo?'<div class="profile-logo-box"><img src="'+logo+'" alt="Logo '+current.name+'"></div>':'')+
       '<div><h3>'+title+'</h3><p>'+desc+'</p></div>'+
     '</div>'+
-    extraPbtCards+
     '<div class="profile-metric">'+
       '<div class="metric-card"><small>'+METRICS[state.metric].label+'</small>'+
         (schoolCount!=null ? '<span><b>'+METRICS[state.metric].schoolLabel+':</b> '+formatNumber(schoolCount,0)+'</span>' : '')+
         '<strong>'+formatNumber(current.value)+METRICS[state.metric].unit+'</strong>'+
         '<span>'+(schoolCount!=null ? 'Hasil nisbah • ' : '')+'Rujukan halaman '+METRICS[state.metric].page+'</span></div>'+
       '<div class="metric-card"><small>Status Prestasi</small><strong style="color:'+STATUS_COLORS[stat.key]+'">'+stat.label+'</strong><span>Klasifikasi paparan dashboard</span></div>'+
-    '</div>';
+    '</div>'+
+    extraPbtCards;
 }
 
 function renderIndicators(){
