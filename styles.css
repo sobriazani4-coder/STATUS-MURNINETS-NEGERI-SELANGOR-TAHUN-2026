@@ -2216,3 +2216,29 @@ img,svg,canvas{max-width:100%}
     display:none!important;
   }
 }
+
+
+/* ===== ENLARGE PBT SELECTOR LOGOS + NAMES BY 20% ONLY ===== */
+/* Keep the existing card dimensions/design unchanged. */
+.pbt-logo-frame img{
+  width:49px!important;  /* 41px × 1.2 */
+  height:49px!important;
+}
+.pbt-logo-card strong{
+  font-size:12px!important; /* 10px × 1.2 */
+}
+
+/* Preserve the same box/card dimensions on smaller screens */
+@media(max-width:700px){
+  .pbt-logo-frame{
+    width:40px!important;
+    height:40px!important;
+  }
+  .pbt-logo-frame img{
+    width:40px!important;
+    height:40px!important;
+  }
+  .pbt-logo-card strong{
+    font-size:12px!important;
+  }
+}
