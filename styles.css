@@ -2736,3 +2736,51 @@ img,svg,canvas{max-width:100%}
     animation:none!important;
   }
 }
+
+
+/* ===== LUXURY RED GLOW FOR SELECTED PBT BOUNDARY ===== */
+/* Effect only: map geometry, labels, popup and layout remain unchanged. */
+.map-region.selected{
+  stroke:#d51f2e!important;
+  stroke-width:6.4!important;
+  stroke-linejoin:round!important;
+  stroke-linecap:round!important;
+  vector-effect:non-scaling-stroke!important;
+  filter:
+    saturate(1.12)
+    drop-shadow(0 0 2px rgba(255,255,255,.72))
+    drop-shadow(0 0 5px rgba(213,31,46,.72))
+    drop-shadow(0 0 11px rgba(213,31,46,.52))
+    drop-shadow(0 0 22px rgba(255,79,91,.30))!important;
+  animation:selectedPbtLuxuryPulse 1.55s cubic-bezier(.45,.05,.55,.95) infinite!important;
+}
+
+@keyframes selectedPbtLuxuryPulse{
+  0%,100%{
+    stroke:#c91f2c;
+    stroke-width:6.2;
+    filter:
+      saturate(1.08)
+      drop-shadow(0 0 2px rgba(255,255,255,.62))
+      drop-shadow(0 0 4px rgba(201,31,44,.56))
+      drop-shadow(0 0 9px rgba(201,31,44,.38))
+      drop-shadow(0 0 16px rgba(255,82,92,.20));
+  }
+  50%{
+    stroke:#ff3045;
+    stroke-width:7.1;
+    filter:
+      saturate(1.18)
+      brightness(1.05)
+      drop-shadow(0 0 3px rgba(255,255,255,.82))
+      drop-shadow(0 0 7px rgba(255,48,69,.92))
+      drop-shadow(0 0 16px rgba(255,48,69,.68))
+      drop-shadow(0 0 30px rgba(255,94,107,.40));
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .map-region.selected{
+    animation:none!important;
+  }
+}
