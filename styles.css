@@ -2784,3 +2784,50 @@ img,svg,canvas{max-width:100%}
     animation:none!important;
   }
 }
+
+
+/* ===== ACTUAL LEAFLET SELECTED PBT BOUNDARY GLOW ===== */
+/* Applied directly to the rendered SVG path while its popup is selected/open. */
+.leaflet-interactive.selected-pbt-boundary{
+  stroke:#ff2d3f!important;
+  stroke-width:7px!important;
+  stroke-opacity:1!important;
+  stroke-linejoin:round!important;
+  stroke-linecap:round!important;
+  vector-effect:non-scaling-stroke!important;
+  filter:
+    drop-shadow(0 0 2px rgba(255,255,255,.95))
+    drop-shadow(0 0 6px rgba(255,45,63,.95))
+    drop-shadow(0 0 14px rgba(255,45,63,.75))
+    drop-shadow(0 0 26px rgba(255,45,63,.48))!important;
+  animation:selectedBoundaryLuxuryPulse 1.15s ease-in-out infinite!important;
+}
+
+@keyframes selectedBoundaryLuxuryPulse{
+  0%,100%{
+    stroke:#d7192d;
+    stroke-width:6.5px;
+    stroke-opacity:.96;
+    filter:
+      drop-shadow(0 0 2px rgba(255,255,255,.88))
+      drop-shadow(0 0 5px rgba(215,25,45,.72))
+      drop-shadow(0 0 11px rgba(215,25,45,.52))
+      drop-shadow(0 0 20px rgba(255,63,80,.30));
+  }
+  50%{
+    stroke:#ff4052;
+    stroke-width:8px;
+    stroke-opacity:1;
+    filter:
+      drop-shadow(0 0 3px rgba(255,255,255,1))
+      drop-shadow(0 0 9px rgba(255,64,82,1))
+      drop-shadow(0 0 19px rgba(255,64,82,.82))
+      drop-shadow(0 0 34px rgba(255,92,106,.55));
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .leaflet-interactive.selected-pbt-boundary{
+    animation:none!important;
+  }
+}
