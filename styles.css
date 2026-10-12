@@ -2665,3 +2665,74 @@ img,svg,canvas{max-width:100%}
     animation:none!important;
   }
 }
+
+
+/* ===== ENHANCED PREMIUM GLOW FOR MAP PBT LABELS ===== */
+/* Stronger effect only. No changes to map structure, label size or position. */
+.pbt-label .pbt-label-inner{
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.88),
+    0 0 0 3px rgba(239,116,43,.20),
+    0 0 12px rgba(255,129,54,.52),
+    0 0 24px rgba(255,129,54,.30),
+    0 6px 14px rgba(23,49,99,.16)!important;
+  animation:pbtPremiumGlow 1.35s ease-in-out infinite!important;
+}
+
+.pbt-label .pbt-label-inner::after{
+  inset:-6px!important;
+  border:2px solid rgba(255,143,67,.72)!important;
+  border-radius:16px!important;
+  box-shadow:
+    0 0 10px rgba(255,129,54,.62),
+    0 0 22px rgba(255,129,54,.40),
+    0 0 34px rgba(255,129,54,.20)!important;
+  opacity:.88!important;
+  animation:pbtPremiumOuterRing 1.35s ease-in-out infinite!important;
+}
+
+/* Extra halo layer using the Leaflet div-icon wrapper */
+.pbt-label{
+  filter:
+    drop-shadow(0 0 4px rgba(255,145,72,.46))
+    drop-shadow(0 0 9px rgba(255,145,72,.24))!important;
+}
+
+@keyframes pbtPremiumGlow{
+  0%,100%{
+    filter:brightness(1);
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,.86),
+      0 0 0 2px rgba(239,116,43,.18),
+      0 0 9px rgba(255,129,54,.38),
+      0 0 18px rgba(255,129,54,.22),
+      0 5px 12px rgba(23,49,99,.13);
+  }
+  50%{
+    filter:brightness(1.08);
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,.96),
+      0 0 0 4px rgba(255,161,85,.30),
+      0 0 18px rgba(255,129,54,.80),
+      0 0 32px rgba(255,129,54,.50),
+      0 8px 18px rgba(23,49,99,.20);
+  }
+}
+
+@keyframes pbtPremiumOuterRing{
+  0%,100%{
+    transform:scale(.985);
+    opacity:.45;
+  }
+  50%{
+    transform:scale(1.075);
+    opacity:1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .pbt-label .pbt-label-inner,
+  .pbt-label .pbt-label-inner::after{
+    animation:none!important;
+  }
+}
