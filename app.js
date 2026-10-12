@@ -122,6 +122,13 @@ function preschoolCountForPbt(name, metricKey = state.metric){
   return idx>=0 ? metric.preschoolCounts[idx] : null;
 }
 
+function housingUnitsForPbt(name, metricKey = state.metric){
+  const metric=METRICS[metricKey];
+  if(!metric || !metric.housingUnits) return null;
+  const idx=PBT.indexOf(name);
+  return idx>=0 ? metric.housingUnits[idx] : null;
+}
+
 function shortPbt(name){
   return name.replace('MBD ','').replace('MB ','').replace('MP ','').replace('MD ','');
 }
@@ -317,6 +324,8 @@ function pbtPopupHtml(pbt){
   const station=riverStationForPbt(pbt);
   const hospitalBedCount=hospitalBedCountForPbt(pbt);
   const preschoolCount=preschoolCountForPbt(pbt);
+  const housingUnits=housingUnitsForPbt(pbt);
+  const isPreschoolMetric=state.metric==='preschoolRatio';
   return '<div class="pbt-popup">'+
     '<div class="pbt-popup-head">'+
       (logo ? '<img class="pbt-popup-logo" src="'+logo+'" alt="Logo '+pbt+'">' : '')+
@@ -326,8 +335,8 @@ function pbtPopupHtml(pbt){
     (station ? '<div class="pbt-popup-metric"><b>Stesen tercemar:</b> '+station.polluted+' &nbsp;•&nbsp; <b>Jumlah stesen:</b> '+station.total+'</div>' : '')+
     (hospitalBedCount!=null ? '<div class="pbt-popup-metric hospital-bed-popup"><b>Bil. Katil Hospital (Kerajaan &amp; Swasta):</b> '+formatNumber(hospitalBedCount,0)+'</div>' : '')+
     (preschoolCount!=null ? '<div class="pbt-popup-metric preschool-count-popup"><b>Bil. Prasekolah / Tadika / Tabika:</b> <span class="preschool-count-number">'+formatNumber(preschoolCount,0)+'</span></div>' : '')+
-    '<span class="value">'+(value==null ? 'Tiada data' : formatNumber(value)+METRICS[state.metric].unit)+'</span>'+
-    '<div class="pbt-popup-metric">'+(schoolCount!=null ? 'Hasil Nisbah' : METRICS[state.metric].label)+'</div>'+
+    '<span class="value">'+(isPreschoolMetric && housingUnits!=null ? formatNumber(housingUnits,0) : (value==null ? 'Tiada data' : formatNumber(value)+METRICS[state.metric].unit))+'</span>'+
+    '<div class="pbt-popup-metric">'+(isPreschoolMetric ? 'Jumlah Unit Rumah Dalam Kawasan PBT' : (schoolCount!=null ? 'Hasil Nisbah' : METRICS[state.metric].label))+'</div>'+
     (status ? '<div>Status: <b>'+status.label+'</b></div>' : '')+
     '<small class="pbt-popup-source">Sempadan: fail GeoJSON yang dilampirkan</small>'+
   '</div>';
