@@ -2538,3 +2538,69 @@ img,svg,canvas{max-width:100%}
     animation:none!important;
   }
 }
+
+
+/* ===== STRONGER GLOW FOR "BUKA PDF" BUTTON ===== */
+.indicator-pdf-btn{
+  position:relative!important;
+  overflow:visible!important;
+  animation:pdfStrongGlow 1.15s ease-in-out infinite!important;
+  border-color:#ff8a3d!important;
+  background:linear-gradient(90deg,#fff1e6 0%,#ffe0c7 50%,#fff3e9 100%)!important;
+  box-shadow:
+    0 0 0 2px rgba(255,138,61,.20),
+    0 0 10px rgba(255,111,36,.50),
+    0 0 22px rgba(255,111,36,.34),
+    0 6px 14px rgba(239,116,43,.16)!important;
+}
+
+.indicator-pdf-btn::after{
+  content:""!important;
+  position:absolute!important;
+  inset:-5px!important;
+  border-radius:999px!important;
+  border:2px solid rgba(255,138,61,.62)!important;
+  box-shadow:
+    0 0 10px rgba(255,111,36,.65),
+    0 0 20px rgba(255,111,36,.38)!important;
+  opacity:.85!important;
+  pointer-events:none!important;
+  animation:pdfOuterGlow 1.15s ease-in-out infinite!important;
+}
+
+@keyframes pdfStrongGlow{
+  0%,100%{
+    filter:brightness(1)!important;
+    box-shadow:
+      0 0 0 2px rgba(255,138,61,.18),
+      0 0 8px rgba(255,111,36,.38),
+      0 0 16px rgba(255,111,36,.24),
+      0 5px 12px rgba(239,116,43,.13);
+  }
+  50%{
+    filter:brightness(1.08)!important;
+    box-shadow:
+      0 0 0 4px rgba(255,166,89,.24),
+      0 0 16px rgba(255,111,36,.78),
+      0 0 30px rgba(255,111,36,.52),
+      0 8px 18px rgba(239,116,43,.22);
+  }
+}
+
+@keyframes pdfOuterGlow{
+  0%,100%{
+    transform:scale(.98);
+    opacity:.45;
+  }
+  50%{
+    transform:scale(1.08);
+    opacity:1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .indicator-pdf-btn,
+  .indicator-pdf-btn::after{
+    animation:none!important;
+  }
+}
