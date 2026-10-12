@@ -736,7 +736,7 @@ function renderProfile(){
 
   const title=isOverallHappiness
     ? 'Majlis Bandaraya Petaling Jaya'
-    : (state.pbt==='all' ? 'Sorotan PBT Tertinggi Semasa' : current.name);
+    : current.name;
 
   const desc=isOverallHappiness
     ? 'Indeks Kebahagiaan 2026 : '+formatNumber(current.value)+METRICS[state.metric].unit
