@@ -723,7 +723,7 @@ function renderProfile(){
       : formatNumber(value)+METRICS[state.metric].unit;
 
     $('#profileBox').innerHTML=
-      '<div class="profile-hero profile-with-logo">'+
+      '<div class="profile-hero profile-with-logo pbt-name-highlight">'+
         '<div class="profile-logo-box"><img src="'+SELANGOR_STATE_CREST+'" alt="Jata Negeri Selangor"></div>'+
         '<div><h3>Negeri Selangor</h3><p>Data satu Negeri Selangor bagi indikator '+METRICS[state.metric].short.toLowerCase()+'.</p></div>'+
       '</div>'+
