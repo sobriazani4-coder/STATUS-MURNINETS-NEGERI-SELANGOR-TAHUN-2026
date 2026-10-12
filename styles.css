@@ -2395,3 +2395,55 @@ img,svg,canvas{max-width:100%}
 .dashboard-shell .content{
   background:transparent!important;
 }
+
+
+/* ===== VISIBLE CORPORATE DIGITAL NETWORK BACKGROUND FIX ===== */
+/* Header untouched. Background layers are now placed above the shell background
+   and below all dashboard content so the digital pattern is actually visible. */
+.dashboard-shell{
+  position:relative!important;
+  isolation:isolate!important;
+  background:
+    linear-gradient(135deg,#eef3f8 0%,#f7f4ef 52%,#edf2f7 100%)!important;
+}
+.dashboard-shell::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  pointer-events:none!important;
+  opacity:.72!important;
+  background:
+    radial-gradient(circle at 8% 18%,rgba(24,49,97,.16) 0 3px,transparent 4px),
+    radial-gradient(circle at 24% 64%,rgba(64,103,145,.14) 0 3px,transparent 4px),
+    radial-gradient(circle at 48% 24%,rgba(239,116,43,.11) 0 3px,transparent 4px),
+    radial-gradient(circle at 69% 73%,rgba(24,49,97,.13) 0 3px,transparent 4px),
+    radial-gradient(circle at 88% 34%,rgba(239,116,43,.10) 0 3px,transparent 4px)!important;
+}
+.dashboard-shell::after{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  pointer-events:none!important;
+  opacity:.42!important;
+  background-image:
+    linear-gradient(28deg,transparent 0 48%,rgba(31,49,88,.12) 49%,transparent 50% 100%),
+    linear-gradient(152deg,transparent 0 48%,rgba(61,103,145,.10) 49%,transparent 50% 100%),
+    linear-gradient(90deg,transparent 0 49%,rgba(239,116,43,.055) 50%,transparent 51% 100%)!important;
+  background-size:150px 104px,150px 104px,210px 144px!important;
+  background-position:0 0,75px 52px,26px 16px!important;
+}
+.dashboard-shell > .sidebar,
+.dashboard-shell > .content{
+  position:relative!important;
+  z-index:1!important;
+}
+.dashboard-shell > .content{
+  background:transparent!important;
+}
+/* Background-only treatment for sidebar so network theme is visible there too. */
+.dashboard-shell > .sidebar{
+  background:linear-gradient(180deg,rgba(255,255,255,.72),rgba(248,246,242,.78))!important;
+  backdrop-filter:blur(2px)!important;
+}
