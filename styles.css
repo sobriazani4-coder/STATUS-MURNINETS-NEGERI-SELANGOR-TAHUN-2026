@@ -2258,3 +2258,24 @@ img,svg,canvas{max-width:100%}
 .profile-hero.pbt-name-highlight h3{
   color:#173163!important;
 }
+
+
+/* ===== PREMIUM SOFT-YELLOW HIGHLIGHT FOR SELANGOR POPULATION ===== */
+.population-title-line{
+  display:inline-flex!important;
+  align-items:baseline!important;
+  flex-wrap:wrap!important;
+  gap:4px!important;
+  width:auto!important;
+  max-width:100%!important;
+  padding:12px 18px 14px!important;
+  margin-bottom:18px!important;
+  border-radius:18px!important;
+  border:1px solid #ead27b!important;
+  background:
+    radial-gradient(circle at 88% 18%,rgba(245,139,25,.16),transparent 34%),
+    linear-gradient(135deg,#fff9df 0%,#ffefb8 52%,#fff7d6 100%)!important;
+  box-shadow:
+    0 10px 24px rgba(227,179,55,.16),
+    inset 0 1px 0 rgba(255,255,255,.82)!important;
+}
