@@ -470,7 +470,9 @@ function renderRanking(){
         const label=station
           ? station.polluted+'/'+station.total+' stesen • '+formatNumber(row.value)+METRICS[state.metric].unit
           : formatNumber(row.value)+METRICS[state.metric].unit;
-        ctx.fillText(label,Math.min(bar.x+8,chart.chartArea.right+8),bar.y);
+        const labelWidth=ctx.measureText(label).width;
+        const labelX=Math.min(bar.x+8,chart.width-labelWidth-12);
+        ctx.fillText(label,labelX,bar.y);
       });
       ctx.restore();
     }
@@ -498,7 +500,7 @@ function renderRanking(){
       responsive:true,
       maintainAspectRatio:false,
       indexAxis:'y',
-      layout:{padding:{right:64}},
+      layout:{padding:{right:118}},
       scales:{
         x:{
           beginAtZero:true,
