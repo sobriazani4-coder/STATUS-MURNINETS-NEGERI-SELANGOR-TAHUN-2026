@@ -734,9 +734,10 @@ function renderProfile(){
     return;
   }
 
+  const displayPbtName=current.name.replace(/^MB /,'Majlis Bandaraya ').replace(/^MP /,'Majlis Perbandaran ');
   const title=isOverallHappiness
     ? 'Majlis Bandaraya Petaling Jaya'
-    : current.name;
+    : displayPbtName;
 
   const desc=isOverallHappiness
     ? 'Indeks Kebahagiaan 2026 : '+formatNumber(current.value)+METRICS[state.metric].unit
