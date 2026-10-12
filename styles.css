@@ -2353,3 +2353,45 @@ img,svg,canvas{max-width:100%}
 .pbt-logo-card strong{
   color:#173163!important;
 }
+
+
+/* ===== CORPORATE SOFT DIGITAL NETWORK BACKGROUND (BELOW HEADER ONLY) ===== */
+/* Background-only enhancement. Header, layout, data and component positions remain unchanged. */
+.dashboard-shell{
+  position:relative!important;
+  isolation:isolate!important;
+  background:
+    linear-gradient(135deg,#f7f9fc 0%,#f2f5f9 46%,#f8f5f1 100%)!important;
+  overflow:hidden!important;
+}
+.dashboard-shell::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:-2!important;
+  pointer-events:none!important;
+  background:
+    radial-gradient(circle at 10% 16%,rgba(28,54,102,.10) 0 2px,transparent 3px),
+    radial-gradient(circle at 24% 64%,rgba(66,108,150,.08) 0 2px,transparent 3px),
+    radial-gradient(circle at 47% 28%,rgba(239,116,43,.065) 0 2px,transparent 3px),
+    radial-gradient(circle at 68% 72%,rgba(28,54,102,.08) 0 2px,transparent 3px),
+    radial-gradient(circle at 88% 34%,rgba(239,116,43,.055) 0 2px,transparent 3px),
+    linear-gradient(135deg,#f8fafc 0%,#f3f6f9 50%,#faf7f3 100%)!important;
+}
+.dashboard-shell::after{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:-1!important;
+  pointer-events:none!important;
+  opacity:.24!important;
+  background-image:
+    linear-gradient(28deg,transparent 0 48%,rgba(31,49,88,.075) 49%,transparent 50% 100%),
+    linear-gradient(152deg,transparent 0 48%,rgba(61,103,145,.065) 49%,transparent 50% 100%),
+    linear-gradient(90deg,transparent 0 49%,rgba(239,116,43,.035) 50%,transparent 51% 100%)!important;
+  background-size:160px 112px,160px 112px,220px 150px!important;
+  background-position:0 0,80px 56px,30px 20px!important;
+}
+.dashboard-shell .content{
+  background:transparent!important;
+}
