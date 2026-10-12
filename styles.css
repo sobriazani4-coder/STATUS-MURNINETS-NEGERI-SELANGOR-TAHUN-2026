@@ -2279,3 +2279,17 @@ img,svg,canvas{max-width:100%}
     0 10px 24px rgba(227,179,55,.16),
     inset 0 1px 0 rgba(255,255,255,.82)!important;
 }
+
+
+/* ===== FORCE POPULATION HIGHLIGHT TO TWO LINES ===== */
+.population-title-line{
+  display:inline-grid!important;
+  grid-template-columns:1fr!important;
+  align-items:start!important;
+  gap:4px!important;
+}
+.population-title-line span,
+.population-title-line strong{
+  display:block!important;
+  white-space:nowrap!important;
+}
