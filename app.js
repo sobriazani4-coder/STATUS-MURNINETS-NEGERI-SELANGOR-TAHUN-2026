@@ -421,6 +421,9 @@ function updateMapStyles(){
     layer.setPopupContent(pbtPopupHtml(pbt));
     const el=layer.getTooltip()?.getElement();
     if(el) el.classList.toggle('is-selected', state.pbt===pbt);
+
+    const pathEl=layer.getElement?.();
+    if(pathEl) pathEl.classList.toggle('selected-pbt-boundary', state.pbt===pbt);
   });
   if(state.pbt!=='all'){
     const layer=state.pbtLayerByName.get(state.pbt);
