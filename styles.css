@@ -2831,3 +2831,41 @@ img,svg,canvas{max-width:100%}
     animation:none!important;
   }
 }
+
+
+/* ===== SOFT PULSE FOR SELECTED PBT BOUNDARY ===== */
+/* Keeps the existing red luxury glow, adding a clearly visible but gentle pulse. */
+.leaflet-interactive.selected-pbt-boundary{
+  animation:selectedBoundarySoftPulse 1.8s ease-in-out infinite!important;
+  transform-origin:center!important;
+  will-change:filter,stroke-width,stroke-opacity!important;
+}
+
+@keyframes selectedBoundarySoftPulse{
+  0%,100%{
+    stroke:#df2437;
+    stroke-width:6.7px;
+    stroke-opacity:.92;
+    filter:
+      drop-shadow(0 0 2px rgba(255,255,255,.90))
+      drop-shadow(0 0 5px rgba(223,36,55,.66))
+      drop-shadow(0 0 11px rgba(223,36,55,.46))
+      drop-shadow(0 0 20px rgba(255,77,93,.28));
+  }
+  50%{
+    stroke:#ff4153;
+    stroke-width:7.8px;
+    stroke-opacity:1;
+    filter:
+      drop-shadow(0 0 3px rgba(255,255,255,.98))
+      drop-shadow(0 0 8px rgba(255,65,83,.88))
+      drop-shadow(0 0 17px rgba(255,65,83,.64))
+      drop-shadow(0 0 29px rgba(255,96,110,.40));
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .leaflet-interactive.selected-pbt-boundary{
+    animation:none!important;
+  }
+}
