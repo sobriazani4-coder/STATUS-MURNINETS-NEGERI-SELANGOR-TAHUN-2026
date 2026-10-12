@@ -2242,3 +2242,19 @@ img,svg,canvas{max-width:100%}
     font-size:12px!important;
   }
 }
+
+
+/* ===== HIGHLIGHT PBT NAME CARDS ONLY ===== */
+/* Applies to the box containing PBT logo + PBT name, for every PBT-based indicator. */
+.profile-hero.pbt-name-highlight{
+  background:
+    radial-gradient(circle at 88% 18%,rgba(245,139,25,.14),transparent 34%),
+    linear-gradient(135deg,#fff3e8 0%,#ffe8d5 52%,#fff9f3 100%)!important;
+  border-color:#efc59e!important;
+  box-shadow:
+    0 8px 20px rgba(239,116,43,.10),
+    inset 4px 0 0 rgba(239,76,54,.72)!important;
+}
+.profile-hero.pbt-name-highlight h3{
+  color:#173163!important;
+}
