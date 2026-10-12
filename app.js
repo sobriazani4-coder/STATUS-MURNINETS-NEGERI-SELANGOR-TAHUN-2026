@@ -188,7 +188,24 @@ function renderPbtLogoSelector(){
       renderAll();
       if(selected==='all' && state.map && state.pbtLayer){
         state.map.closePopup();
-        state.map.fitBounds(state.pbtLayer.getBounds(),{padding:[20,20]});
+        /* Kekalkan navigasi peta dalam Negeri Selangor sahaja. */
+  const selangorBounds=state.pbtLayer.getBounds();
+  const selangorMaxBounds=selangorBounds.pad(0.035);
+  state.map.setMaxBounds(selangorMaxBounds);
+  state.map.options.maxBoundsViscosity=1.0;
+  state.map.fitBounds(selangorBounds,{padding:[20,20]});
+
+  /* Elak zoom-out terlalu jauh sehingga peta lari ke negeri lain. */
+  const selangorMinZoom=state.map.getBoundsZoom(selangorBounds,false);
+  state.map.setMinZoom(selangorMinZoom);
+
+  /* Jika resize skrin, pastikan paparan kekal terkunci pada Selangor. */
+  state.map.on('resize',()=>{
+    state.map.setMaxBounds(selangorBounds.pad(0.035));
+    if(state.pbt==='all'){
+      state.map.fitBounds(selangorBounds,{padding:[20,20]});
+    }
+  });
       }
     });
   });
