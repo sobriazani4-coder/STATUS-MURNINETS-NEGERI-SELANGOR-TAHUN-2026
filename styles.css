@@ -2293,3 +2293,63 @@ img,svg,canvas{max-width:100%}
   display:block!important;
   white-space:nowrap!important;
 }
+
+
+/* ===== PREMIUM SELANGOR-THEME PBT SELECTOR CARDS ===== */
+/* Visual enhancement only: card size/layout/data remain unchanged. */
+.pbt-logo-card{
+  background:linear-gradient(180deg,#fffdfa 0%,#fff6ee 100%)!important;
+  border-color:#ecd7c4!important;
+  box-shadow:
+    0 6px 14px rgba(20,36,67,.045),
+    inset 0 1px 0 rgba(255,255,255,.9)!important;
+}
+
+/* Soft alternating Selangor red / yellow / cream tones */
+.pbt-logo-card:nth-child(3n+1){
+  background:
+    radial-gradient(circle at 82% 14%,rgba(220,50,71,.08),transparent 34%),
+    linear-gradient(180deg,#fffafa 0%,#fff0ed 100%)!important;
+}
+.pbt-logo-card:nth-child(3n+2){
+  background:
+    radial-gradient(circle at 82% 14%,rgba(245,139,25,.11),transparent 34%),
+    linear-gradient(180deg,#fffdf7 0%,#fff3d9 100%)!important;
+}
+.pbt-logo-card:nth-child(3n){
+  background:
+    radial-gradient(circle at 82% 14%,rgba(239,90,44,.08),transparent 34%),
+    linear-gradient(180deg,#fffaf6 0%,#ffeadc 100%)!important;
+}
+
+/* Logo frame remains same size; only visual treatment changes */
+.pbt-logo-frame{
+  background:rgba(255,255,255,.78)!important;
+  border:1px solid rgba(234,205,179,.82)!important;
+  box-shadow:
+    0 3px 9px rgba(20,36,67,.04),
+    inset 0 1px 0 rgba(255,255,255,.95)!important;
+}
+
+/* Hover */
+.pbt-logo-card:hover{
+  transform:translateY(-2px)!important;
+  border-color:#efa26b!important;
+  box-shadow:
+    0 10px 22px rgba(239,116,43,.11),
+    inset 0 1px 0 rgba(255,255,255,.92)!important;
+}
+
+/* Selected PBT: stronger red-orange highlight */
+.pbt-logo-card.active{
+  background:
+    radial-gradient(circle at 86% 18%,rgba(245,139,25,.18),transparent 34%),
+    linear-gradient(135deg,#fff4e9 0%,#ffdfc5 52%,#fff7ef 100%)!important;
+  border:2px solid #ef742b!important;
+  box-shadow:
+    0 11px 24px rgba(239,116,43,.17),
+    inset 0 0 0 1px rgba(255,255,255,.72)!important;
+}
+.pbt-logo-card strong{
+  color:#173163!important;
+}
