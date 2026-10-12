@@ -2869,3 +2869,67 @@ img,svg,canvas{max-width:100%}
     animation:none!important;
   }
 }
+
+
+/* ===== ORANGE RING GLOW + SOFT PULSE FOR KPI CARDS ===== */
+/* Effect only: no size, spacing, content or layout changes. */
+.kpi-card{
+  position:relative!important;
+  overflow:visible!important;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.82),
+    0 0 0 2px rgba(244,139,31,.16),
+    0 0 10px rgba(244,139,31,.20),
+    var(--premium-shadow)!important;
+  animation:kpiOrangeSoftPulse 2.2s ease-in-out infinite!important;
+}
+
+.kpi-card::before{
+  content:""!important;
+  position:absolute!important;
+  inset:-4px!important;
+  border-radius:18px!important;
+  border:1.5px solid rgba(244,139,31,.42)!important;
+  box-shadow:
+    0 0 8px rgba(244,139,31,.28),
+    0 0 16px rgba(244,139,31,.16)!important;
+  opacity:.48!important;
+  pointer-events:none!important;
+  animation:kpiOrangeOuterRing 2.2s ease-in-out infinite!important;
+}
+
+@keyframes kpiOrangeSoftPulse{
+  0%,100%{
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,.82),
+      0 0 0 2px rgba(244,139,31,.14),
+      0 0 8px rgba(244,139,31,.18),
+      var(--premium-shadow);
+  }
+  50%{
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,.90),
+      0 0 0 3px rgba(244,139,31,.23),
+      0 0 14px rgba(244,139,31,.34),
+      0 0 24px rgba(244,139,31,.18),
+      var(--premium-shadow);
+  }
+}
+
+@keyframes kpiOrangeOuterRing{
+  0%,100%{
+    transform:scale(.995);
+    opacity:.34;
+  }
+  50%{
+    transform:scale(1.012);
+    opacity:.78;
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .kpi-card,
+  .kpi-card::before{
+    animation:none!important;
+  }
+}
