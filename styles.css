@@ -2604,3 +2604,64 @@ img,svg,canvas{max-width:100%}
     animation:none!important;
   }
 }
+
+
+/* ===== OUTER RING GLOW FOR MAP PBT NAME LABELS ===== */
+/* Effect-only enhancement. Existing map, label size, position and layout stay unchanged. */
+.pbt-label .pbt-label-inner{
+  position:relative!important;
+  overflow:visible!important;
+  box-shadow:
+    0 0 0 1px rgba(239,116,43,.18),
+    0 0 9px rgba(239,116,43,.26),
+    0 4px 10px rgba(23,49,99,.10)!important;
+  animation:pbtLabelGlow 1.8s ease-in-out infinite!important;
+}
+
+.pbt-label .pbt-label-inner::after{
+  content:""!important;
+  position:absolute!important;
+  inset:-4px!important;
+  border-radius:14px!important;
+  border:1.5px solid rgba(239,116,43,.42)!important;
+  box-shadow:
+    0 0 8px rgba(239,116,43,.34),
+    0 0 15px rgba(239,116,43,.22)!important;
+  opacity:.55!important;
+  pointer-events:none!important;
+  animation:pbtLabelOuterRing 1.8s ease-in-out infinite!important;
+}
+
+@keyframes pbtLabelGlow{
+  0%,100%{
+    box-shadow:
+      0 0 0 1px rgba(239,116,43,.15),
+      0 0 7px rgba(239,116,43,.20),
+      0 4px 10px rgba(23,49,99,.09);
+  }
+  50%{
+    box-shadow:
+      0 0 0 2px rgba(239,116,43,.24),
+      0 0 14px rgba(239,116,43,.42),
+      0 0 22px rgba(239,116,43,.18),
+      0 5px 12px rgba(23,49,99,.12);
+  }
+}
+
+@keyframes pbtLabelOuterRing{
+  0%,100%{
+    transform:scale(.99);
+    opacity:.38;
+  }
+  50%{
+    transform:scale(1.045);
+    opacity:.9;
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .pbt-label .pbt-label-inner,
+  .pbt-label .pbt-label-inner::after{
+    animation:none!important;
+  }
+}
