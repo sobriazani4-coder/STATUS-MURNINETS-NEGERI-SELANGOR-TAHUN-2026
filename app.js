@@ -758,7 +758,7 @@ function renderProfile(){
       const row=rows.find(r=>r.name===item.name);
       const extraLogo=logoForPbt(item.name);
       if(!row) return '';
-      return '<div class="profile-hero profile-with-logo">'+
+      return '<div class="profile-hero profile-with-logo pbt-name-highlight">'+
         (extraLogo?'<div class="profile-logo-box"><img src="'+extraLogo+'" alt="Logo '+item.display+'"></div>':'')+
         '<div><h3>'+item.display+'</h3>'+
         '<p>Indeks Kebahagiaan 2026 : <b>'+formatNumber(row.value)+METRICS[state.metric].unit+'</b></p></div>'+
@@ -771,7 +771,7 @@ function renderProfile(){
   }
 
   $('#profileBox').innerHTML=
-    '<div class="profile-hero profile-with-logo">'+
+    '<div class="profile-hero profile-with-logo pbt-name-highlight">'+
       (logo?'<div class="profile-logo-box"><img src="'+logo+'" alt="Logo '+current.name+'"></div>':'')+
       '<div><h3>'+title+'</h3><p>'+desc+'</p></div>'+
     '</div>'+
