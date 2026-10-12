@@ -444,9 +444,13 @@ function updateMapStyles(){
 }
 
 function renderRanking(){
-  const allRows = metricRows();
+  const baseRows = metricRows();
+  const allRows = state.metric==='preschoolRatio'
+    ? [...baseRows].sort((a,b)=>(housingUnitsForPbt(b.name)||0)-(housingUnitsForPbt(a.name)||0))
+    : baseRows;
   const rows = state.pbt === 'all' ? allRows : allRows.filter(r=>r.name===state.pbt);
-  const clipped = rows.map(r=> state.metric==='revenue' ? Math.min(r.value, 160) : r.value);
+  const rankingValues = rows.map(r=> state.metric==='preschoolRatio' ? housingUnitsForPbt(r.name) : r.value);
+  const clipped = rankingValues.map(v=> state.metric==='revenue' ? Math.min(v, 160) : v);
 
   const palette = [
     '#ef4444','#f97316','#f59e0b','#eab308',
@@ -479,9 +483,12 @@ function renderRanking(){
       meta.data.forEach((bar,index)=>{
         const row=rows[index];
         const station=riverStationForPbt(row.name);
-        const label=station
-          ? station.polluted+'/'+station.total+' stesen • '+formatNumber(row.value)+METRICS[state.metric].unit
-          : formatNumber(row.value)+METRICS[state.metric].unit;
+        const housingUnits=state.metric==='preschoolRatio' ? housingUnitsForPbt(row.name) : null;
+        const label=housingUnits!=null
+          ? formatNumber(housingUnits,0)+' Jumlah Unit Rumah dalam kawasan PBT'
+          : (station
+            ? station.polluted+'/'+station.total+' stesen • '+formatNumber(row.value)+METRICS[state.metric].unit
+            : formatNumber(row.value)+METRICS[state.metric].unit);
         const labelWidth=ctx.measureText(label).width;
         const labelX=Math.min(bar.x+8,chart.width-labelWidth-12);
         ctx.fillText(label,labelX,bar.y);
@@ -538,6 +545,10 @@ function renderRanking(){
               const row=rows[ctx.dataIndex];
               const schoolCount=schoolCountForPbt(row.name);
               const station=riverStationForPbt(row.name);
+              const housingUnits=state.metric==='preschoolRatio' ? housingUnitsForPbt(row.name) : null;
+              if(housingUnits!=null){
+                return 'Jumlah Unit Rumah dalam kawasan PBT: '+formatNumber(housingUnits,0);
+              }
               if(station){
                 return [
                   'Bil. Stesen Pengawasan Kualiti Air Sungai Tercemar: '+station.polluted,
