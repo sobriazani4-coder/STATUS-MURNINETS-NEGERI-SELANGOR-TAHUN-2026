@@ -2018,3 +2018,201 @@ img,svg,canvas{max-width:100%}
   color:#173163!important;
   letter-spacing:-.02em!important;
 }
+
+
+/* ===== FINAL HEADER RESPONSIVE OVERRIDE ===== */
+/* Keeps the main title centered. Only logo size/position adapts by viewport. */
+@media (min-width:1451px){
+  .top-header .logo-group{
+    position:relative!important;
+    width:100%!important;
+    min-height:136px!important;
+  }
+  .top-header .title-block{
+    position:absolute!important;
+    left:50%!important;
+    top:50%!important;
+    transform:translate(-50%,-50%)!important;
+    width:min(1120px,calc(100% - 560px))!important;
+    margin:0!important;
+    text-align:center!important;
+  }
+  .top-header .suo-logo-wrap{
+    position:absolute!important;
+    left:15.5%!important;
+    top:50%!important;
+    transform:translate(-50%,-50%)!important;
+    width:136px!important;
+    height:136px!important;
+    margin:0!important;
+  }
+  .top-header .murninets-header-logo{
+    display:block!important;
+    position:absolute!important;
+    left:87.5%!important;
+    top:50%!important;
+    transform:translate(-50%,-50%)!important;
+    width:300px!important;
+    margin:0!important;
+  }
+}
+
+@media (min-width:1201px) and (max-width:1450px){
+  .top-header .logo-group{
+    position:relative!important;
+    width:100%!important;
+    min-height:126px!important;
+  }
+  .top-header .title-block{
+    position:absolute!important;
+    left:50%!important;
+    top:50%!important;
+    transform:translate(-50%,-50%)!important;
+    width:min(760px,calc(100% - 440px))!important;
+    margin:0!important;
+    text-align:center!important;
+  }
+  .top-header .title-block h1{
+    font-size:clamp(24px,2.35vw,34px)!important;
+  }
+  .top-header .suo-logo-wrap{
+    position:absolute!important;
+    left:7.5%!important;
+    top:50%!important;
+    transform:translate(-50%,-50%)!important;
+    width:108px!important;
+    height:108px!important;
+    margin:0!important;
+  }
+  .top-header .murninets-header-logo{
+    display:block!important;
+    position:absolute!important;
+    left:91.5%!important;
+    top:50%!important;
+    transform:translate(-50%,-50%)!important;
+    width:220px!important;
+    margin:0!important;
+  }
+}
+
+@media (min-width:901px) and (max-width:1200px){
+  .top-header{
+    min-height:118px!important;
+  }
+  .top-header .logo-group{
+    position:relative!important;
+    width:100%!important;
+    min-height:112px!important;
+    display:block!important;
+  }
+  .top-header .title-block{
+    position:absolute!important;
+    left:50%!important;
+    top:50%!important;
+    transform:translate(-50%,-50%)!important;
+    width:min(620px,calc(100% - 330px))!important;
+    margin:0!important;
+    text-align:center!important;
+  }
+  .top-header .title-block h1{
+    font-size:clamp(21px,2.65vw,29px)!important;
+    line-height:1.02!important;
+  }
+  .top-header .title-block .eyebrow{
+    font-size:10px!important;
+  }
+  .top-header .title-block p{
+    font-size:11px!important;
+  }
+  .top-header .suo-logo-wrap{
+    position:absolute!important;
+    left:6.5%!important;
+    top:50%!important;
+    transform:translate(-50%,-50%)!important;
+    width:86px!important;
+    height:86px!important;
+    margin:0!important;
+  }
+  .top-header .murninets-header-logo{
+    display:block!important;
+    position:absolute!important;
+    left:93%!important;
+    top:50%!important;
+    transform:translate(-50%,-50%)!important;
+    width:160px!important;
+    margin:0!important;
+  }
+}
+
+@media (max-width:900px){
+  .top-header{
+    min-height:auto!important;
+    padding:10px 8px 12px!important;
+  }
+  .top-header .logo-group{
+    position:relative!important;
+    width:100%!important;
+    min-height:0!important;
+    display:grid!important;
+    grid-template-columns:72px minmax(0,1fr) 96px!important;
+    align-items:center!important;
+    gap:6px!important;
+  }
+  .top-header .title-block{
+    position:static!important;
+    transform:none!important;
+    width:100%!important;
+    margin:0!important;
+    text-align:center!important;
+  }
+  .top-header .title-block h1{
+    font-size:clamp(15px,3.4vw,23px)!important;
+    line-height:1.03!important;
+  }
+  .top-header .title-block .eyebrow{
+    font-size:8px!important;
+  }
+  .top-header .title-block p{
+    font-size:9px!important;
+  }
+  .top-header .suo-logo-wrap{
+    position:static!important;
+    transform:none!important;
+    justify-self:start!important;
+    width:68px!important;
+    height:68px!important;
+    margin:0!important;
+  }
+  .top-header .murninets-header-logo{
+    display:block!important;
+    position:static!important;
+    transform:none!important;
+    justify-self:end!important;
+    width:92px!important;
+    margin:0!important;
+  }
+}
+
+@media (max-width:520px){
+  .top-header .logo-group{
+    grid-template-columns:52px minmax(0,1fr) 68px!important;
+    gap:4px!important;
+  }
+  .top-header .suo-logo-wrap{
+    width:48px!important;
+    height:48px!important;
+  }
+  .top-header .murninets-header-logo{
+    width:66px!important;
+  }
+  .top-header .title-block h1{
+    font-size:12px!important;
+    line-height:1.02!important;
+  }
+  .top-header .title-block .eyebrow{
+    font-size:6.5px!important;
+  }
+  .top-header .title-block p{
+    display:none!important;
+  }
+}
