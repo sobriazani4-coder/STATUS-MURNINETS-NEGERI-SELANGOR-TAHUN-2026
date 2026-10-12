@@ -2933,3 +2933,65 @@ img,svg,canvas{max-width:100%}
     animation:none!important;
   }
 }
+
+
+/* ===== STRONGER ORANGE RING GLOW FOR KPI CARDS ===== */
+/* More visible glow only; dimensions, spacing and layout remain unchanged. */
+.kpi-card{
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.90),
+    0 0 0 3px rgba(255,145,47,.24),
+    0 0 14px rgba(255,137,37,.34),
+    0 0 28px rgba(255,137,37,.20),
+    var(--premium-shadow)!important;
+  animation:kpiOrangePulseVisible 1.9s ease-in-out infinite!important;
+}
+
+.kpi-card::before{
+  inset:-5px!important;
+  border:2px solid rgba(255,148,52,.68)!important;
+  box-shadow:
+    0 0 10px rgba(255,137,37,.52),
+    0 0 22px rgba(255,137,37,.30),
+    0 0 34px rgba(255,171,78,.18)!important;
+  opacity:.76!important;
+  animation:kpiOrangeRingVisible 1.9s ease-in-out infinite!important;
+}
+
+@keyframes kpiOrangePulseVisible{
+  0%,100%{
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,.88),
+      0 0 0 2px rgba(255,145,47,.20),
+      0 0 10px rgba(255,137,37,.26),
+      0 0 20px rgba(255,137,37,.14),
+      var(--premium-shadow);
+  }
+  50%{
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,.96),
+      0 0 0 4px rgba(255,153,61,.34),
+      0 0 18px rgba(255,137,37,.55),
+      0 0 34px rgba(255,137,37,.30),
+      0 0 48px rgba(255,181,92,.14),
+      var(--premium-shadow);
+  }
+}
+
+@keyframes kpiOrangeRingVisible{
+  0%,100%{
+    transform:scale(.997);
+    opacity:.52;
+  }
+  50%{
+    transform:scale(1.018);
+    opacity:1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .kpi-card,
+  .kpi-card::before{
+    animation:none!important;
+  }
+}
