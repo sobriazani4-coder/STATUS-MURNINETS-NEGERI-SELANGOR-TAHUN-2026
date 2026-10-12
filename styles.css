@@ -2447,3 +2447,65 @@ img,svg,canvas{max-width:100%}
   background:linear-gradient(180deg,rgba(255,255,255,.72),rgba(248,246,242,.78))!important;
   backdrop-filter:blur(2px)!important;
 }
+
+
+/* ===== LUXURY DIGITAL BACKGROUND · DASHBOARD ONLY ===== */
+/* Header and all dashboard component geometry remain untouched. */
+.dashboard-shell{
+  position:relative!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+  background:
+    radial-gradient(circle at 14% 18%,rgba(34,58,104,.10),transparent 30%),
+    radial-gradient(circle at 82% 20%,rgba(239,116,43,.08),transparent 28%),
+    linear-gradient(135deg,#eef2f6 0%,#f7f3ee 46%,#edf2f7 100%)!important;
+}
+
+/* Fine premium mesh */
+.dashboard-shell::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  pointer-events:none!important;
+  opacity:.48!important;
+  background-image:
+    linear-gradient(30deg,transparent 0 48%,rgba(24,49,97,.10) 49%,transparent 50% 100%),
+    linear-gradient(150deg,transparent 0 48%,rgba(82,117,154,.08) 49%,transparent 50% 100%),
+    linear-gradient(90deg,transparent 0 49%,rgba(239,116,43,.045) 50%,transparent 51% 100%)!important;
+  background-size:168px 118px,168px 118px,236px 164px!important;
+  background-position:0 0,84px 59px,28px 18px!important;
+}
+
+/* Soft glow nodes + elegant vignette */
+.dashboard-shell::after{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  pointer-events:none!important;
+  background:
+    radial-gradient(circle at 9% 24%,rgba(23,49,99,.20) 0 3px,rgba(23,49,99,.08) 4px,transparent 12px),
+    radial-gradient(circle at 28% 68%,rgba(79,119,158,.18) 0 3px,rgba(79,119,158,.07) 4px,transparent 12px),
+    radial-gradient(circle at 52% 26%,rgba(239,116,43,.16) 0 3px,rgba(239,116,43,.06) 4px,transparent 12px),
+    radial-gradient(circle at 74% 72%,rgba(23,49,99,.17) 0 3px,rgba(23,49,99,.06) 4px,transparent 12px),
+    radial-gradient(circle at 91% 34%,rgba(239,116,43,.14) 0 3px,rgba(239,116,43,.05) 4px,transparent 12px),
+    linear-gradient(180deg,rgba(255,255,255,.18),rgba(255,255,255,0) 24%,rgba(27,48,86,.025) 100%)!important;
+  opacity:.72!important;
+}
+
+.dashboard-shell > .sidebar,
+.dashboard-shell > .content{
+  position:relative!important;
+  z-index:1!important;
+}
+
+.dashboard-shell > .content{
+  background:transparent!important;
+}
+
+.dashboard-shell > .sidebar{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.82) 0%,rgba(247,245,242,.82) 100%)!important;
+  backdrop-filter:blur(3px)!important;
+}
