@@ -3193,3 +3193,80 @@ img,svg,canvas{max-width:100%}
     animation:none!important;
   }
 }
+
+
+/* ===== VISIBLE MODERN ORANGE SPARKLING BACKGROUND FIX ===== */
+/* Pattern-only override: keeps the black premium base and all dashboard components unchanged. */
+.dashboard-shell{
+  background:
+    radial-gradient(circle at 24px 28px,rgba(255,178,88,.95) 0 1.4px,rgba(255,126,26,.38) 2.2px,transparent 7px) 0 0/118px 118px,
+    radial-gradient(circle at 78px 64px,rgba(255,145,47,.86) 0 1.2px,rgba(255,112,20,.30) 2px,transparent 6px) 0 0/154px 154px,
+    radial-gradient(circle at 52px 96px,rgba(255,205,129,.72) 0 1px,rgba(255,136,34,.24) 1.8px,transparent 5px) 0 0/196px 196px,
+    radial-gradient(circle at 14% 18%,rgba(255,126,27,.13),transparent 26%),
+    radial-gradient(circle at 82% 70%,rgba(255,148,49,.10),transparent 24%),
+    linear-gradient(135deg,#07090d 0%,#0b0f15 42%,#05070b 100%)!important;
+}
+
+/* Dense glowing spark layer so the effect is clearly visible in all open background areas. */
+.dashboard-shell::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  pointer-events:none!important;
+  opacity:.92!important;
+  background:
+    radial-gradient(circle,rgba(255,187,97,.98) 0 1.4px,rgba(255,124,24,.52) 2.2px,transparent 7px) 18px 24px/126px 126px,
+    radial-gradient(circle,rgba(255,143,42,.94) 0 1.2px,rgba(255,104,16,.42) 2px,transparent 6px) 76px 58px/168px 168px,
+    radial-gradient(circle,rgba(255,211,139,.78) 0 1px,rgba(255,151,50,.32) 1.8px,transparent 5px) 38px 94px/214px 214px!important;
+  filter:
+    drop-shadow(0 0 5px rgba(255,132,31,.72))
+    drop-shadow(0 0 12px rgba(255,132,31,.34))!important;
+  animation:orangeSparkleVisiblePulse 2.35s ease-in-out infinite!important;
+}
+
+/* Soft ambient orange glow only; no web/network lines. */
+.dashboard-shell::after{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  pointer-events:none!important;
+  background:
+    radial-gradient(ellipse at 16% 24%,rgba(255,121,18,.20),transparent 22%),
+    radial-gradient(ellipse at 48% 52%,rgba(255,151,51,.15),transparent 27%),
+    radial-gradient(ellipse at 84% 30%,rgba(255,126,24,.18),transparent 23%),
+    radial-gradient(ellipse at 70% 82%,rgba(255,164,65,.13),transparent 25%)!important;
+  opacity:.72!important;
+  filter:blur(1px)!important;
+  animation:orangeAmbientVisiblePulse 2.35s ease-in-out infinite!important;
+}
+
+@keyframes orangeSparkleVisiblePulse{
+  0%,100%{
+    opacity:.68;
+    filter:
+      brightness(.94)
+      drop-shadow(0 0 4px rgba(255,126,27,.50))
+      drop-shadow(0 0 9px rgba(255,126,27,.22));
+  }
+  50%{
+    opacity:1;
+    filter:
+      brightness(1.22)
+      drop-shadow(0 0 8px rgba(255,153,56,.96))
+      drop-shadow(0 0 19px rgba(255,126,27,.52));
+  }
+}
+
+@keyframes orangeAmbientVisiblePulse{
+  0%,100%{opacity:.46;}
+  50%{opacity:.82;}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .dashboard-shell::before,
+  .dashboard-shell::after{
+    animation:none!important;
+  }
+}
