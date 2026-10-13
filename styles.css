@@ -3270,3 +3270,55 @@ img,svg,canvas{max-width:100%}
     animation:none!important;
   }
 }
+
+
+/* ===== MORE VISIBLE MID-PULSE FOR ORANGE SPARKLES ===== */
+/* Pulse-only adjustment. Existing black background, sparkle pattern and dashboard design stay unchanged. */
+.dashboard-shell::before{
+  animation:orangeSparkleClearPulse 1.55s ease-in-out infinite!important;
+  transform-origin:center!important;
+  will-change:opacity,filter,transform!important;
+}
+
+.dashboard-shell::after{
+  animation:orangeAmbientClearPulse 1.55s ease-in-out infinite!important;
+  will-change:opacity,filter!important;
+}
+
+@keyframes orangeSparkleClearPulse{
+  0%,100%{
+    opacity:.48;
+    transform:scale(1);
+    filter:
+      brightness(.78)
+      drop-shadow(0 0 3px rgba(255,126,27,.42))
+      drop-shadow(0 0 8px rgba(255,126,27,.20));
+  }
+  50%{
+    opacity:1;
+    transform:scale(1.006);
+    filter:
+      brightness(1.42)
+      drop-shadow(0 0 10px rgba(255,158,63,1))
+      drop-shadow(0 0 24px rgba(255,126,27,.68))
+      drop-shadow(0 0 38px rgba(255,126,27,.34));
+  }
+}
+
+@keyframes orangeAmbientClearPulse{
+  0%,100%{
+    opacity:.28;
+    filter:brightness(.82) blur(1px);
+  }
+  50%{
+    opacity:.88;
+    filter:brightness(1.32) blur(1.2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .dashboard-shell::before,
+  .dashboard-shell::after{
+    animation:none!important;
+  }
+}
