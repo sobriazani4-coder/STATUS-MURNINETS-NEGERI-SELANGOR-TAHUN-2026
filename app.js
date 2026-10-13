@@ -751,12 +751,38 @@ function renderStatus(){
   });
 }
 
+const dimensionCountLabelsPlugin={
+  id:'dimensionCountLabels',
+  afterDatasetsDraw(chart){
+    const meta=chart.getDatasetMeta(0);
+    const dataset=chart.data.datasets[0];
+    const ctx=chart.ctx;
+    ctx.save();
+    ctx.textAlign='center';
+    ctx.textBaseline='middle';
+    ctx.font='700 13px Montserrat,Arial,sans-serif';
+    ctx.fillStyle='#fff';
+    meta.data.forEach((arc,i)=>{
+      const count=dataset.data[i];
+      if(!count || arc.hidden) return;
+      const p=arc.getProps(['x','y','startAngle','endAngle','innerRadius','outerRadius'],true);
+      const angle=(p.startAngle+p.endAngle)/2;
+      const radius=(p.innerRadius+p.outerRadius)/2;
+      const x=p.x+Math.cos(angle)*radius;
+      const y=p.y+Math.sin(angle)*radius;
+      ctx.fillText(String(count),x,y);
+    });
+    ctx.restore();
+  }
+};
+
 function renderDimensionsChart(){
   if(state.dimensionChart) return;
   state.dimensionChart=new Chart($('#dimensionChart'),{
     type:'doughnut',
     data:{labels:DIMENSIONS.map(d=>d.name),datasets:[{data:DIMENSIONS.map(d=>d.count),backgroundColor:DIMENSIONS.map(d=>d.color),borderColor:'#fff',borderWidth:4}]},
-    options:{responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{position:'bottom',labels:{boxWidth:16,boxHeight:16,padding:16,color:'#203762',font:{size:14,weight:'700'}}},tooltip:{callbacks:{label:(ctx)=>ctx.label+': '+ctx.raw+' indikator'}}}}
+    options:{responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{position:'bottom',labels:{boxWidth:16,boxHeight:16,padding:16,color:'#203762',font:{size:14,weight:'700'}}},tooltip:{callbacks:{label:(ctx)=>ctx.label+': '+ctx.raw+' indikator'}}}},
+    plugins:[dimensionCountLabelsPlugin]
   });
 }
 
