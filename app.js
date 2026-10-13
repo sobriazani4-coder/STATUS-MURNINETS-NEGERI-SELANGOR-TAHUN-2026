@@ -464,14 +464,14 @@ function renderRanking(){
   const baseRows = metricRows();
   const allRows = state.metric==='preschoolRatio'
     ? [...baseRows].sort((a,b)=>(housingUnitsForPbt(b.name)||0)-(housingUnitsForPbt(a.name)||0))
-    : state.metric==='secondarySchoolRatio'
+    : (state.metric==='secondarySchoolRatio' || state.metric==='primarySchoolRatio')
       ? [...baseRows].sort((a,b)=>(schoolCountForPbt(b.name)||0)-(schoolCountForPbt(a.name)||0))
       : baseRows;
   const rows = state.pbt === 'all' ? allRows : allRows.filter(r=>r.name===state.pbt);
   const rankingValues = rows.map(r=>
     state.metric==='preschoolRatio'
       ? housingUnitsForPbt(r.name)
-      : state.metric==='secondarySchoolRatio'
+      : (state.metric==='secondarySchoolRatio' || state.metric==='primarySchoolRatio')
         ? schoolCountForPbt(r.name)
         : r.value
   );
@@ -509,11 +509,12 @@ function renderRanking(){
         const row=rows[index];
         const station=riverStationForPbt(row.name);
         const housingUnits=state.metric==='preschoolRatio' ? housingUnitsForPbt(row.name) : null;
-        const secondarySchoolCount=state.metric==='secondarySchoolRatio' ? schoolCountForPbt(row.name) : null;
+        const schoolCountRanking=(state.metric==='secondarySchoolRatio' || state.metric==='primarySchoolRatio') ? schoolCountForPbt(row.name) : null;
+        const schoolCountLabel=state.metric==='secondarySchoolRatio' ? ' Bil. Sekolah Menengah' : ' Bil. Sekolah Rendah';
         const label=housingUnits!=null
           ? formatNumber(housingUnits,0)+' Jumlah Unit Rumah dalam kawasan PBT'
-          : secondarySchoolCount!=null
-            ? formatNumber(secondarySchoolCount,0)+' Bil. Sekolah Menengah'
+          : schoolCountRanking!=null
+            ? formatNumber(schoolCountRanking,0)+schoolCountLabel
             : (station
               ? station.polluted+'/'+station.total+' stesen • '+formatNumber(row.value)+METRICS[state.metric].unit
               : formatNumber(row.value)+METRICS[state.metric].unit);
@@ -574,12 +575,12 @@ function renderRanking(){
               const schoolCount=schoolCountForPbt(row.name);
               const station=riverStationForPbt(row.name);
               const housingUnits=state.metric==='preschoolRatio' ? housingUnitsForPbt(row.name) : null;
-              const secondarySchoolCount=state.metric==='secondarySchoolRatio' ? schoolCountForPbt(row.name) : null;
+              const schoolCountRanking=(state.metric==='secondarySchoolRatio' || state.metric==='primarySchoolRatio') ? schoolCountForPbt(row.name) : null;
               if(housingUnits!=null){
                 return 'Jumlah Unit Rumah dalam kawasan PBT: '+formatNumber(housingUnits,0);
               }
-              if(secondarySchoolCount!=null){
-                return 'Bil. Sekolah Menengah: '+formatNumber(secondarySchoolCount,0);
+              if(schoolCountRanking!=null){
+                return (state.metric==='secondarySchoolRatio' ? 'Bil. Sekolah Menengah: ' : 'Bil. Sekolah Rendah: ')+formatNumber(schoolCountRanking,0);
               }
               if(station){
                 return [
