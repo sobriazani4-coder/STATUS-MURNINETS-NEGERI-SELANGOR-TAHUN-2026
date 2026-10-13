@@ -464,9 +464,17 @@ function renderRanking(){
   const baseRows = metricRows();
   const allRows = state.metric==='preschoolRatio'
     ? [...baseRows].sort((a,b)=>(housingUnitsForPbt(b.name)||0)-(housingUnitsForPbt(a.name)||0))
-    : baseRows;
+    : state.metric==='secondarySchoolRatio'
+      ? [...baseRows].sort((a,b)=>(schoolCountForPbt(b.name)||0)-(schoolCountForPbt(a.name)||0))
+      : baseRows;
   const rows = state.pbt === 'all' ? allRows : allRows.filter(r=>r.name===state.pbt);
-  const rankingValues = rows.map(r=> state.metric==='preschoolRatio' ? housingUnitsForPbt(r.name) : r.value);
+  const rankingValues = rows.map(r=>
+    state.metric==='preschoolRatio'
+      ? housingUnitsForPbt(r.name)
+      : state.metric==='secondarySchoolRatio'
+        ? schoolCountForPbt(r.name)
+        : r.value
+  );
   const clipped = rankingValues.map(v=> state.metric==='revenue' ? Math.min(v, 160) : v);
 
   const palette = [
@@ -501,11 +509,14 @@ function renderRanking(){
         const row=rows[index];
         const station=riverStationForPbt(row.name);
         const housingUnits=state.metric==='preschoolRatio' ? housingUnitsForPbt(row.name) : null;
+        const secondarySchoolCount=state.metric==='secondarySchoolRatio' ? schoolCountForPbt(row.name) : null;
         const label=housingUnits!=null
           ? formatNumber(housingUnits,0)+' Jumlah Unit Rumah dalam kawasan PBT'
-          : (station
-            ? station.polluted+'/'+station.total+' stesen • '+formatNumber(row.value)+METRICS[state.metric].unit
-            : formatNumber(row.value)+METRICS[state.metric].unit);
+          : secondarySchoolCount!=null
+            ? formatNumber(secondarySchoolCount,0)+' Bil. Sekolah Menengah'
+            : (station
+              ? station.polluted+'/'+station.total+' stesen • '+formatNumber(row.value)+METRICS[state.metric].unit
+              : formatNumber(row.value)+METRICS[state.metric].unit);
         const labelWidth=ctx.measureText(label).width;
         const labelX=Math.min(bar.x+8,chart.width-labelWidth-12);
         ctx.fillText(label,labelX,bar.y);
@@ -563,8 +574,12 @@ function renderRanking(){
               const schoolCount=schoolCountForPbt(row.name);
               const station=riverStationForPbt(row.name);
               const housingUnits=state.metric==='preschoolRatio' ? housingUnitsForPbt(row.name) : null;
+              const secondarySchoolCount=state.metric==='secondarySchoolRatio' ? schoolCountForPbt(row.name) : null;
               if(housingUnits!=null){
                 return 'Jumlah Unit Rumah dalam kawasan PBT: '+formatNumber(housingUnits,0);
+              }
+              if(secondarySchoolCount!=null){
+                return 'Bil. Sekolah Menengah: '+formatNumber(secondarySchoolCount,0);
               }
               if(station){
                 return [
