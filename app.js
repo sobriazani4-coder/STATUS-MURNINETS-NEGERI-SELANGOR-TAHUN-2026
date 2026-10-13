@@ -504,12 +504,21 @@ function renderRanking(){
     'Selayang':'#ff4d4d','Sepang':'#00b050','Kuala Langat':'#00b050',
     'Kuala Selangor':'#00b050','Hulu Selangor':'#00b050','Sabak Bernam':'#00b050'
   };
+  // Colours for Bil. Prasekolah/Tadika/Tabika, matched to the supplied 2026 table.
+  const preschoolColors={
+    'Shah Alam':'#ffff00','Petaling Jaya':'#ff4d4d','Subang Jaya':'#ffff00',
+    'Klang':'#ff4d4d','Ampang Jaya':'#ffff00','Kajang':'#ffff00',
+    'Selayang':'#ff4d4d','Sepang':'#ffff00','Kuala Langat':'#ffff00',
+    'Kuala Selangor':'#ff4d4d','Hulu Selangor':'#ffff00','Sabak Bernam':'#00b050'
+  };
   const rankingBarColors=rows.map((r,i)=>
     state.metric==='secondarySchoolRatio'
       ? (secondarySchoolColors[r.short] || palette[i%palette.length])
       : state.metric==='primarySchoolRatio'
         ? (primarySchoolColors[r.short] || palette[i%palette.length])
-        : palette[i%palette.length]
+        : state.metric==='preschoolRatio'
+          ? (preschoolColors[r.short] || palette[i%palette.length])
+          : palette[i%palette.length]
   );
 
   const shadowPlugin = {
