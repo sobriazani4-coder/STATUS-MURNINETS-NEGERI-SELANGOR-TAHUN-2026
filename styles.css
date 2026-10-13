@@ -2995,21 +2995,3 @@ img,svg,canvas{max-width:100%}
     animation:none!important;
   }
 }
-
-
-/* ===== SOFT YELLOW BACKGROUND FOR RANKING PBT PANEL ONLY ===== */
-/* Background-only change. Layout, chart, typography and structure remain unchanged. */
-#analysisBoard > .panel:first-child{
-  background:
-    radial-gradient(circle at 88% 12%,rgba(245,139,25,.10),transparent 30%),
-    linear-gradient(135deg,#fffdf3 0%,#fff6cf 52%,#fff9e8 100%)!important;
-}
-
-#analysisBoard > .panel:first-child > .panel-head{
-  background:
-    linear-gradient(180deg,rgba(255,255,255,.58) 0%,rgba(255,248,221,.42) 100%)!important;
-}
-
-#analysisBoard > .panel:first-child > .chart-box{
-  background:transparent!important;
-}
