@@ -397,6 +397,13 @@ async function initMap(){
       });
 
       layer.on({
+        popupopen:()=>{
+          state.map.getContainer().querySelectorAll('.leaflet-interactive.selected-pbt-boundary').forEach(el=>el.classList.remove('selected-pbt-boundary'));
+          layer.getElement()?.classList.add('selected-pbt-boundary');
+        },
+        popupclose:()=>{
+          layer.getElement()?.classList.remove('selected-pbt-boundary');
+        },
         mouseover:(e)=>{
           e.target.setStyle({weight:4.5,color:'#172b51',fillOpacity:.84});
           if(!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) e.target.bringToFront();
@@ -449,7 +456,7 @@ function updateMapStyles(){
     if(el) el.classList.toggle('is-selected', state.pbt===pbt);
 
     const pathEl=layer.getElement?.();
-    if(pathEl) pathEl.classList.toggle('selected-pbt-boundary', state.pbt===pbt);
+    if(pathEl) pathEl.classList.toggle('selected-pbt-boundary', state.pbt===pbt && layer.isPopupOpen());
   });
   if(state.pbt!=='all'){
     const layer=state.pbtLayerByName.get(state.pbt);
