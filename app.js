@@ -490,6 +490,19 @@ function renderRanking(){
     '#3b82f6','#6366f1','#8b5cf6','#ec4899'
   ];
 
+  // Colours for Bil. Sekolah Menengah only, matching the supplied 2026 table.
+  const secondarySchoolColors={
+    'Klang':'#ff4d4d','Kajang':'#ffff00','Subang Jaya':'#ff4d4d',
+    'Sepang':'#00b050','Shah Alam':'#ff4d4d','Petaling Jaya':'#ff4d4d',
+    'Hulu Selangor':'#00b050','Selayang':'#ff4d4d','Kuala Selangor':'#ffff00',
+    'Ampang Jaya':'#ff4d4d','Kuala Langat':'#ff4d4d','Sabak Bernam':'#00b050'
+  };
+  const rankingBarColors=rows.map((r,i)=>
+    state.metric==='secondarySchoolRatio'
+      ? (secondarySchoolColors[r.short] || palette[i%palette.length])
+      : palette[i%palette.length]
+  );
+
   const shadowPlugin = {
     id:'barShadow',
     beforeDatasetDraw(chart){
@@ -545,8 +558,8 @@ function renderRanking(){
         borderSkipped:false,
         borderColor:'#ffffff',
         borderWidth:2,
-        backgroundColor:rows.map((_,i)=>palette[i%palette.length]),
-        hoverBackgroundColor:rows.map((_,i)=>palette[i%palette.length]),
+        backgroundColor:rankingBarColors,
+        hoverBackgroundColor:rankingBarColors,
         barPercentage:.78,
         categoryPercentage:.88
       }]
