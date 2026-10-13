@@ -520,7 +520,9 @@ function renderRanking(){
           ? (preschoolColors[r.short] || palette[i%palette.length])
           : state.metric==='hospitalBeds'
             ? '#ffff00'
-            : palette[i%palette.length]
+            : riverStationForPbt(r.name)
+              ? (riverStationForPbt(r.name).polluted > 0 ? '#ffff00' : '#00b050')
+              : palette[i%palette.length]
   );
 
   const shadowPlugin = {
