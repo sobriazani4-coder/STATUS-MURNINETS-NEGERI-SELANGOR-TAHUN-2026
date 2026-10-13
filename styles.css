@@ -3322,3 +3322,50 @@ img,svg,canvas{max-width:100%}
     animation:none!important;
   }
 }
+
+
+/* ===== GLOW-ONLY PULSE FOR ALL ORANGE SPARKLES ===== */
+/* Only the orange glow intensity pulses. Spark positions, size and dashboard layout remain unchanged. */
+.dashboard-shell::before{
+  opacity:.92!important;
+  transform:none!important;
+  animation:orangeGlowOnlyPulse 1.75s ease-in-out infinite!important;
+}
+
+.dashboard-shell::after{
+  opacity:.72!important;
+  transform:none!important;
+  animation:orangeAmbientGlowOnlyPulse 1.75s ease-in-out infinite!important;
+}
+
+@keyframes orangeGlowOnlyPulse{
+  0%,100%{
+    filter:
+      brightness(1)
+      drop-shadow(0 0 4px rgba(255,126,27,.42))
+      drop-shadow(0 0 9px rgba(255,126,27,.22))!important;
+  }
+  50%{
+    filter:
+      brightness(1.08)
+      drop-shadow(0 0 8px rgba(255,151,52,.88))
+      drop-shadow(0 0 18px rgba(255,126,27,.48))
+      drop-shadow(0 0 28px rgba(255,126,27,.24))!important;
+  }
+}
+
+@keyframes orangeAmbientGlowOnlyPulse{
+  0%,100%{
+    filter:brightness(.96) blur(1px)!important;
+  }
+  50%{
+    filter:brightness(1.18) blur(1px)!important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .dashboard-shell::before,
+  .dashboard-shell::after{
+    animation:none!important;
+  }
+}
