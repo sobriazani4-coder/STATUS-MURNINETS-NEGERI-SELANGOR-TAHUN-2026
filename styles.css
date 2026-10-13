@@ -3026,3 +3026,75 @@ img,svg,canvas{max-width:100%}
     radial-gradient(circle at 84% 14%,rgba(245,139,25,.10),transparent 34%),
     linear-gradient(180deg,#fff5e9 0%,#ffe8d3 52%,#fff2e5 100%)!important;
 }
+
+
+/* ===== PREMIUM BLACK DIGITAL NETWORK BACKGROUND · DASHBOARD ONLY ===== */
+/* Background-only override. Header, cards, panels, layout, data and component geometry remain unchanged. */
+.dashboard-shell{
+  position:relative!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+  background:
+    radial-gradient(circle at 12% 16%,rgba(34,74,122,.18),transparent 28%),
+    radial-gradient(circle at 84% 18%,rgba(245,139,25,.10),transparent 26%),
+    radial-gradient(circle at 70% 78%,rgba(220,50,71,.08),transparent 24%),
+    linear-gradient(135deg,#07090d 0%,#0b0f15 42%,#05070b 100%)!important;
+}
+
+.dashboard-shell::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  pointer-events:none!important;
+  opacity:.52!important;
+  background-image:
+    linear-gradient(30deg,transparent 0 48%,rgba(89,151,208,.16) 49%,transparent 50% 100%),
+    linear-gradient(150deg,transparent 0 48%,rgba(43,84,132,.14) 49%,transparent 50% 100%),
+    linear-gradient(90deg,transparent 0 49%,rgba(245,139,25,.055) 50%,transparent 51% 100%)!important;
+  background-size:172px 120px,172px 120px,240px 168px!important;
+  background-position:0 0,86px 60px,30px 18px!important;
+}
+
+.dashboard-shell::after{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  pointer-events:none!important;
+  background:
+    radial-gradient(circle at 8% 22%,rgba(102,176,238,.72) 0 2px,rgba(102,176,238,.22) 3px,transparent 10px),
+    radial-gradient(circle at 26% 68%,rgba(86,140,194,.62) 0 2px,rgba(86,140,194,.18) 3px,transparent 10px),
+    radial-gradient(circle at 50% 28%,rgba(245,139,25,.48) 0 2px,rgba(245,139,25,.14) 3px,transparent 10px),
+    radial-gradient(circle at 73% 74%,rgba(102,176,238,.58) 0 2px,rgba(102,176,238,.16) 3px,transparent 10px),
+    radial-gradient(circle at 92% 34%,rgba(239,76,54,.42) 0 2px,rgba(239,76,54,.12) 3px,transparent 10px),
+    linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,0) 30%,rgba(0,0,0,.16) 100%)!important;
+  opacity:.88!important;
+}
+
+.dashboard-shell > .content,
+.dashboard-shell > .sidebar{
+  position:relative!important;
+  z-index:1!important;
+}
+
+.dashboard-shell > .content{
+  background:transparent!important;
+}
+
+/* Sidebar follows the same premium black digital theme; menu/button design stays unchanged. */
+.dashboard-shell > .sidebar{
+  background:
+    radial-gradient(circle at 22% 10%,rgba(245,139,25,.07),transparent 28%),
+    linear-gradient(180deg,rgba(11,14,20,.96) 0%,rgba(7,10,15,.98) 100%)!important;
+  border-right-color:rgba(245,139,25,.18)!important;
+  backdrop-filter:none!important;
+}
+
+@media (max-width:1200px){
+  .dashboard-shell > .sidebar{
+    background:
+      linear-gradient(90deg,rgba(11,14,20,.97) 0%,rgba(8,11,16,.98) 100%)!important;
+    border-bottom-color:rgba(245,139,25,.18)!important;
+  }
+}
