@@ -2789,9 +2789,9 @@ img,svg,canvas{max-width:100%}
 /* ===== ACTUAL LEAFLET SELECTED PBT BOUNDARY GLOW ===== */
 /* Applied directly to the rendered SVG path while its popup is selected/open. */
 .leaflet-interactive.selected-pbt-boundary{
-  stroke:#ff2d3f!important;
-  stroke-width:7px!important;
-  stroke-opacity:1!important;
+  stroke:#ff2d3f;
+  stroke-width:7px;
+  stroke-opacity:1;
   stroke-linejoin:round!important;
   stroke-linecap:round!important;
   vector-effect:non-scaling-stroke!important;
@@ -2799,7 +2799,7 @@ img,svg,canvas{max-width:100%}
     drop-shadow(0 0 2px rgba(255,255,255,.95))
     drop-shadow(0 0 6px rgba(255,45,63,.95))
     drop-shadow(0 0 14px rgba(255,45,63,.75))
-    drop-shadow(0 0 26px rgba(255,45,63,.48))!important;
+    drop-shadow(0 0 26px rgba(255,45,63,.48));
   animation:selectedBoundaryLuxuryPulse 1.15s ease-in-out infinite!important;
 }
 
@@ -3507,4 +3507,27 @@ img,svg,canvas{max-width:100%}
   font-family:'Montserrat',Arial,sans-serif!important;
   font-weight:700!important;
   font-style:italic!important;
+}
+
+/* ===== SELECTED PBT POPUP: CLEAR BOUNDARY BLINK ONLY ===== */
+/* Animate the stroke only; original fill, labels and popup remain unchanged. */
+#selangorMap .leaflet-interactive.selected-pbt-boundary{
+  animation:pbtPopupBorderBlink 1.15s steps(1,end) infinite!important;
+}
+@keyframes pbtPopupBorderBlink{
+  0%,49%{
+    stroke:#ff2d3f;
+    stroke-width:7px;
+    stroke-opacity:1;
+    filter:drop-shadow(0 0 2px rgba(255,255,255,.95)) drop-shadow(0 0 8px rgba(255,45,63,1)) drop-shadow(0 0 22px rgba(255,45,63,.85));
+  }
+  50%,100%{
+    stroke:#b91c2f;
+    stroke-width:6px;
+    stroke-opacity:.24;
+    filter:drop-shadow(0 0 3px rgba(255,45,63,.20));
+  }
+}
+@media (prefers-reduced-motion:reduce){
+  #selangorMap .leaflet-interactive.selected-pbt-boundary{animation:none!important}
 }
