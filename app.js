@@ -520,7 +520,9 @@ function renderRanking(){
           ? (preschoolColors[r.short] || palette[i%palette.length])
           : state.metric==='hospitalBeds'
             ? '#ffff00'
-            : riverStationForPbt(r.name)
+            : state.metric==='happiness'
+              ? '#00b050'
+              : riverStationForPbt(r.name)
               ? (r.short==='Kuala Selangor' ? '#00b050' : (riverStationForPbt(r.name).polluted > 0 ? '#ffff00' : '#00b050'))
               : palette[i%palette.length]
   );
