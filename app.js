@@ -100,13 +100,6 @@ function schoolCountForPbt(name, metricKey = state.metric){
   return idx >= 0 ? metric.schoolCounts[idx] : null;
 }
 
-function populationForPbt(name, metricKey = state.metric){
-  const metric = METRICS[metricKey];
-  if(!metric || !metric.populations) return null;
-  const idx = PBT.indexOf(name);
-  return idx >= 0 ? metric.populations[idx] : null;
-}
-
 function riverStationForPbt(name, metricKey = state.metric){
   const metric=METRICS[metricKey];
   if(!metric || !metric.stationTotal || !metric.stationPolluted) return null;
@@ -517,12 +510,11 @@ function renderRanking(){
         const station=riverStationForPbt(row.name);
         const preschoolCountRanking=state.metric==='preschoolRatio' ? preschoolCountForPbt(row.name) : null;
         const schoolCountRanking=(state.metric==='secondarySchoolRatio' || state.metric==='primarySchoolRatio') ? schoolCountForPbt(row.name) : null;
-        const populationRanking=state.metric==='secondarySchoolRatio' ? populationForPbt(row.name) : null;
         const schoolCountLabel=state.metric==='secondarySchoolRatio' ? ' Bil. Sekolah Menengah' : ' Bil. Sekolah Rendah';
         const label=preschoolCountRanking!=null
           ? formatNumber(preschoolCountRanking,0)+' Bil. Prasekolah/Tadika/Tabika'
           : schoolCountRanking!=null
-            ? formatNumber(schoolCountRanking,0)+schoolCountLabel+(populationRanking!=null ? ' • '+formatNumber(populationRanking,0)+' Penduduk' : '')
+            ? formatNumber(schoolCountRanking,0)+schoolCountLabel
             : (station
               ? station.polluted+'/'+station.total+' stesen • '+formatNumber(row.value)+METRICS[state.metric].unit
               : formatNumber(row.value)+METRICS[state.metric].unit);
@@ -584,18 +576,11 @@ function renderRanking(){
               const station=riverStationForPbt(row.name);
               const preschoolCountRanking=state.metric==='preschoolRatio' ? preschoolCountForPbt(row.name) : null;
               const schoolCountRanking=(state.metric==='secondarySchoolRatio' || state.metric==='primarySchoolRatio') ? schoolCountForPbt(row.name) : null;
-              const populationRanking=state.metric==='secondarySchoolRatio' ? populationForPbt(row.name) : null;
               if(preschoolCountRanking!=null){
                 return 'Bil. Prasekolah/Tadika/Tabika: '+formatNumber(preschoolCountRanking,0);
               }
               if(schoolCountRanking!=null){
-                if(state.metric==='secondarySchoolRatio'){
-                  return [
-                    'Bil. Sekolah Menengah: '+formatNumber(schoolCountRanking,0),
-                    'Jumlah Penduduk: '+formatNumber(populationRanking,0)
-                  ];
-                }
-                return 'Bil. Sekolah Rendah: '+formatNumber(schoolCountRanking,0);
+                return (state.metric==='secondarySchoolRatio' ? 'Bil. Sekolah Menengah: ' : 'Bil. Sekolah Rendah: ')+formatNumber(schoolCountRanking,0);
               }
               if(station){
                 return [
