@@ -3512,7 +3512,7 @@ img,svg,canvas{max-width:100%}
 /* ===== SELECTED PBT POPUP: CLEAR BOUNDARY BLINK ONLY ===== */
 /* Animate the stroke only; original fill, labels and popup remain unchanged. */
 #selangorMap .leaflet-interactive.selected-pbt-boundary{
-  animation:pbtPopupBorderBlink 1.15s steps(1,end) infinite!important;
+  animation:pbtPopupBorderBlink 0.8s steps(1,end) infinite!important;
 }
 @keyframes pbtPopupBorderBlink{
   0%,49%{
