@@ -3369,3 +3369,60 @@ img,svg,canvas{max-width:100%}
     animation:none!important;
   }
 }
+
+
+/* ===== CLEAR GLOW-ONLY PULSE FOR ORANGE SPARKLES ===== */
+/* Spark cores remain static; only a separate orange halo layer pulses. */
+.dashboard-shell::before{
+  opacity:1!important;
+  animation:none!important;
+  filter:
+    drop-shadow(0 0 3px rgba(255,132,31,.46))
+    drop-shadow(0 0 7px rgba(255,132,31,.20))!important;
+}
+
+/* Dedicated pulsing halo layer aligned to the sparkle field */
+.dashboard-shell::after{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  pointer-events:none!important;
+  transform:none!important;
+  background:
+    radial-gradient(circle,rgba(255,151,52,.58) 0 4px,rgba(255,126,27,.34) 5px,rgba(255,126,27,.12) 9px,transparent 18px) 18px 24px/126px 126px,
+    radial-gradient(circle,rgba(255,141,38,.52) 0 4px,rgba(255,111,18,.30) 5px,rgba(255,111,18,.10) 9px,transparent 17px) 76px 58px/168px 168px,
+    radial-gradient(circle,rgba(255,190,96,.42) 0 3px,rgba(255,143,41,.24) 4px,rgba(255,143,41,.08) 8px,transparent 15px) 38px 94px/214px 214px!important;
+  filter:
+    blur(.25px)
+    drop-shadow(0 0 7px rgba(255,137,37,.52))
+    drop-shadow(0 0 16px rgba(255,126,27,.28))!important;
+  opacity:.22!important;
+  animation:orangeHaloPulseStrong 1.65s ease-in-out infinite!important;
+}
+
+@keyframes orangeHaloPulseStrong{
+  0%,100%{
+    opacity:.18;
+    filter:
+      blur(.25px)
+      brightness(.92)
+      drop-shadow(0 0 5px rgba(255,137,37,.34))
+      drop-shadow(0 0 12px rgba(255,126,27,.16));
+  }
+  50%{
+    opacity:.98;
+    filter:
+      blur(.35px)
+      brightness(1.34)
+      drop-shadow(0 0 11px rgba(255,157,61,.98))
+      drop-shadow(0 0 25px rgba(255,126,27,.64))
+      drop-shadow(0 0 38px rgba(255,126,27,.30));
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .dashboard-shell::after{
+    animation:orangeHaloPulseStrong 1.65s ease-in-out infinite!important;
+  }
+}
