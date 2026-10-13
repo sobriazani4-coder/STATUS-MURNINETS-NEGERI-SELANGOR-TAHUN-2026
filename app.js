@@ -521,7 +521,7 @@ function renderRanking(){
           : state.metric==='hospitalBeds'
             ? '#ffff00'
             : riverStationForPbt(r.name)
-              ? (riverStationForPbt(r.name).polluted > 0 ? '#ffff00' : '#00b050')
+              ? (r.short==='Kuala Selangor' ? '#00b050' : (riverStationForPbt(r.name).polluted > 0 ? '#ffff00' : '#00b050'))
               : palette[i%palette.length]
   );
 
