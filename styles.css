@@ -3482,3 +3482,20 @@ img,svg,canvas{max-width:100%}
   font-weight:500!important;
   font-style:italic!important;
 }
+
+
+/* ===== AUTO-WIDEN MAP PBT LABEL BOXES FOR FULL NAMES ===== */
+/* Only allows the existing label box to grow enough for its text. */
+.pbt-label .pbt-label-copy b,
+.pbt-label.label-urban .pbt-label-copy b,
+.pbt-label.label-rural .pbt-label-copy b{
+  max-width:none!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  white-space:nowrap!important;
+}
+.pbt-label .pbt-label-inner{
+  width:max-content!important;
+  padding-left:6px!important;
+  padding-right:10px!important;
+}
