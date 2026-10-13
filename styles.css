@@ -3500,10 +3500,11 @@ img,svg,canvas{max-width:100%}
   padding-right:10px!important;
 }
 
-/* ===== KPI SUMMARY CARDS: MONTSERRAT BOLD ONLY ===== */
+/* ===== KPI SUMMARY CARDS: MONTSERRAT BOLD ITALIC ONLY ===== */
 .kpi-grid .kpi-card .kpi-label,
 .kpi-grid .kpi-card .kpi-value,
 .kpi-grid .kpi-card .kpi-sub{
   font-family:'Montserrat',Arial,sans-serif!important;
   font-weight:700!important;
+  font-style:italic!important;
 }
