@@ -518,7 +518,9 @@ function renderRanking(){
         ? (primarySchoolColors[r.short] || palette[i%palette.length])
         : state.metric==='preschoolRatio'
           ? (preschoolColors[r.short] || palette[i%palette.length])
-          : palette[i%palette.length]
+          : state.metric==='hospitalBeds'
+            ? '#ffff00'
+            : palette[i%palette.length]
   );
 
   const shadowPlugin = {
