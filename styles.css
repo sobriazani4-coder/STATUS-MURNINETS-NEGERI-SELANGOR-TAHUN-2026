@@ -3098,3 +3098,22 @@ img,svg,canvas{max-width:100%}
     border-bottom-color:rgba(245,139,25,.18)!important;
   }
 }
+
+
+/* ===== RESTORE SOFT ORANGE SIDEBAR BACKGROUND ===== */
+/* Sidebar background only. Navigation buttons, icons, layout and all other dashboard design stay unchanged. */
+.dashboard-shell > .sidebar{
+  background:
+    radial-gradient(circle at 18% 10%,rgba(245,139,25,.10),transparent 30%),
+    linear-gradient(180deg,#fff3e6 0%,#ffe8d2 46%,#fff5ea 100%)!important;
+  border-right-color:#efc9aa!important;
+  backdrop-filter:none!important;
+}
+
+@media (max-width:1200px){
+  .dashboard-shell > .sidebar{
+    background:
+      linear-gradient(90deg,#fff3e6 0%,#ffe8d2 52%,#fff5ea 100%)!important;
+    border-bottom-color:#efc9aa!important;
+  }
+}
