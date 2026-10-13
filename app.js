@@ -497,10 +497,19 @@ function renderRanking(){
     'Hulu Selangor':'#00b050','Selayang':'#ff4d4d','Kuala Selangor':'#ffff00',
     'Ampang Jaya':'#ff4d4d','Kuala Langat':'#ff4d4d','Sabak Bernam':'#00b050'
   };
+  // Colours for Bil. Sekolah Rendah, matched by PBT to the supplied 2026 table.
+  const primarySchoolColors={
+    'Shah Alam':'#00b050','Petaling Jaya':'#ff4d4d','Subang Jaya':'#ffff00',
+    'Klang':'#00b050','Ampang Jaya':'#ff4d4d','Kajang':'#00b050',
+    'Selayang':'#ff4d4d','Sepang':'#00b050','Kuala Langat':'#00b050',
+    'Kuala Selangor':'#00b050','Hulu Selangor':'#00b050','Sabak Bernam':'#00b050'
+  };
   const rankingBarColors=rows.map((r,i)=>
     state.metric==='secondarySchoolRatio'
       ? (secondarySchoolColors[r.short] || palette[i%palette.length])
-      : palette[i%palette.length]
+      : state.metric==='primarySchoolRatio'
+        ? (primarySchoolColors[r.short] || palette[i%palette.length])
+        : palette[i%palette.length]
   );
 
   const shadowPlugin = {
