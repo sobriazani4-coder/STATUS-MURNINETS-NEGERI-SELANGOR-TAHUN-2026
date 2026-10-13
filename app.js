@@ -463,14 +463,14 @@ function updateMapStyles(){
 function renderRanking(){
   const baseRows = metricRows();
   const allRows = state.metric==='preschoolRatio'
-    ? [...baseRows].sort((a,b)=>(housingUnitsForPbt(b.name)||0)-(housingUnitsForPbt(a.name)||0))
+    ? [...baseRows].sort((a,b)=>(preschoolCountForPbt(b.name)||0)-(preschoolCountForPbt(a.name)||0))
     : (state.metric==='secondarySchoolRatio' || state.metric==='primarySchoolRatio')
       ? [...baseRows].sort((a,b)=>(schoolCountForPbt(b.name)||0)-(schoolCountForPbt(a.name)||0))
       : baseRows;
   const rows = state.pbt === 'all' ? allRows : allRows.filter(r=>r.name===state.pbt);
   const rankingValues = rows.map(r=>
     state.metric==='preschoolRatio'
-      ? housingUnitsForPbt(r.name)
+      ? preschoolCountForPbt(r.name)
       : (state.metric==='secondarySchoolRatio' || state.metric==='primarySchoolRatio')
         ? schoolCountForPbt(r.name)
         : r.value
@@ -508,11 +508,11 @@ function renderRanking(){
       meta.data.forEach((bar,index)=>{
         const row=rows[index];
         const station=riverStationForPbt(row.name);
-        const housingUnits=state.metric==='preschoolRatio' ? housingUnitsForPbt(row.name) : null;
+        const preschoolCountRanking=state.metric==='preschoolRatio' ? preschoolCountForPbt(row.name) : null;
         const schoolCountRanking=(state.metric==='secondarySchoolRatio' || state.metric==='primarySchoolRatio') ? schoolCountForPbt(row.name) : null;
         const schoolCountLabel=state.metric==='secondarySchoolRatio' ? ' Bil. Sekolah Menengah' : ' Bil. Sekolah Rendah';
-        const label=housingUnits!=null
-          ? formatNumber(housingUnits,0)+' Jumlah Unit Rumah dalam kawasan PBT'
+        const label=preschoolCountRanking!=null
+          ? formatNumber(preschoolCountRanking,0)+' Bil. Prasekolah/Tadika/Tabika'
           : schoolCountRanking!=null
             ? formatNumber(schoolCountRanking,0)+schoolCountLabel
             : (station
@@ -574,10 +574,10 @@ function renderRanking(){
               const row=rows[ctx.dataIndex];
               const schoolCount=schoolCountForPbt(row.name);
               const station=riverStationForPbt(row.name);
-              const housingUnits=state.metric==='preschoolRatio' ? housingUnitsForPbt(row.name) : null;
+              const preschoolCountRanking=state.metric==='preschoolRatio' ? preschoolCountForPbt(row.name) : null;
               const schoolCountRanking=(state.metric==='secondarySchoolRatio' || state.metric==='primarySchoolRatio') ? schoolCountForPbt(row.name) : null;
-              if(housingUnits!=null){
-                return 'Jumlah Unit Rumah dalam kawasan PBT: '+formatNumber(housingUnits,0);
+              if(preschoolCountRanking!=null){
+                return 'Bil. Prasekolah/Tadika/Tabika: '+formatNumber(preschoolCountRanking,0);
               }
               if(schoolCountRanking!=null){
                 return (state.metric==='secondarySchoolRatio' ? 'Bil. Sekolah Menengah: ' : 'Bil. Sekolah Rendah: ')+formatNumber(schoolCountRanking,0);
