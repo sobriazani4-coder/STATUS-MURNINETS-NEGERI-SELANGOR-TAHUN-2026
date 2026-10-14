@@ -3552,3 +3552,22 @@ img,svg,canvas{max-width:100%}
 .pbt-logo-selector .pbt-logo-card strong{
   font-size:11px!important;
 }
+
+/* ===== DASHBOARD-WIDE FONT ONLY (EXCLUDE TOP HEADER) ===== */
+/* Retain all original font sizes, geometry, colours and icons. */
+.dashboard-shell,
+.dashboard-shell *:not(svg):not(path):not(.kpi-icon):not(.all-pbt-icon):not(.pbt-fallback):not(.menu-item > span){
+  font-family:'Montserrat',Arial,sans-serif!important;
+  font-weight:600!important;
+  font-style:italic!important;
+}
+/* Map names are rendered inside Leaflet SVG/HTML overlays. */
+#selangorMap .leaflet-tooltip,
+#selangorMap .leaflet-tooltip *,
+#selangorMap .leaflet-popup-content,
+#selangorMap .leaflet-popup-content *,
+#selangorMap svg text{
+  font-family:'Montserrat',Arial,sans-serif!important;
+  font-weight:600!important;
+  font-style:italic!important;
+}
