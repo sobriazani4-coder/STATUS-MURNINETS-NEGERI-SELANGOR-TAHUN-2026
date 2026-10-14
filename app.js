@@ -467,6 +467,14 @@ function updateMapStyles(){
   }
 }
 
+
+// Dashboard charts use Montserrat SemiBold Italic, without changing chart geometry.
+if(window.Chart){
+  Chart.defaults.font.family='Montserrat, Arial, sans-serif';
+  Chart.defaults.font.weight='600';
+  Chart.defaults.font.style='italic';
+}
+
 function renderRanking(){
   const baseRows = metricRows();
   const allRows = state.metric==='preschoolRatio'
@@ -546,7 +554,7 @@ function renderRanking(){
     afterDatasetsDraw(chart){
       const {ctx}=chart;
       ctx.save();
-      ctx.font='800 11px Montserrat, Arial, sans-serif';
+      ctx.font='italic 600 11px Montserrat, Arial, sans-serif';
       ctx.fillStyle='#173163';
       ctx.textAlign='left';
       ctx.textBaseline='middle';
@@ -603,7 +611,7 @@ function renderRanking(){
         },
         y:{
           grid:{display:false},
-          ticks:{color:'#1f2f58',font:{size:11,weight:'700'}}
+          ticks:{color:'#1f2f58',font:{size:11,weight:'600',style:'italic',family:'Montserrat'}}
         }
       },
       plugins:{
@@ -724,11 +732,11 @@ function renderStatus(){
       ctx.textAlign='center';
       ctx.textBaseline='middle';
       ctx.fillStyle='#000000';
-      ctx.font='900 32px Montserrat,Arial,sans-serif';
+      ctx.font='italic 600 32px Montserrat,Arial,sans-serif';
       ctx.fillText(pct+'%',cx,cy-9);
 
       ctx.fillStyle='#000000';
-      ctx.font='800 10px Montserrat,Arial,sans-serif';
+      ctx.font='italic 600 10px Montserrat,Arial,sans-serif';
       ctx.fillText(total+' PBT DINILAI',cx,cy+20);
 
       ctx.restore();
@@ -767,7 +775,7 @@ function renderStatus(){
             boxHeight:12,
             padding:18,
             color:'#000000',
-            font:{size:11,weight:'700'}
+            font:{size:11,weight:'600',style:'italic',family:'Montserrat'}
           }
         },
         tooltip:{
@@ -799,7 +807,7 @@ const dimensionCountLabelsPlugin={
     ctx.save();
     ctx.textAlign='center';
     ctx.textBaseline='middle';
-    ctx.font='700 13px Montserrat,Arial,sans-serif';
+    ctx.font='italic 600 13px Montserrat,Arial,sans-serif';
     ctx.fillStyle='#fff';
     meta.data.forEach((arc,i)=>{
       const count=dataset.data[i];
@@ -820,7 +828,7 @@ function renderDimensionsChart(){
   state.dimensionChart=new Chart($('#dimensionChart'),{
     type:'doughnut',
     data:{labels:DIMENSIONS.map(d=>d.name),datasets:[{data:DIMENSIONS.map(d=>d.count),backgroundColor:DIMENSIONS.map(d=>d.color),borderColor:'#fff',borderWidth:4}]},
-    options:{responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{position:'bottom',labels:{boxWidth:16,boxHeight:16,padding:16,color:'#203762',font:{size:14,weight:'700'}}},tooltip:{callbacks:{label:(ctx)=>ctx.label+': '+ctx.raw+' indikator'}}}},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{position:'bottom',labels:{boxWidth:16,boxHeight:16,padding:16,color:'#203762',font:{size:14,weight:'600',style:'italic',family:'Montserrat'}}},tooltip:{callbacks:{label:(ctx)=>ctx.label+': '+ctx.raw+' indikator'}}}},
     plugins:[dimensionCountLabelsPlugin]
   });
 }
