@@ -723,11 +723,11 @@ function renderStatus(){
 
       ctx.textAlign='center';
       ctx.textBaseline='middle';
-      ctx.fillStyle='#ffffff';
+      ctx.fillStyle='#000000';
       ctx.font='900 32px Montserrat,Arial,sans-serif';
       ctx.fillText(pct+'%',cx,cy-9);
 
-      ctx.fillStyle='rgba(255,255,255,.92)';
+      ctx.fillStyle='#000000';
       ctx.font='800 10px Montserrat,Arial,sans-serif';
       ctx.fillText(total+' PBT DINILAI',cx,cy+20);
 
@@ -766,7 +766,7 @@ function renderStatus(){
             boxWidth:12,
             boxHeight:12,
             padding:18,
-            color:'#40506d',
+            color:'#000000',
             font:{size:11,weight:'700'}
           }
         },
