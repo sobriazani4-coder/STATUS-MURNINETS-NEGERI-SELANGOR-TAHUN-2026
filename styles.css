@@ -3540,3 +3540,15 @@ img,svg,canvas{max-width:100%}
 #statusPerformancePanel .status-counters .counter small{
   color:#000000!important;
 }
+
+/* ===== PBT LOGO SELECTOR TYPOGRAPHY ONLY: MONTSERRAT SEMIBOLD ITALIC ===== */
+.pbt-logo-selector .pbt-selector-head h2,
+.pbt-logo-selector .pbt-selector-head span,
+.pbt-logo-selector .pbt-logo-card strong{
+  font-family:'Montserrat',Arial,sans-serif!important;
+  font-weight:600!important;
+  font-style:italic!important;
+}
+.pbt-logo-selector .pbt-logo-card strong{
+  font-size:11px!important;
+}
