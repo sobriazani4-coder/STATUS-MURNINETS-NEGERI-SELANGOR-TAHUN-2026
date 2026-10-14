@@ -3531,3 +3531,12 @@ img,svg,canvas{max-width:100%}
 @media (prefers-reduced-motion:reduce){
   #selangorMap .leaflet-interactive.selected-pbt-boundary{animation:none!important}
 }
+
+/* Status Prestasi: text colour only, preserving card and chart visuals. */
+#statusPerformancePanel .panel-head h2,
+#statusPerformancePanel .panel-head p,
+#statusPerformancePanel .status-counters .counter,
+#statusPerformancePanel .status-counters .counter span,
+#statusPerformancePanel .status-counters .counter small{
+  color:#000000!important;
+}
